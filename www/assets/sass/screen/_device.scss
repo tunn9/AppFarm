@@ -1,0 +1,261 @@
+#iot-device-header{
+  margin: 0 15px 0;
+  border-bottom: 1px solid $orange;
+  padding: 30px 0 10px 0;
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    -webkit-display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    li{
+      &:nth-child(1){
+        width: 20%;
+      }
+      &:nth-child(2){
+        flex: 1;
+        padding-left: 5px;
+      }
+      &:nth-child(3){
+      }
+      &:last-child{
+        padding-left: 50px;
+      }
+      font-weight: bold;
+    }
+  }
+}
+#iot-list-device-manager{
+  padding: 15px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  ul{
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    display: flex;
+    -webkit-display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    align-items: center;
+    -webkit-align-items: center;
+    li{
+      &:nth-child(1){
+        width: 20%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      &:nth-child(2){
+        flex: 1;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-left: 5px;
+      }
+      &:nth-child(3){
+        width: 15%;
+      }
+
+      .device-wifi{
+        width: 27px;
+        height: 27px;
+        background-image: url("../images/wifi.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 27px;
+        display: block;
+        margin: auto;
+        &.status0{
+          background-image: url("../images/wifi-of.svg");
+        }
+      }
+    }
+  }
+}
+#device-footer{
+  display: flex;
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  padding: 30px 0;
+  #iot-remove-device{
+    width: 40vw;
+    display: block;
+    margin:0 25px 0 10px;
+    font-weight: 500;
+    color: $color-white;
+    background-color: $brand-primary;
+    @include border-radius(50px);
+    text-align: center;
+    position: relative;
+    height: 45px;
+    line-height: 45px;
+    &:active{
+      background-color: $active-primary;
+    }
+  }
+  #iot-addnew-device{
+    width: 45px;
+    height: 45px;
+    @include border-radius(50%);
+    background-color: $orange;
+    background-image: url("../images/icon_ic.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+    display: block;
+    margin:0 25px 0 10px;
+    &:active{
+      background-color: darken($orange,10%);
+    }
+  }
+}
+.iot-page-wapper{
+  position: relative;
+}
+
+.ioi-edit-device-wapper,
+.ioi-create-device-wapper{
+  padding: 15px;
+  .edit-device-content,
+  .create-device-content{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    > li{
+      position: relative;
+      padding-top: 15px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+      h4{
+        padding: 0 0 10px 0;
+        margin: 0;
+        position: relative;
+        font-size: $font-size-base - 2;
+        font-weight: bold;
+        line-height: 30px;
+        color: $brand-primary;
+        &:before{
+          content: '';
+          width: 10px;
+          height: 10px;
+          @include border-radius(50%);
+          background-color: #cccccc;
+          display: inline-block;
+          margin-right: 7px;
+        }
+      }
+      input {
+        margin: 0;
+        border: 2px solid $brand-primary;
+        height: 45px;
+        line-height: 45px;
+        font-weight: bold;
+        @include border-radius(30px);
+        text-align: center;
+        font-size: $font-size-base - 2;
+        background: transparent;
+        padding: 5px 25px;
+        width: 100%;
+        &:focus{
+          outline: 0 solid transparent;
+        }
+        @include placeholder($text-color);
+      }
+
+      .iot-condition-device{
+        display: block;
+        border: 2px solid $brand-primary;
+        height: 45px;
+        line-height: 45px;
+        font-weight: bold;
+        @include border-radius(30px);
+        text-align: center;
+        font-size: $font-size-base - 2;
+        position: relative;
+        &:before{
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          margin-top: -4px;
+          content: '';
+          border-top: 8px solid $brand-primary;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+        }
+        &.active{
+          &+ .iot-list-device-name{
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+      .iot-list-device-name{
+        position: absolute;
+        padding: 10px 0;
+        margin: 0;
+        list-style: none;
+        width: 90%;
+        top: 95%;
+        left: 5%;
+        @include box-shadow(0px 0px 10px 0 rgba(0,0,0,0.3));
+        background-color: $color-white;
+        z-index: 333;
+        opacity: 0;
+        visibility: hidden;
+        li{
+          padding: 10px;
+          border-top: 1px solid $gray-lighter;
+          &:active{
+            background-color: $gray-lighter;
+          }
+          &:first-child{
+            border-top: 0;
+          }
+        }
+      }
+    }
+  }
+}
+.btn-remove-device{
+  width: 50px;
+  height: 40px;
+  display: block;
+  background-image: url("../images/remove.png");
+  background-position: center;
+  background-size: 30px;
+  background-repeat: no-repeat;
+}
+.iot-edit-device-footer,
+.iot-create-device-footer{
+  z-index: 9;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  a{
+    display: inline-block;
+    margin: 0 10px;
+    border: 1px solid $brand-primary;
+    min-width: 140px;
+    height: 42px;
+    line-height: 42px;
+    font-weight: bold;
+    @include border-radius(30px);
+    &#iot-edit-device-cancel,
+    &#iot-create-device-cancel{
+      color: $brand-primary;
+      &:active{
+        background: $brand-primary;
+        color: $color-white;
+      }
+    }
+    &#iot-edit-device-action,
+    &#iot-create-device-action{
+      background: $brand-primary;
+      color: $color-white;
+    }
+  }
+}

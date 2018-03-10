@@ -1,0 +1,28 @@
+// Core variables and mixins
+@import "variables";
+@import "mixins";
+
+// Reset
+@import "normalize";
+@import "scaffolding";
+
+// Components
+@import "core";
+@import "dialog";
+
+//Screen
+@import "screen/index";
+@import "screen/sidebar";
+@import "screen/login";
+@import "screen/register";
+@import "screen/profiler";
+@import "screen/home";
+@import "screen/manual";
+@import "screen/createkv";
+@import "screen/editarea";
+@import "screen/autokv";
+@import "screen/listsettings";
+@import "screen/editAuto";
+@import "screen/device";
+@import "screen/support";
+@import "screen/history";

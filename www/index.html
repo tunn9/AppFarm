@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="assets/css/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/mobiscroll.custom-2.6.2.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+        <script type="text/javascript" src="assets/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="assets/js/dialog.js"></script>
+        <script type="text/javascript" src="assets/js/mqtt.js"></script>
+        <script type="text/javascript" src="assets/js/Chart.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <script type="text/javascript" src="core/constants.js"></script>
+        <script type="text/javascript" src="core/messages.js"></script>
+        <script type="text/javascript" src="core/common.js"></script>
+        <script type="text/javascript" src="core/mqtt-app.js"></script>
+        <script type="text/javascript" src="core/storageManager.js"></script>
+        <script type="text/javascript" src="core/sidebar.js"></script>
+        <script type="text/javascript" src="core/pageUrl.js"></script>
+        <script type="text/javascript" src="core/fileHelper.js"></script>
+        <script type="text/javascript" src="core/eventHelper.js"></script>
+        <script type="text/javascript" src="core/pageHelper.js"></script>
+        <script type="text/javascript" src="core/httpService.js"></script>
+        <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="assets/js/mobiscroll/mobiscroll.custom-2.6.2.js"></script>
+
+        <script type="text/javascript" src="app.js"></script>
+        <title>Index</title>
+    </head>
+    <body>
+        <div id="ioi-sidebar-wapper">
+            <div class="ioi-sidebar-inner">
+                <div class="ioi-logo"></div>
+                <div class="ioi-sidebar-content">
+                    <ul>
+                        <li>
+                            <a href="#" data-router="history" class="iot-history" id="iot-iot-history-action">Lịch Sử</a>
+                        </li>
+                        <li>
+                            <a href="#" data-router="report" class="iot-warning">Báo cáo nguy cơ</a>
+                        </li>
+                        <li>
+                            <a href="#" class="iot-setup" id="iot-setup-action">Cài đặt tưới tự động</a>
+                        </li>
+                        <li>
+                            <a href="#" class="iot-setup" id="iot-device-manager">Quản lý thiết bị</a>
+                        </li>
+                        <!--<li>-->
+                            <!--<a href="#" data-router="material" class="iot-material">Quản lý vật tư</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a href="#" data-router="support" id="iot-support" class="iot-support">Hỗ trợ</a>
+                        </li>
+                        <li>
+                            <a href="#" data-router="profiler" id="iot-profiler" class="iot-information">Thông tin người dùng</a>
+                        </li>
+                        <li>
+                            <a href="#" data-router="login" class="iot-logout" id="iot-logout-action">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- end .ioi-sidebar-inner -->
+        </div><!-- end .ioi-sidebar-wapper -->
+        <div id="ioi-sidebar-wapper-overlay"></div>
+        <div id="ioi-sidebar-wapper-lock"></div>
+
+        <div data-role="page" id="index">
+
+        </div>
+    </body>
+</html>

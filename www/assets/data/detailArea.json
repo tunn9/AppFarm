@@ -1,0 +1,22 @@
+{
+  "code": 200,
+  "data": {
+    "id":"23123t87d87a6s8dg823468273",
+    "name": "Khu vuc D",
+    "gateway": "gatewayId",
+    "sensor": "sensorId",
+    "control": "controlId",
+    "outputs":[
+      {
+        "id":"outputId",
+        "relay":1
+      },
+      {
+        "id":"outputId1",
+        "relay":2
+      }
+    ]
+  }
+}
+
+

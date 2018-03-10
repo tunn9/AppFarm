@@ -1,0 +1,74 @@
+.iot-support-inner{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 0 20px 0;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+  .iot-support-website{
+    padding-bottom: 15px;
+    padding-top: 40px;
+    h5{
+      font-size: 15px;
+      padding: 0;
+      margin: 0;
+    }
+    p{
+      margin: 0;
+      padding: 0;
+    }
+    a{
+      color: $brand-primary;
+      display: inline-block;
+      padding: 5px;
+    }
+  }
+  .iot-support-detail{
+    border-top: 1px solid #eeeeee;
+    padding-bottom: 30px;
+    h4{
+      font-size: 16px;
+      padding: 30px 0 15px 0;
+      margin: 0;
+    }
+    ul{
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      li{
+        display: flex;
+        -webkit-display: flex;
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        align-items: center;
+        -webkit-align-items: center;
+        padding: 5px 0;
+        span{
+          display: block;
+        }
+        .icon-support-detail{
+          width: 40px;
+          height: 35px;
+          display: block;
+          background-color: transparent;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 30px;
+          &.iot-icon-phone{
+            background-image: url("../images/ic_phone.svg");
+          }
+          &.iot-icon-message{
+            background-image: url("../images/ic_message.svg");
+          }
+          &.iot-icon-mail{
+            background-image: url("../images/ic_mail.svg");
+          }
+        }
+      }
+    }
+  }
+}

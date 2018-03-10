@@ -1,0 +1,44 @@
+{
+  "code": 200,
+  "total": 2,
+  "data": [
+    {
+      "id": 1113,
+      "nameSetting": "Nhiệt độ",
+      "nameArea": "Khuc vực 1",
+      "enable": 1
+    },
+    {
+      "id": 1113,
+      "nameSetting": "Độ ẩm",
+      "nameArea": "Khuc vực 2",
+      "enable": 0
+    },
+    {
+      "id": 1113,
+      "nameSetting": "Nhiệt độ",
+      "nameArea": "Khuc vực 3",
+      "enable": 1
+    },
+    {
+      "id": 1113,
+      "nameSetting": "Độ ẩm",
+      "nameArea": "Khuc vực 4",
+      "enable": 0
+    },
+    {
+      "id": 1113,
+      "nameSetting": "Nhiệt độ",
+      "nameArea": "Khuc vực 5",
+      "enable": 1
+    },
+    {
+      "id": 1113,
+      "nameSetting": "Độ ẩm",
+      "nameArea": "Khuc vực 6",
+      "enable": 0
+    }
+  ]
+}
+
+

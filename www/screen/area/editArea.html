@@ -1,0 +1,52 @@
+<div data-role="page" id="iot-edit-area" class="page-wapper">
+    <div class="ioi-header" id="iot-editarea-header">
+        <a id="ioi-back-editarea" class="icon-header-control icon-back"></a>
+        <h1 id="iot-editarea-title">Cập nhật cho <span></span></h1>
+    </div>
+    <div class="ioi-editarea-wapper">
+        <div class="ioi-content" id="ioi-content-editarea">
+            <div class="iot-header-list">
+
+                <div class="iot-area-group">
+                    <p>Tên Khu Vực</p>
+                    <input data-role="none" type="text" name="iot-creatkv-name" class="height-45" id="iot-editarea-name" value="" placeholder="Nhập tên khu vực">
+                </div>
+                <div class="iot-area-group">
+                    <p>Máy chủ</p>
+                    <a id="iot-editarea-gateway" data-id="" class="iot-condition-select-device">Chọn ID máy chủ</a>
+                    <ul class="iot-list-device-name" id="iot-edit-gateway-name">
+                        <li style="pointer-events: none">Nhập thêm thiết bị</li>
+                    </ul>
+                </div>
+                <div class="iot-area-group">
+                    <p>Bộ cảm biến</p>
+                    <a id="iot-editarea-sensor" data-id="" class="iot-condition-select-device">Chọn ID bộ cảm biến</a>
+                    <ul class="iot-list-device-name" id="iot-edit-sensor-name">
+                        <li style="pointer-events: none">Nhập thêm thiết bị</li>
+                    </ul>
+                </div>
+                <div class="iot-area-group">
+                    <p>Bộ điều khiển</p>
+                    <a id="iot-editarea-control" data-id="" class="iot-condition-select-device">Chọn ID bộ điều khiển</a>
+                    <ul class="iot-list-device-name" id="iot-edit-control-name">
+                        <li style="pointer-events: none">Nhập thêm thiết bị</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="iot-editarea-list">
+                <div class="iot-editarea-name">
+                    <h4>Thiết Bị</h4>
+                    <h4>Chọn</h4>
+                </div>
+                <ul id="ioi-editarea-device">
+                </ul>
+            </div>
+
+            <div class="loading-page"></div>
+        </div>
+    </div>
+    <div class="iot-editarea-footer">
+        <a id="iot-editarea-destroy">Hủy</a>
+        <a id="iot-editarea-action">Cập nhật</a>
+    </div>
+</div>

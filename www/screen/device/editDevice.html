@@ -1,0 +1,32 @@
+<div data-role="page" id="iot-edit-device" class="page-wapper">
+    <div class="ioi-header" id="ioi-edit-device-header">
+        <a id="ioi-back-edit-device" class="icon-header-control icon-back"></a>
+        <h1 id="iot-edit-device-title">Edit Device</h1>
+    </div>
+    <div class="ioi-edit-device-wapper">
+        <ul class="edit-device-content">
+            <li>
+                <h4>Name</h4>
+                <input id="device-detail-name"  type="text" placeholder="Name" data-role="none">
+            </li>
+            <li>
+                <h4>Lựa chọn kiểu Device</h4>
+                <a id="iot-condition-device-detail-id" data-type="0" class="iot-condition-device">Getway</a>
+                <ul class="iot-list-device-name" id="iot-list-device-name">
+                    <li class="device-name-item" data-type="0">Gateway</li>
+                    <li class="device-name-item" data-type="1">Control</li>
+                    <li class="device-name-item" data-type="2">sensor</li>
+                </ul>
+            </li>
+            <li>
+                <h4>Nhập IP thiết bị</h4>
+                <input id="device-detail-ip" type="text" placeholder="nhận IP thiệt bị" data-role="none">
+            </li>
+        </ul>
+    </div>
+    <div class="iot-edit-device-footer">
+        <a id="iot-edit-device-cancel">Hủy</a>
+        <a id="iot-edit-device-action">Cập nhật</a>
+    </div>
+    <div class="loading-page"></div>
+</div>

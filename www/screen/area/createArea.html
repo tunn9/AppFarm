@@ -1,0 +1,92 @@
+<div data-role="page" id="iot-createkv" class="page-wapper">
+    <div class="ioi-header" id="ioi-createkv-header">
+        <a id="ioi-back-createkv" class="icon-header-control icon-back"></a>
+        <h1 id="iot-createkv-title">Tạo mới khu vực</h1>
+    </div>
+    <div class="ioi-createkv-wapper">
+        <div class="ioi-content" id="ioi-content-createkv">
+            <div class="iot-createkv-header">
+                <div class="iot-area-group">
+                    <p>Tên Khu Vực</p>
+                    <input data-role="none" type="text" name="iot-creatkv-name" class="height-45" id="iot-creatkv-name" value="" placeholder="Nhập tên khu vực">
+                </div>
+                <div class="iot-area-group">
+                    <p>Máy chủ</p>
+                    <a id="iot-creatkv-gateway" data-id="" class="iot-condition-select-device">Chọn ID máy chủ</a>
+                    <ul class="iot-list-device-name" id="iot-list-gateway-name">
+                        <li style="pointer-events: none">Nhập thêm thiết bị</li>
+                    </ul>
+                </div>
+                <div class="iot-area-group">
+                    <p>Bộ môi trường</p>
+                    <a id="iot-creatkv-sensor" data-id="" class="iot-condition-select-device">Chọn ID bộ môi trường</a>
+                    <ul class="iot-list-device-name" id="iot-list-sensor-name">
+                        <li style="pointer-events: none">Nhập thêm thiết bị</li>
+                    </ul>
+                </div>
+                <div class="iot-area-group">
+                    <p>Bộ điều khiển</p>
+                    <a id="iot-creatkv-control" data-id="" class="iot-condition-select-device">Chọn ID bộ điều khiển</a>
+                    <ul class="iot-list-device-name" id="iot-list-control-name">
+                        <li style="pointer-events: none">Nhập thêm thiết bị</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="iot-createkv-list">
+                <div class="iot-createkv-name">
+                    <h4>Thiết Bị</h4>
+                    <h4>Chọn</h4>
+                </div>
+                <ul class="ioi-list-device-content">
+                    <li>
+                        <div class="ioi-device-name">Output 1</div>
+                        <div class="ioi-device-status">
+                            <div class="onoffswitch">
+                                <input data-role="none" type="checkbox" name="onoffswitch" data-id="1" data-relay="1" data-name="Output 1" class="onoffswitch-checkbox">
+                                <div class="onoffswitch-action"></div>
+                                <span class="onoffswitch-switch"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ioi-device-name">Output 2</div>
+                        <div class="ioi-device-status">
+                            <div class="onoffswitch">
+                                <input data-role="none" type="checkbox" name="onoffswitch" data-id="2" data-relay="2" data-name="Output 2" class="onoffswitch-checkbox">
+                                <div class="onoffswitch-action"></div>
+                                <span class="onoffswitch-switch"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ioi-device-name">Output 3</div>
+                        <div class="ioi-device-status">
+                            <div class="onoffswitch">
+                                <input data-role="none" type="checkbox" name="onoffswitch" data-id="3" data-relay="3" data-name="Output 3" class="onoffswitch-checkbox">
+                                <div class="onoffswitch-action"></div>
+                                <span class="onoffswitch-switch"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ioi-device-name">Output 4</div>
+                        <div class="ioi-device-status">
+                            <div class="onoffswitch">
+                                <input data-role="none" type="checkbox" name="onoffswitch" data-id="4" data-relay="4" data-name="Output 4" class="onoffswitch-checkbox">
+                                <div class="onoffswitch-action"></div>
+                                <span class="onoffswitch-switch"></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="iot-createkv-footer">
+        <a id="iot-createkv-remove">Hủy</a>
+        <a id="iot-createkv-action">Tạo Khu Vực</a>
+    </div>
+    <div class="loading-page"></div>
+</div>

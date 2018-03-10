@@ -1,0 +1,72 @@
+{
+  "code": 200,
+  "type": 2,
+  "settingThreshold": {
+    "condition": [
+      {
+        "type": "airTemp",
+        "name": "Nhiệt độ không khí",
+        "lowThreshold":12,
+        "hightThreshold":12
+      },
+      {
+        "type": "airHum",
+        "name": "Nhiệt độ đất",
+        "lowThreshold":12,
+        "hightThreshold":12
+      },
+      {
+        "type": "soilTemp",
+        "name": "Độ ẩm không khí",
+        "lowThreshold":12,
+        "hightThreshold":12
+      },
+      {
+        "type": "soilHum",
+        "name": "Độ ẩm đất",
+        "lowThreshold":12,
+        "hightThreshold":30
+      },
+      {
+        "type": "elecNeg",
+        "name": "Độ ẩm Độ dẫn điện EC",
+        "lowThreshold":12,
+        "hightThreshold":12
+      }
+    ],
+    "output": [
+      {
+        "relay": 1,
+        "name": "Máy bơm 1",
+        "status": 0,
+        "enable": 1
+      },
+      {
+        "relay": 2,
+        "name": "Máy bơm 2",
+        "status": 0,
+        "enable": 1
+      },
+      {
+        "relay": 3,
+        "name": "Máy bơm 3",
+        "status": 0,
+        "enable": 1
+      },
+      {
+        "relay": 4,
+        "name": "Máy bơm 4",
+        "status": 0,
+        "enable": 1
+      },
+      {
+        "relay": 5,
+        "name": "Máy bơm 5",
+        "status": 0,
+        "enable": 1
+      }
+    ]
+  }
+}
+
+

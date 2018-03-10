@@ -1,0 +1,175 @@
+.fdialog .ftoy-dimmer {
+  position: fixed;
+  z-index: 1981;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  background-color: #252525;
+  opacity: .5;
+}
+.fdialog .ftoy-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0 10%;
+  overflow-y: auto;
+  z-index: 1981;
+  margin: 35% 0;
+}
+.fdialog .ftoy-dialog {
+  position: relative;
+  padding: 24px 24px 0 24px;
+  outline: 0;
+  background-color: #fff;
+}
+.fdialog .ftoy-dialog.ftoy-capture:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  z-index: 1;
+}
+.fdialog .ftoy-reset {
+  position: absolute !important;
+  display: inline !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+.fdialog .ftoy-header {
+  margin: -20px -20px 0 -20px;
+  padding: 16px 20px;
+  background-color: #fff;
+}
+.fdialog .ftoy-body {
+  min-height: 56px;
+}
+.fdialog .ftoy-body .ftoy-content {
+  padding: 0;
+}
+.fdialog .ftoy-footer {
+  margin-left: -20px;
+  margin-right: -20px;
+  min-height: 45px;
+  background-color: #fff;;
+}
+.fdialog .ftoy-footer .ftoy-buttons.ftoy-primary {
+  text-align: center;
+}
+
+.fdialog .ftoy-footer .ftoy-buttons.ftoy-auxiliary {
+  float: left;
+  clear: none;
+  text-align: left;
+}
+.fdialog .ftoy-footer .ftoy-buttons.ftoy-auxiliary .ftoy-button {
+  margin: 4px;
+}
+.fdialog .ftoy-footer .ftoy-buttons .ftoy-button {
+  min-width: 88px;
+  min-height: 35px;
+  background: none;
+  border: 0;
+}
+
+.fdialog.ftoy-no-overflow .ftoy-body .ftoy-content {
+  overflow: hidden !important;
+}
+
+.fdialog.ftoy-no-padding .ftoy-body {
+  margin-left: -24px;
+  margin-right: -24px;
+}
+.fdialog.ftoy-no-padding .ftoy-body .ftoy-content {
+  padding: 0;
+}
+.ftoy-no-overflow {
+  overflow: hidden !important;
+  outline: none;
+}
+.ftoy-no-overflow.ftoy-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: scroll!important;
+}
+.ftoy-no-selection,
+.ftoy-no-selection * {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.fdialog .ftoy-dimmer{
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  transition-property: opacity, visibility;
+  transition-timing-function: linear;
+  transition-duration: 250ms;
+}
+.fdialog.ftoy-hidden .ftoy-dimmer,
+.fdialog.ftoy-hidden .ftoy-modal {
+  visibility: hidden;
+  opacity: 0;
+}
+.fdialog.ftoy-in:not(.ftoy-hidden) .ftoy-dialog {
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+}
+.fdialog.ftoy-out.ftoy-hidden .ftoy-dialog {
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+}
+
+.fdialog.ftoy-fade.ftoy-in:not(.ftoy-hidden) .ftoy-dialog {
+  -webkit-animation-name: ftoy-fadeIn;
+          animation-name: ftoy-fadeIn;
+}
+.fdialog.ftoy-fade.ftoy-out.ftoy-hidden .ftoy-dialog {
+  -webkit-animation-name: ftoy-fadeOut;
+          animation-name: ftoy-fadeOut;
+}
+
+@-webkit-keyframes ftoy-fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes ftoy-fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes ftoy-fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes ftoy-fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

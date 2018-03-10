@@ -1,0 +1,36 @@
+{
+  "code": 0,
+  "message": null,
+  "data": [
+    {
+      "id": "relayID",
+      "name": "Máy bơm 1",
+      "nameID": "relay 1",
+      "status": 0
+    },
+    {
+      "id": "relayID",
+      "name": "Máy bơm 2",
+      "nameID": "relay 2",
+      "status": 0
+    },
+    {
+      "id": "relayID",
+      "name": "Máy bơm 3",
+      "nameID": "relay 3",
+      "status": 0
+    },
+    {
+      "id": "relayID",
+      "name": "Máy bơm 4",
+      "nameID": "relay 4",
+      "status": 0
+    },
+    {
+      "id": "relayID",
+      "name": "Máy bơm 5",
+      "nameID": "relay 5",
+      "status": 0
+    }
+  ]
+}

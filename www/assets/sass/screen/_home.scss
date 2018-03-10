@@ -1,0 +1,279 @@
+.ic-more-wapper{
+  width: 55px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  height: 100%;
+  .ic-more{
+    height: 100%;
+    background-color: transparent;
+    background-image: url("../images/ic_more.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    &:active{
+      background-color: $active-primary;
+    }
+    &.noActive{
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  .iot-more-control{
+    position: absolute;
+    width: 200px;
+    right: 3px;
+    top: 100%;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    background-color: $color-white;
+    @include border-radius(7px);
+    @include transition(all 0.3s ease 0s);
+    opacity: 0;
+    visibility: hidden;
+    @include scale(0.9);
+    @include box-shadow(0 1px 5px 0 rgba(0,0,0,0.6));
+    &.iot-popup-open{
+      opacity: 1;
+      visibility: visible;
+      @include scale(1);
+    }
+    &:before{
+      border-bottom: 7px solid #fff;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      content: '';
+      position: absolute;
+      right: 18.5px;
+      top: -6px;
+    }
+    li{
+      &:first-child{
+        a{
+          border-top: 0;
+        }
+      }
+      a{
+        border-top: 1px solid $gray-lighter;;
+        display: block;
+        padding: 7px 15px;
+        color: $text-color;
+        &:active{
+          background-color: #f5f5f5;
+        }
+      }
+    }
+  }
+}
+.area-wapper{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  background-image: url(../images/logo_home.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 55vw;
+  &.not-data{
+    background-image: url("../images/log_2.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+  }
+  & > .owl-carousel{
+    height: 100%;
+    background-color: $color-white;
+  }
+  .background-cameras{
+    height: 50vw;
+    position: relative;
+    background-color: transparent;
+    background-image: url("../images/organic_farm.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .content-area{
+    ul{
+      list-style: none;
+      padding: 0 15px;
+      margin: 0;
+      li{
+        border-top: 1px solid $border-color;
+        padding-left: 12%;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        font-size: $font-size-base;
+        position: relative;
+        color: $text-primary;
+        &:first-child{
+          border-top: 0;
+        }
+        .icon-area{
+          width: 12%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          background-color: transparent;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 35px;
+          &.airTemprature{
+            background-image: url("../images/icon-demo3.png");
+          }
+          &.airHumidity{
+            background-image: url("../images/icon-demo2.png");
+          }
+          &.landTemprature{
+            background-image: url("../images/icon-demo1.png");
+          }
+          &.lanHumidity{
+            background-image: url("../images/icon-demo3.png");
+          }
+          &.conductivityEC{
+            background-image: url("../images/ic_ec.svg");
+          }
+        }
+        .name-area{
+          width: 60%;
+          padding-left: 5px;
+        }
+        .status-area{
+          width: 20%;
+        }
+        .unit-area{
+          width: 20%;
+          text-align: right;
+        }
+        @include clearfix;
+      }
+    }
+  }
+  .footer-area{
+    padding: 10px 15px 15px;
+    a{
+      display: block;
+      background: $brand-primary;
+      color: $color-white;
+      @include border-radius(50px);
+      text-align: center;
+      position: relative;
+      @include box-shadow(0 15px 10px -11px rgba(0,0,0,0.3));
+      height: 45px;
+      line-height: 45px;
+      &:active{
+        background: $active-primary;
+      }
+      span{
+        padding: 0 15px 0 60px;
+        display: inline-block;
+        position: relative;
+        &:before{
+          background-color: transparent;
+          background-image: url("../images/ic_tuoi.svg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 50px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 50px;
+          content: '';
+        }
+      }
+    }
+  }
+}
+.owl-theme{
+  .owl-dots {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 25px;
+    width: 100%;
+    .owl-dot {
+      display: inline-block;
+      zoom: 1;
+      span {
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+        background: #b3b3b3;
+        display: block;
+        -webkit-backface-visibility: visible;
+        transition: opacity .2s ease;
+        border-radius: 30px;
+      }
+      &.active{
+        span{
+          background: $orange;
+        }
+      }
+    }
+  }
+}
+
+.btn-addnew{
+  width: 50px;
+  height: 50px;
+  @include border-radius(50%);
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: $orange;
+  background-image: url("../images/icon_ic.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  z-index: 99;
+  &:active{
+    background-color: darken($orange,10%);
+  }
+}
+.lock-home-page{
+  #ioi-header-home{
+    pointer-events: none;
+  }
+}
+
+@media ( max-width: 370px ){
+  //.area-wapper {
+  //  .content-area{
+  //    ul{
+  //      li{
+  //        padding-top: 12px;
+  //        padding-bottom: 12px;
+  //        font-size: 16px;
+  //      }
+  //    }
+  //  }
+  //}
+  .area-wapper .footer-area a span:before{
+    background-size: 45px;
+  }
+}
+@media ( max-width: 320px ){
+  .area-wapper {
+    .content-area{
+      ul{
+        li{
+          padding-top: 12px;
+          padding-bottom: 12px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+

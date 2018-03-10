@@ -1,0 +1,44 @@
+{
+  "code": 200,
+  "total": 2,
+  "data": [
+    {
+      "id": "321312312",
+      "name": "Getway",
+      "type": 0,
+      "status": 1
+    },
+    {
+      "id": "3213123122",
+      "name": "Getway 2",
+      "type": 0,
+      "status": 1
+    },
+    {
+      "id": "321312312",
+      "name": "Control",
+      "type": 1,
+      "status": 0
+    },
+    {
+      "id": "321312312",
+      "name": "Control 2",
+      "type": 1,
+      "status": 0
+    },
+    {
+      "id": "321312312",
+      "name": "sensor",
+      "type": 2,
+      "status": 0
+    },
+    {
+      "id": "321312312",
+      "name": "sensor 2",
+      "type": 2,
+      "status": 0
+    }
+  ]
+}
+
+

@@ -1,0 +1,23 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "id": "f9b5f613-b82d-4400-a4f9-03e5a98ec8c5",
+      "airTemp": 36,
+      "airHum": 0.2,
+      "landTemp": 23,
+      "landHum": 0.2,
+      "elecNeg": 12.3,
+      "utc": 1500375600000
+    },
+    {
+      "id": "e38d91c8-50bb-412a-b3c3-753721544527",
+      "airTemp": 40,
+      "airHum": 10,
+      "landTemp": 23,
+      "landHum": 0.2,
+      "elecNeg": 12.3,
+      "utc": 1499770800000
+    }
+  ]
+}

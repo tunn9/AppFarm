@@ -1,0 +1,37 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "id": "148f6ce8-c60c-4e0f-87af-ec394d0922ef",
+      "name": "Khu vuc E",
+      "gateway": {
+        "id": "gateway",
+        "name": "gateway",
+        "type": 0,
+        "status": 0
+      },
+      "sensor": {
+        "id": "sensor",
+        "name": "sensor",
+        "type": 2,
+        "status": 0
+      },
+      "sensorValue": {
+        "id": "fd768d4a-c2e3-4144-a196-a4928a8bf85e",
+        "airTemp": 11.25,
+        "airHum": 222,
+        "landTemp": 31232,
+        "landHum": 1111,
+        "elecNeg": 333,
+        "utc": 111
+      }
+    }
+  ],
+  "total": 1
+
+}
+
+
+
+
+

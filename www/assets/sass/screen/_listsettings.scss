@@ -1,0 +1,125 @@
+#listsetting-header{
+  list-style: none;
+  padding: 30px 20px 15px;
+  margin: 0;
+  li{
+    width: 30%;
+    float: left;
+    font-weight: 600;
+    color: $brand-primary;
+    &:nth-child(1){
+      width: 35%;
+    }
+    &:nth-child(3){
+      width: 35%;
+    }
+  }
+  &:after{
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+#ioi-list-settings-content{
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  li{
+    padding: 20px 0;
+    &:after{
+      clear: both;
+      content: '';
+      display: table;
+    }
+    &>div{
+      float: left;
+      width: 30%;
+      overflow: hidden;
+      text-overflow: clip;
+      &:nth-child(1){
+        width: 35%;
+      }
+    }
+    div.text-right{
+      width: 35%;
+    }
+    .ioi-device-status{
+      float: right;
+      .onoffswitch{
+        padding: 0;
+        .onoffswitch-switch{
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+.text-right{
+  text-align: right;
+  .iot-check{
+    float: right;
+    margin-left: 20px;
+  }
+  &:after{
+    clear: both;
+    display: table;
+    content: '';
+  }
+}
+.iot-check{
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  border: 3px solid $orange;
+  @include border-radius(5px);
+  &.iot-check-active,
+  &.iot-checkall-active{
+    background-color: $orange;
+    background-image: url("../images/check.svg");
+    background-size: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+#listsetting-footer{
+  display: flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  padding: 30px 0;
+  #remove-settings{
+    width: 40vw;
+    display: block;
+    margin:0 10px;
+    font-weight: 500;
+    color: $color-white;
+    background-color: $brand-primary;
+    @include border-radius(50px);
+    text-align: center;
+    position: relative;
+    height: 45px;
+    line-height: 45px;
+    &:active{
+      background-color: $active-primary;
+    }
+  }
+  #addnew-setting{
+    width: 45px;
+    height: 45px;
+    @include border-radius(50%);
+    background-color: $orange;
+    background-image: url("../images/icon_ic.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+    display: block;
+    margin: 0 10px;
+    &:active{
+      background-color: darken($orange,10%);
+    }
+  }
+}

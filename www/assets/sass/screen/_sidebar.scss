@@ -1,0 +1,209 @@
+
+/*
+* style for menu
+*/
+#ioi-sidebar-wapper{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 272px;
+  height: 100%;
+  background: $color-white;
+  z-index: 1005;
+  @include transition(all 0.3s ease 0s);
+  @include translate(-300px,0);
+  @include box-shadow(5px 0 8px 0px rgba(0,0,0,0.15));
+  &.lock-sidebar{
+    pointer-events: none;
+  }
+  &.ioi-panel-open{
+    @include translate(0,0);
+    & + #ioi-sidebar-wapper-overlay{
+      opacity: 1;
+      visibility: visible;
+      display: block;
+    }
+  }
+  .ioi-sidebar-inner{
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .ioi-logo{
+      width: 42vw;
+      height: 54vw;
+      background-color: #fff;
+      background-image: url(../images/logo_sidebar.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 30.6vw;
+      margin: auto;
+    }
+    .ioi-sidebar-content{
+      flex: 1;
+      -webkit-flex: 1;
+      position: relative;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      ul{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li{
+          padding: 2px 0;
+          a{
+            padding: 10px 15px 10px 50px;
+            display: block;
+            color: $brand-primary;
+            font-size: $font-size-base;
+            font-weight: 500;
+            text-decoration: none !important;
+            position: relative;
+            &.loading-sidebar{
+              &:before{
+                background-image: url("../images/loading.svg") !important;
+              }
+            }
+            &:active{
+              background-color: $brand-primary;
+              color: $color-white;
+              &.iot-information{
+                &:before{
+                  background-image: url("../images/ic_user_hover.svg");
+                }
+              }
+              &.iot-setup{
+                &:before{
+                  background-image: url("../images/ic_setup_hover.svg");
+                }
+              }
+              &.iot-labor{
+                &:before{
+                  background-image: url("../images/ic_labor_hover.svg");
+                }
+              }
+              &.iot-support{
+                &:before{
+                  background-image: url("../images/ic_support-hover.svg");
+                }
+              }
+              &.iot-material{
+                &:before{
+                  background-image: url("../images/ic_material_hover.svg");
+                }
+              }
+              &.iot-history{
+                &:before{
+                  background-image: url("../images/ic_history_hover.svg");
+                }
+              }
+              &.iot-warning{
+                &:before{
+                  background-image: url("../images/ic_waring_hover.svg");
+                }
+              }
+              &.iot-logout{
+                &:before{
+                  background-image: url("../images/ic_logout_hover.svg");
+                }
+              }
+            }
+            &:before{
+              content: '';
+              width: 50px;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
+              background-color: transparent;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 24px;
+            }
+
+            &.iot-information{
+              &:before{
+                background-image: url("../images/ic_sidebar_user.svg");
+              }
+            }
+            &.iot-setup{
+              &:before{
+                background-image: url("../images/ic_setup.svg");
+              }
+            }
+            &.iot-labor{
+              &:before{
+                background-image: url("../images/ic_labor.svg");
+              }
+            }
+            &.iot-support{
+              &:before{
+                background-image: url("../images/support.svg");
+              }
+            }
+            &.iot-material{
+              &:before{
+                background-image: url("../images/ic_material.svg");
+              }
+            }
+            &.iot-history{
+              &:before{
+                background-image: url("../images/ic_history.svg");
+              }
+            }
+            &.iot-warning{
+              &:before{
+                background-image: url("../images/ic-waring.svg");
+              }
+            }
+            &.iot-logout{
+              &:before{
+                background-image: url("../images/ic-logout.svg");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#ioi-sidebar-wapper-overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 1003;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+#ioi-sidebar-wapper-lock{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 1006;
+  display: none;
+  &.sidebar-open-lock{
+    display: block;
+  }
+}
+
+@media (max-width: 370px) {
+  #ioi-sidebar-wapper .ioi-sidebar-inner .ioi-logo{
+    height: 50vw;
+  }
+}

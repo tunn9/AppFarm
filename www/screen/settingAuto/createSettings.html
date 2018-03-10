@@ -1,0 +1,115 @@
+<div data-role="page" id="page-autokv" class="page-wapper">
+    <div class="ioi-header" id="iot-autokv-header">
+        <a id="iot-back-autokv" class="icon-header-control icon-back"></a>
+        <h1>Cài đặt chế độ tưới Tự Động</h1>
+    </div>
+
+    <div class="ioi-content" id="ioi-content-autokv">
+        <div class="iot-autokv-control">
+            <ul class="iot-autokv-control-list">
+                <li>
+                    <h4>Tên cài đặt</h4>
+                    <input data-role="none" type="text" value="" placeholder="Tên khu vực" id="iot-autokv-name" />
+                </li>
+                <li>
+                    <h4>Khu Vực</h4>
+                    <a id="iot-nameArea" data-nodeID="" class="iot-condition iot-select-area">Lựa chọn khu vực</a>
+                    <ul class="iot-condition-content" id="iot-condition-area-name">
+                    </ul>
+                </li>
+                <li class="iot-condition-parent no-active">
+                    <h4>Điều kiện</h4>
+                    <a id="iot-conditionkv" class="iot-condition iot-condition-select">Lựa chọn điều kiện</a>
+                    <ul class="iot-condition-content" id="iot-condition-select-name">
+                        <li id="sensor-infor">Thông số cảm biến</li>
+                        <li id="autoby-time">Thời gian</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="iot-autokv-list">
+            <div class="iot-condition-list-time">
+                <div class="iot-condition-time-value">
+                    <h5>Thời gian bắt đầu</h5>
+                    <div class="setting-timestart time-start">6:07</div>
+                </div>
+                <div class="iot-condition-time-value">
+                    <h5>Thời gian kết thúc</h5>
+                    <div class="setting-timesend time-start">18:07</div>
+                </div>
+
+            </div>
+            <div class="iot-condition-list">
+                <div class="iot-condition-top">
+                    <h5>Chọn điều kiện</h5>
+                    <a class="iot-condition iot-condition-sensor" data-senson="">Lựa chọn điều kiện</a>
+                    <ul class="iot-condition-content iot-autokv-sensor-value">
+                        <li data-value="airTemp">Nhiệt độ không khí</li>
+                        <li data-value="airHum">Nhiệt độ đất</li>
+                        <li data-value="soilTemp">Độ ẩm không khí</li>
+                        <li data-value="soilHum">Độ ẩm đất</li>
+                        <li data-value="elecNeg">Độ ẩm Độ dẫn điện EC</li>
+                    </ul>
+                </div>
+                <div class="iot-condition-bottom">
+                    <div class="iot-condition-value">
+                        <h5>Ngưỡng dưới <span class="unit"></span></h5>
+                        <input data-role="none" type="number" value="" class="lowThreshold" placeholder="" />
+                    </div>
+                    <div class="iot-condition-value">
+                        <h5>Ngưỡng trên <span class="unit"></span></h5>
+                        <input data-role="none" type="number" value="" class="highThreshold" placeholder="" />
+                    </div>
+                </div>
+                <div class="iot-condition-action">
+                    <a class="iot-autokv-condition-remove">-</a>
+                    <a class="iot-autokv-condition-addnew">+</a>
+                </div>
+            </div><!-- .iot-condition-list -->
+            <div class="iot-condition-list-device">
+                <div class="iot-device-header">
+                    <h4>Thiết bị</h4>
+                    <h4>Tắt/Bật</h4>
+                </div>
+                <ul class="iot-autokvdevice-content">
+                </ul>
+            </div><!-- .iot-condition-list-device -->
+        </div><!-- .iot-autokv-list -->
+
+        <div id="iot-autokv-bytime">
+            <ul class="iot-autokv-bytime-header">
+                <li>
+                    Thiết bị
+                </li>
+                <li>
+                    Bật/Tắt
+                </li>
+                <li>
+                    TG bắt đầu
+                </li>
+                <li>
+                    Bao lâu (m)
+                </li>
+            </ul>
+            <div id="iot-bytime-list-device">
+
+            </div>
+        </div><!-- #iot-autokv-bytime -->
+
+    </div>
+
+    <!-- create mobile scroll -->
+    <div class="iot-theme-mobiscroll">
+        <h3 class="title-msr-form">Cài đặt thời gian</h3>
+        <input data-role="none" type="text" id="iot-datemobi" />
+        <a id="iot-mobilescroll-complete">Hoàn tất</a>
+    </div>
+    <!-- end mobile scroll -->
+
+    <div class="iot-autokv-footer" id="iot-autokv-footer">
+        <a id="iot-autokv-cancel">Hủy</a>
+        <a id="iot-autokv-action">Tạo Khu Vực</a>
+    </div>
+    <div class="loading-page" id="loading-page-home"></div>
+</div>

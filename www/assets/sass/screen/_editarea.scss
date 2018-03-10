@@ -1,0 +1,175 @@
+.iot-header-list{
+  background-color: #5bbc2f;
+  padding: 25px 15px 30px;
+  .iot-area-group{
+    padding-top: 30px;
+    position: relative;
+    &:first-child{
+      padding-top: 0;
+    }
+  }
+  p{
+    &:first-child{
+      padding-top: 0;
+    }
+    font-size: $font-header;
+    line-height: 20px;
+    color: $color-white;
+    padding: 0 0 10px 10px;
+    margin: 0;
+    font-weight: bold;
+  }
+  input{
+    width: 100%;
+    background-color: transparent;
+    padding: 0 25px;
+    line-height: 22px;
+    font-size: $font-size-base - 2;
+    @include placeholder($color-white);
+    color: $color-white;
+    border: 1px solid $color-white;
+    @include border-radius(30px);
+    &:focus{
+      outline: 0;
+    }
+  }
+  .iot-condition-select-device{
+    display: block;
+    border: 1px solid $color-white;
+    height: 45px;
+    line-height: 45px;
+    @include border-radius(30px);
+    font-size: $font-size-base - 2;
+    color: $color-white !important;
+    position: relative;
+    padding: 0 25px;
+    &:before{
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      margin-top: -4px;
+      content: '';
+      border-top: 8px solid $color-white;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+    &.active{
+      &+ .iot-list-device-name{
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  .iot-list-device-name{
+    position: absolute;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+    width: 90%;
+    top: 95%;
+    left: 5%;
+    @include box-shadow(0px 0px 10px 0 rgba(0,0,0,0.3));
+    background-color: $color-white;
+    z-index: 333;
+    opacity: 0;
+    visibility: hidden;
+    li{
+      padding: 10px;
+      border-top: 1px solid $gray-lighter;
+      &:active{
+        background-color: $gray-lighter;
+      }
+      &:first-child{
+        border-top: 0;
+      }
+    }
+  }
+}
+.ioi-editarea-wapper{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.iot-editarea-list{
+  .iot-editarea-name{
+    border-bottom: 1px solid $orange;
+    padding: 25px 0 18px;
+    margin: 0 15px;
+    h4{
+      font-size: $font-header + 2;
+      line-height: 1.4;
+      padding: 0;
+      margin: 0;
+      float: left;
+      color: $brand-primary;
+      &:last-child{
+        float: right;
+      }
+    }
+    @include clearfix;
+  }
+  #ioi-editarea-device{
+    list-style: none;
+    padding: 0 15px 20px;
+    margin: 0;
+    li{
+      @include clearfix;
+      position: relative;
+      padding: 22px 75px 22px 0;
+      border-bottom: 1px solid #fde4c7;
+      &:last-child{
+        border-bottom: 0;
+      }
+      .ioi-device-name{
+        padding-right: 25px;
+        input{
+          width: 100%;
+          background-color: transparent;
+          padding:7px 10px;
+          line-height: 22px;
+          font-size: $font-size-base - 2;
+          @include placeholder($color-white);
+          @include border-radius(30px);
+          border: 1px solid $brand-primary;
+          &:focus{
+            outline: 0;
+          }
+        }
+      }
+      .ioi-device-status{
+        position: absolute;
+        right: 0;
+        top: 50%;
+        @include translate(0,-50%);
+      }
+    }
+  }
+}
+.iot-editarea-footer{
+  border-top: 1px solid $orange;
+  z-index: 9;
+  text-align: center;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  a{
+    display: inline-block;
+    margin: 0 10px;
+    border: 1px solid $brand-primary;
+    min-width: 140px;
+    height: 42px;
+    line-height: 42px;
+    font-weight: bold;
+    @include border-radius(30px);
+    &#iot-editarea-remove{
+      color: $brand-primary;
+      &:active{
+        background-color: $brand-primary;
+        color: $color-white;
+      }
+    }
+    &#iot-editarea-action{
+      background: $brand-primary;
+      color: $color-white;
+    }
+  }
+}

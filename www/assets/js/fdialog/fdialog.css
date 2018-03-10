@@ -1,0 +1,346 @@
+.fdialog-center{
+    text-align: center;
+}
+.fdialog-prompt .fdialog-header{
+    text-align: left;
+}
+.fdialog-prompt .fdialog-textarea{
+    position: relative;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: #50b748;
+}
+.fdialog-prompt .fdialog-textarea textarea{
+    background: transparent;
+    border: 0;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 0.95em;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: height 0.35s ease 0s;
+    -webkit-transition: height 0.35s ease 0s;
+    vertical-align: top;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.fdialog-prompt .fdialog-textarea textarea:focus{
+    outline-color: transparent;
+    outline: none;
+}
+.fdialog-overlay{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999;
+    background: rgba(0,0,0,0.2);
+}
+.fdialog-wrapper{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 80%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    z-index: 999999999;
+    background: #fff;
+    padding: 1.2em 1em 0.8em 1em;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    opacity: 0;
+    visibility: hidden;
+}
+.fdialog-wrapper-absolute,
+.fdialog-wrapper-absolute + .fdialog-overlay{
+    position: absolute;
+}
+.fdialog-inner{
+
+}
+.fdialog-header{
+    padding: 0 0 0.8em 0;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1em;
+    margin-bottom: 3px;
+}
+.fdialog-header i{
+    padding-right: 10px;
+}
+.fdialog-content{
+    padding-bottom: 1em;
+    font-size: 1em;
+    font-weight: 400;
+    text-shadow: 0 0 0 rgba(243, 243, 243, 0);
+    color: #333;
+}
+.fdialog-footer{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.text-left .fdialog-footer a,
+.fdialog-footer a{
+    width: 50%;
+    color: #333;
+    padding: 0.5em 0;
+    text-decoration: none;
+    font-weight: 700;
+    text-shadow: 0 0 0 rgba(243, 243, 243, 0);
+}
+.text-left .fdialog-footer a{
+    text-align: center;
+}
+
+.fdialog-alert .fdialog-footer a,
+.fdialog-warning .fdialog-footer a{
+    width: 100%;
+}
+.fdialog-prompt.open-lock-action .fdialog-footer .fdialog-action{
+    pointer-events: none;
+    color: gray;
+}
+
+
+
+.fdialog-loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 60px;
+    height: 60px;
+    z-index: 9999;
+    background-image: url(../../img/svg/loading.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+}
+.showloading{
+    display: block;
+}
+
+
+.fdialog-wrapper ~ .fdialog-overlay{
+    animation-name: fopacity;
+    -webkit-animation-name: fopacity;
+    animation-duration: 0.35s;
+    -webkit-animation-duration: 0.35s;
+
+}
+
+.fdialog-wrapper-dowload {
+    background: transparent;
+}
+
+.fdialog-wrapper-dowload ~ .fdialog-overlay {
+    background: rgba(255,255,255,0.85);
+}
+
+.fdialog-wrapper-dowload ~ .fdialog-content {
+    text-align: center;
+}
+
+.fdialog-wrapper-dowload .download-indicator {
+    width: 60px;
+    height: 60px;
+    background-image: url(../../img/svg/loading.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.fdialog-wrapper-dowload .download-text-message {
+    display: block;
+}
+
+/*
+* Set color
+*/
+.tool_tss .fdialog-header{
+    color: rgb(0, 102, 179);
+}
+.tool_tss .fdialog-footer a:active{
+    color: rgb(0, 102, 179);
+}
+.tool_tss .fdialog-textarea{
+    border-color: rgb(0, 102, 179);
+}
+.tool_DEFAULT .fdialog-header{
+    color: rgb(0, 102, 179);
+}
+.tool_DEFAULT .fdialog-footer a:active{
+    color: rgb(0, 102, 179);
+}
+.tool_DEFAULT .fdialog-textarea{
+    border-color: rgb(0, 102, 179);
+}
+
+.tool_tms2 .fdialog-header{
+    color: #2f539c;
+}
+.tool_tms2 .fdialog-footer a:active{
+    color: #2f539c;
+}
+.tool_tms2 .fdialog-textarea{
+    border-color: #2f539c;
+}
+
+.tool_ot  .fdialog-header{
+    color: #50b748;
+}
+.tool_ot  .fdialog-footer a:active{
+    color: #50b748;
+}
+.tool_ot .fdialog-textarea{
+    border-color: #50b748;
+}
+
+
+.tool_PAO .fdialog-header{
+    color: #f06d22;
+}
+.tool_PAO .fdialog-footer a:active{
+    color: #f06d22;
+}
+.tool_PAO .fdialog-textarea{
+    border-color: #f06d22;
+}
+/*
+* =================================
+* eff
+* =================================
+*/
+
+
+/*scale*/
+.fscaleUp{
+    animation-name: fdialog-scaleUp;
+    -webkit-animation-name: fdialog-scaleUp;
+    animation-duration: 0.35s;
+    -webkit-animation-duration: 0.35s;
+    opacity: 1;
+    visibility: visible;
+
+}
+@keyframes fdialog-scaleUp {
+    from{
+        transform:  scale(0.6);
+        -webkit-transform:  scale(0.6);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    to{
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+}
+@-webkit-keyframes fdialog-scaleUp {
+    from{
+        transform:  scale(0.6);
+        -webkit-transform:  scale(0.6);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    to{
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+}
+.fscaleDown{
+    animation-name: fdialog-scaleDown;
+    -webkit-animation-name: fdialog-scaleDown;
+    animation-duration: 0.35s;
+    -webkit-animation-duration: 0.35s;
+    transition: all 0.35s ease 0s;
+    -webkit-transition: all 0.35s ease 0s;
+    opacity: 0;
+
+}
+@keyframes fdialog-scaleDown {
+    from{
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+
+    to{
+        transform: scale(0.6);
+        -webkit-transform: scale(0.6);
+    }
+
+}
+@-webkit-keyframes fdialog-scaleDown {
+    from{
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+
+    to{
+        transform: scale(0.6);
+        -webkit-transform:  scale(0.6);
+    }
+
+}
+/*fopacity*/
+.fopacity{
+    animation-name: fopacity;
+    -webkit-animation-name: fopacity;
+    animation-duration: 0.35s;
+    -webkit-animation-duration: 0.35s;
+}
+
+.fopacityDown{
+    opacity: 0;
+    transition: all 0.35s ease 0s;
+    -webkit-transition: all 0.35s ease 0s;
+}
+@keyframes fopacity {
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+
+}
+@-webkit-keyframes fopacity {
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+
+}
+
+
+
+
+@media ( max-width: 380px ) {
+    .fdialog-wrapper{
+        width: 85%;
+        padding: 20px 10px 15px 10px;
+    }
+}
+
+@media ( max-width: 350px ) {
+    .fdialog-wrapper{
+        width: 92%;
+        padding: 15px 10px 10px 10px;
+    }
+}

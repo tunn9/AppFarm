@@ -1,0 +1,53 @@
+<div data-role="page" id="page-history" class="page-wapper">
+    <div class="ioi-header" id="iot-history-header">
+        <a id="iot-back-history" class="icon-header-control icon-back"></a>
+        <h1>Lịch sử</h1>
+    </div>
+
+    <div class="iot-content" id="iot-content-history">
+        <div class="iot-history-control">
+            <ul class="iot-history-control-list">
+                <li>
+                    <h4>Khu Vực</h4>
+                    <a id="iot-history-area-value" data-id="" class="iot-condition iot-select-history">Lựa chọn khu vực</a>
+                    <ul class="iot-condition-content" id="iot-history-condition-area-name">
+                    </ul>
+                </li>
+                <li class="iot-condition-parent iot-condition-parent-sensor not-allow no-active">
+                    <h4>Điều kiện</h4>
+                    <a id="iot-history-sensor-value" class="iot-condition iot-select-history">Lựa chọn điều kiện</a>
+                    <ul class="iot-condition-content" id="iot-history-sensor-select">
+                        <li data-value="airTemp" data-type="1">Nhiệt độ không khí</li>
+                        <li data-value="airHum" data-type="2">Nhiệt độ đất</li>
+                        <li data-value="landTemp" data-type="3">Độ ẩm không khí</li>
+                        <li data-value="landHum" data-type="4">Độ ẩm đất</li>
+                        <li data-value="elecNeg" data-type="5">Độ ẩm Độ dẫn điện EC</li>
+                    </ul>
+                </li>
+               <li class="not-allow no-active">
+                   <h4>Thời gian bắt đầu</h4>
+                   <div class="iot-history-group group-first-child">
+                       <a id="iot-timeStart">00:00</a>
+                       <a id="iot-dateStart">11/07/2017</a>
+                   </div>
+                   <h4>Thời gian kết thúc</h4>
+                   <div class="iot-history-group">
+                       <a id="iot-timeEnd">29:00</a>
+                       <a id="iot-dateEnd">13/07/2017</a>
+                   </div>
+               </li>
+            </ul>
+            <button class="not-allow no-active" data-role="none" id="iot-history-search">Tìm kiếm</button>
+        </div>
+        <div class="iot-chart">
+            <canvas id="myChart" width="300" height="400" style="display: none"></canvas>
+        </div>
+    </div>
+    <!-- create mobile scroll -->
+    <div class="iot-theme-mobiscroll">
+        <h3 class="title-msr-form">Cài đặt thời gian</h3>
+        <input data-role="none" type="text" id="iot-datemobi" />
+        <a id="iot-mobilescroll-complete">Hoàn tất</a>
+    </div>
+    <div class="loading-page"></div>
+</div>

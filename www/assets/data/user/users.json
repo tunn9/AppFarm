@@ -1,0 +1,12 @@
+{
+  "code": 200,
+  "data": {
+    "name": "Cuong Nguyen",
+    "email": "cuongnm@gmail.com",
+    "password": null,
+    "phoneNumber": "123456789",
+    "city": "Ha Noi",
+    "district": "Thach That",
+    "ward": "234 PX"
+}
+}

@@ -1,0 +1,325 @@
+#iot-register{
+  background-color: $color-white;
+}
+.iot-page-register{
+  position: relative;
+  overflow: hidden;
+  @include clearfix;
+}
+.form-register-tab{
+  height: 100%;
+  position: relative;
+  width: 100%;
+  @include transition(all 0.3s ease 0s);
+  @include clearfix;
+  @include translate(0, 0);
+  &.form-registe-two{
+    @include translate(-50%, 0);
+  }
+}
+.form-register-control{
+  height: 100%;
+  position: relative;
+  float: left;
+  width: 50%;
+  overflow: auto;
+}
+#form-register-one{
+  display: flex;
+  -webkit-display: flex;
+  align-items: center;
+  -webkit-align-items: center;
+}
+.iot-register-logo{
+  margin: 12vw 0 8vw;
+  position: relative;
+  .logo{
+    display: block;
+    width: 30.6vw;
+    height: 30.6vw;
+    background-color: transparent;
+    background-image: url("../images/ic_register.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+  #myAvatar{
+    display: none;
+    width: auto;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    @include translate(-50%,0);
+    max-height: 100%;
+    object-fit: cover;
+    -webkit-object-fit: cover;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+  }
+  #myAvatarHide{
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+.iot-register-form{
+  padding: 0 15px;
+  position: relative;
+  width: 100%;
+}
+.iot-register-form-input{
+
+  border: 1px solid $brand-primary;
+  padding: 0 20px;
+  @include border-radius(30px);
+  margin: 15px 0;
+  position: relative;
+  input{
+    height: 45px;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    text-align: left;
+    color: $brand-primary;
+    @include placeholder($brand-primary);
+    &:focus{
+      outline: 0;
+    }
+  }
+}
+.register-active{
+  pointer-events: none;
+  .iot-btn-register{
+    background-color: darken($orange,7%);
+    &:after{
+      opacity: 1;
+    }
+  }
+}
+.iot-btn-register{
+  height: 45px;
+  width: 100%;
+  border: 0;
+  background-color: $orange;
+  text-align: center;
+  color: $color-white;
+  @include border-radius(30px);
+  @include box-shadow(none);
+  position: relative;
+  line-height: 45px;
+  padding: 0;
+  margin: 0;
+  &:after{
+    content: '';
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-image: url(../images/loading.svg);
+    width: 25px;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    margin-left: 10px;
+    opacity: 0;
+  }
+  &:active{
+    background-color: darken($orange,5%);
+  }
+  &:focus{
+    outline: 0;
+  }
+}
+.iot-register-form-register{
+  text-align: right;
+  padding-top: 5px;
+  a{
+    color: $color-white;
+    font-weight: 400;
+    padding: 5px 0 5px 10px;
+  }
+}
+.iot-register-changelogin{
+  text-align: right;
+  padding-top: 10px;
+  a{
+    color: $brand-primary !important;
+    font-weight: $font-weight-base;
+    padding: 10px 50px 10px 15px;
+    position: relative;
+    display: block;
+    &:after{
+      content: '';
+      width: 50px;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: transparent;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 24px;
+      background-image: url(../images/ic-logout.svg);
+    }
+  }
+}
+.iot-register-footer{
+  line-height: 24px;
+  width: 100%;
+  padding: 0 15px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  p{
+    margin: 0;
+    padding: 0;
+    opacity: 0.5;
+    color: $brand-primary;
+    font-size: $font-size-base - 1;
+  }
+  a{
+    display: block;
+    font-size: $font-size-base + 1;
+    color: $brand-primary;
+    position: relative;
+    padding-left: 30px;
+    &:before{
+      content: '';
+      background-color: transparent;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 20px;
+      background-image: url(../images/ic_help_background.svg);
+      width: 20px;
+      height: 100%;
+      display: block;
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+.iot-register-errors{
+  position: absolute;
+  bottom: 100%;
+  padding: 0 10vw 10px 10vw;
+  left: 0;
+  right: 0;
+  word-wrap: break-word;
+  color: red;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  opacity: 0;
+  &.eff{
+    opacity: 1;
+  }
+}
+@keyframes bounceCenter {
+  0%{
+    left: 15px;
+  }
+  25%{
+    left: 22px;
+  }
+  50%{
+    left: 15px;
+  }
+  100%{
+    left: 22px;
+  }
+}
+@media ( max-width: 370px ) {
+
+}
+.iot-register-form-select{
+  margin: 15px 0;
+  position: relative;
+}
+.ui-page-theme-a .iot-condition-register{
+  display: block;
+  border: 1px solid $brand-primary;
+  height: 45px;
+  line-height: 45px;
+  @include border-radius(30px);
+  position: relative;
+  text-align: left;
+  color: #4cb024 !important;
+  padding: 0 20px;
+  &:before{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -4px;
+    content: '';
+    border-top: 8px solid $brand-primary;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+  }
+  &.active{
+    &+ .iot-list-register-detail{
+      opacity: 1;
+      display: block;
+    }
+  }
+}
+.iot-list-register-detail{
+  position: absolute;
+  padding: 10px 0;
+  margin: 0;
+  list-style: none;
+  width: 90%;
+  top: 95%;
+  left: 5%;
+  @include box-shadow(0px 0px 10px 0 rgba(0,0,0,0.3));
+  background-color: $color-white;
+  z-index: 333;
+  opacity: 0;
+  display: none;
+  height: 200px;
+  overflow: auto;
+  li{
+    padding: 10px;
+    border-top: 1px solid $gray-lighter;
+    &:active{
+      background-color: $gray-lighter;
+    }
+    &:first-child{
+      border-top: 0;
+    }
+  }
+}
+#iot-list-district{
+  top: -200px;
+}
+#iot-register{
+  &.loading-image{
+    pointer-events: none;
+    .iot-register-logo{
+      &:after{
+        content: '';
+        display: block;
+        width: 30.6vw;
+        height: 30.6vw;
+        background-color: rgba(255,255,255,0.95);
+        background-image: url(../images/loading2.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 80px;
+        margin: auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include translate(-50%,-50%);
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.fdialog .ftoy-dialog {
+  background-color: white;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+.fdialog .ftoy-header {
+  color: black;
+  font-weight: bold;
+  padding-bottom: 0;
+  -webkit-border-radius: 15px 15px 0 0;
+  border-radius:  15px 15px 0 0;
+}
+.fdialog .ftoy-body {
+  color: black;
+}
+.fdialog .ftoy-body .ftoy-content .ftoy-input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 4px;
+  border-radius: 2px;
+  border: 1px solid #CCC;
+}
+.fdialog .ftoy-body .ftoy-content p {
+  margin: 0;
+}
+.fdialog .ftoy-footer {
+  border-radius: 0 0 15px 15px;
+}
+.fdialog .ftoy-footer .ftoy-buttons .ftoy-button {
+  background-color: transparent;
+  color: #000;
+  border: 0;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 48%;
+}
+.fdialog .ftoy-footer .ftoy-buttons .ftoy-button.ftoy-ok {
+  color: #3593D2;
+}
+
+.fdialog .ftoy-footer .ftoy-buttons.ftoy-primary {
+  text-align: center;
+}
+
+.fdialog .ftoy-header p {
+  margin: 0;
+}

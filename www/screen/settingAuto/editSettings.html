@@ -1,0 +1,77 @@
+<div data-role="page" id="page-editAuto" class="page-wapper">
+    <div class="ioi-header" id="iot-editAuto-header">
+        <a id="ioi-back-editAuto" class="icon-header-control icon-back"></a>
+        <h1>Cài đặt chế độ tưới Tự Động</h1>
+    </div>
+
+    <div class="ioi-content" id="ioi-content-editAuto">
+        <div class="iot-editAuto-control">
+            <ul class="iot-editAuto-control-list">
+                <li>
+                    <h4>Tên cài đặt</h4>
+                    <input data-role="none" type="text" value="" placeholder="Tên khu vực" id="iot-editAuto-name" />
+                </li>
+                <li>
+                    <h4>Khu Vực</h4>
+                    <a id="iot-editauto-nameArea" data-nodeID="" class="iot-condition">Lựa chọn khu vực</a>
+                </li>
+                <li class="iot-condition-parent">
+                    <h4>Điều kiện</h4>
+                    <a id="iot-condition-editauto" class="iot-condition editAuto-condition-select">Lựa chọn điều kiện</a>
+                    <ul class="iot-condition-content" id="iot-condition-select-name">
+                        <li id="sensor-infor">Thông số cảm biến</li>
+                        <li id="autoby-time">Thời gian</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="iot-editAuto-list" class="iot-editAuto-list">
+            <div id="iot-editAuto-condition">
+            </div>
+            <div class="iot-condition-list-device">
+                <div class="iot-device-header">
+                    <h4>Thiết bị</h4>
+                    <h4>Tắt/Bật</h4>
+                </div>
+                <ul id="iot-editAutodevice-content" class="iot-editAutodevice-content">
+                </ul>
+            </div>
+        </div><!-- .iot-editAuto-list -->
+
+        <div id="iot-editAuto-bytime">
+            <ul class="iot-editAuto-bytime-header">
+                <li>
+                    Thiết bị
+                </li>
+                <li>
+                    Bật/Tắt
+                </li>
+                <li>
+                    TG bắt đầu
+                </li>
+                <li>
+                    Bao lâu (m)
+                </li>
+            </ul>
+            <div id="iot-bytime-list-device">
+
+            </div>
+        </div><!-- #iot-editAuto-bytime -->
+
+    </div>
+
+    <!-- create mobile scroll -->
+    <div class="iot-theme-mobiscroll">
+        <h3 class="title-msr-form">Cài đặt thời gian</h3>
+        <input data-role="none" type="text" id="iot-datemobi" />
+        <a id="iot-mobilescroll-complete">Hoàn tất</a>
+    </div>
+    <!-- end mobile scroll -->
+
+    <div class="iot-editAuto-footer" id="iot-editAuto-footer">
+        <a id="iot-editAuto-cancel">Hủy</a>
+        <a id="iot-editAuto-action">Cập nhật</a>
+    </div>
+    <div class="loading-page" id="loading-page-home"></div>
+</div>

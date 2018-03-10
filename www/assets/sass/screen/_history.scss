@@ -1,0 +1,213 @@
+.iot-history-control {
+  padding: 15px;
+}
+.iot-history-control-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  > li{
+    position: relative;
+    padding-top: 15px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    h4{
+      padding: 0 0 10px 0;
+      margin: 0;
+      position: relative;
+      font-size: $font-size-base - 2;
+      font-weight: bold;
+      line-height: 30px;
+      color: $brand-primary;
+      &:before{
+        content: '';
+        width: 10px;
+        height: 10px;
+        @include border-radius(50%);
+        background-color: #cccccc;
+        display: inline-block;
+        margin-right: 7px;
+      }
+    }
+    #iot-history-name{
+      margin: 0;
+      border: 2px solid $brand-primary;
+      height: 45px;
+      line-height: 45px;
+      font-weight: bold;
+      @include border-radius(30px);
+      text-align: center;
+      font-size: $font-size-base - 2;
+      background: transparent;
+      padding: 5px 25px;
+      width: 100%;
+      &:focus{
+        outline: 0 solid transparent;
+      }
+      @include placeholder($text-color);
+    }
+  }
+}
+
+#iot-content-history{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  .iot-condition{
+    display: block;
+    border: 2px solid $brand-primary;
+    height: 45px;
+    line-height: 45px;
+    font-weight: bold;
+    @include border-radius(30px);
+    text-align: center;
+    font-size: $font-size-base - 2;
+    position: relative;
+    &:before{
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      margin-top: -4px;
+      content: '';
+      border-top: 8px solid $brand-primary;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+    &.active{
+      &+ .iot-condition-content{
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  .iot-condition-content{
+    position: absolute;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+    width: 90%;
+    top: 95%;
+    left: 5%;
+    @include box-shadow(0px 0px 10px 0 rgba(0,0,0,0.3));
+    background-color: $color-white;
+    z-index: 333;
+    opacity: 0;
+    visibility: hidden;
+    li{
+      padding: 10px;
+      border-top: 1px solid $gray-lighter;
+      &:active{
+        background-color: $gray-lighter;
+      }
+      &:first-child{
+        border-top: 0;
+      }
+    }
+  }
+  .iot-history-list{
+    display: none;
+    padding-bottom: 10px;
+    &.active-condition{
+      display: block;
+    }
+    background: #f2f2f2;
+    .iot-condition-list{
+      padding: 25px 15px;
+      border-top: 5px solid #fff;
+      &:first-child{
+        border-top: 0;
+        .iot-history-condition-remove{
+          display: none;
+        }
+      }
+
+    }
+    .iot-condition-top{
+      position: relative;
+      h5{
+        color: #808080;
+        margin: 0;
+        padding: 0 0 12px 0;
+      }
+      .iot-condition{
+        border-color: #9b9b9b;
+        &:before{
+          border-top-color: #9b9b9b;
+        }
+      }
+    }
+    .iot-condition-bottom{
+      padding-top: 25px;
+      @include clearfix;
+      h5{
+        color: #808080;
+        margin: 0;
+        padding: 0 0 12px 0;
+      }
+      .iot-condition-value{
+        float: left;
+        width: 50%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-right: 15px;
+        &:last-child{
+          padding-right: 0;
+          padding-left: 12px;
+          float: right;
+        }
+      }
+      .iot-condition-value{
+        input{
+          width: 100%;
+          border: 2px solid #9b9b9b;
+          height: 45px;
+          line-height: 45px;
+          font-weight: bold;
+          @include border-radius(30px);
+          text-align: center;
+          font-size: $font-size-base - 2;
+          position: relative;
+          background: transparent;
+          &:focus{
+            outline: 0 solid transparent;
+          }
+        }
+      }
+    }
+  }
+}
+.iot-history-group{
+  display: flex;
+  justify-content: space-between;
+  &.group-first-child{
+    margin-bottom: 15px;
+  }
+  a{
+    width: 45%;
+    display: block;
+    border: 2px solid #4cb024;
+    height: 45px;
+    line-height: 45px;
+    font-weight: bold;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+  }
+}
+#iot-history-search{
+  width: 100%;
+  height: 45px;
+  background: #4cb024;
+  border: 2px solid #4cb024;
+  border-radius: 25px;
+  color: #fff;
+  margin-top: 30px;
+  &:focus{
+    outline: 0 solid transparent;
+  }
+}
+.iot-chart{
+  padding: 20px 10px;
+}

@@ -1,0 +1,129 @@
+<div data-role="page" id="iot-register" class="page-wapper">
+    <div class="ioi-header">
+        <a id="ioi-back-register" class="icon-header-control icon-back"></a>
+        <h1>Đăng ký</h1>
+    </div>
+    <div class="iot-page-register" data-role="main">
+        <div id="form-register-tabs" class="form-register-tab">
+            <div id="form-register-one" class="form-register-control">
+                <div class="iot-register-form">
+                    <div class="iot-register-errors"></div>
+                    <div class="iot-register-form-user iot-register-form-input">
+                        <input data-role="none" type="text" name="iot-fullname" id="iot-fullname" placeholder="Họ tên" />
+                    </div>
+                    <div class="iot-register-form-user iot-register-form-input">
+                        <input data-role="none" type="number" name="iot-phonenumber" id="iot-phonenumber"  placeholder="SDT" />
+                    </div>
+                    <div class="iot-register-form-user iot-register-form-input">
+                        <input data-role="none" type="text" name="iot-email" id="iot-email" placeholder="Email" />
+                    </div>
+                    <div class="iot-register-form-select">
+                        <a id="iot-city" class="iot-condition-register iot-btn-select">Tỉnh thành</a>
+                        <ul id="iot-list-city" class="iot-list-register-detail">
+                            <li data-value="angiang" class="iot-list-city-item">An Giang</li>
+                            <li data-value="baria" class="iot-list-city-item">Bà Rịa - Vũng Tàu</li>
+                            <li data-value="baclieu" class="iot-list-city-item">Bạc Liêu</li>
+                            <li data-value="backan" class="iot-list-city-item">Bắc Kạn</li>
+                            <li data-value="bacgiang" class="iot-list-city-item">Bắc Giang</li>
+                            <li data-value="bacninh" class="iot-list-city-item">Bắc Ninh</li>
+                            <li data-value="bentre" class="iot-list-city-item">Bến Tre</li>
+                            <li data-value="binhduong" class="iot-list-city-item">Bình Dương</li>
+                            <li data-value="binhdinh" class="iot-list-city-item">Bình Định</li>
+                            <li data-value="binhphuoc" class="iot-list-city-item">Bình Phước</li>
+                            <li data-value="binhthuan" class="iot-list-city-item">Bình Thuận</li>
+                            <li data-value="camau" class="iot-list-city-item">Cà Mau</li>
+                            <li data-value="caobang" class="iot-list-city-item">Cao Bằng</li>
+                            <li data-value="cantho" class="iot-list-city-item">Cần Thơ</li>
+                            <li data-value="danang" class="iot-list-city-item">Đà Nẵng</li>
+                            <li data-value="daclak" class="iot-list-city-item">Đắk Lắk</li>
+                            <li data-value="daknong" class="iot-list-city-item">Đắk Nông</li>
+                            <li data-value="dongnai" class="iot-list-city-item">Đồng Nai</li>
+                            <li data-value="dongthap" class="iot-list-city-item">Đồng Tháp</li>
+                            <li data-value="dienbien" class="iot-list-city-item">Điện Biên</li>
+                            <li data-value="gialai" class="iot-list-city-item">Gia Lai</li>
+                            <li data-value="hagiang" class="iot-list-city-item">Hà Giang</li>
+                            <li data-value="hanam" class="iot-list-city-item">Hà Nam</li>
+                            <li data-value="hanoi" class="iot-list-city-item">Hà Nội</li>
+                            <li data-value="hatinh" class="iot-list-city-item">Hà Tĩnh</li>
+                            <li data-value="haiduong" class="iot-list-city-item">Hải Dương</li>
+                            <li data-value="haiphong" class="iot-list-city-item">Hải Phòng</li>
+                            <li data-value="hoabinh" class="iot-list-city-item">Hòa Bình</li>
+                            <li data-value="haugiang" class="iot-list-city-item">Hậu Giang</li>
+                            <li data-value="hungyen" class="iot-list-city-item">Hưng Yên</li>
+                            <li data-value="hochiminh" class="iot-list-city-item">Hồ Chí Minh</li>
+                            <li data-value="kiengiang" class="iot-list-city-item">Kiên Giang</li>
+                            <li data-value="kontum" class="iot-list-city-item">Kon Tum</li>
+                            <li data-value="laichau" class="iot-list-city-item">Lai Châu</li>
+                            <li data-value="laocai" class="iot-list-city-item">Lào Cai</li>
+                            <li data-value="langson" class="iot-list-city-item">Lạng Sơn</li>
+                            <li data-value="lamdong" class="iot-list-city-item">Lâm Đồng</li>
+                            <li data-value="longan" class="iot-list-city-item">Long An</li>
+                            <li data-value="namdinh" class="iot-list-city-item">Nam Định</li>
+                            <li data-value="nghean" class="iot-list-city-item">Nghệ An</li>
+                            <li data-value="ninhbinh" class="iot-list-city-item">Ninh Bình</li>
+                            <li data-value="ninhthuan" class="iot-list-city-item">Ninh Thuận</li>
+                            <li data-value="phutho" class="iot-list-city-item">Phú Thọ</li>
+                            <li data-value="phucyen" class="iot-list-city-item" >Phú Yên</li>
+                            <li data-value="quangbinh" class="iot-list-city-item">Quảng Bình</li>
+                            <li data-value="quangnam" class="iot-list-city-item">Quảng Nam</li>
+                            <li data-value="quangngai" class="iot-list-city-item">Quảng Ngãi</li>
+                            <li data-value="quangninh" class="iot-list-city-item">Quảng Ninh</li>
+                            <li data-value="quangtri" class="iot-list-city-item">Quảng Trị</li>
+                            <li data-value="soctrang" class="iot-list-city-item">Sóc Trăng</li>
+                            <li data-value="sonla" class="iot-list-city-item">Sơn La</li>
+                            <li data-value="tayninh" class="iot-list-city-item">Tây Ninh</li>
+                            <li data-value="thaibinh" class="iot-list-city-item">Thái Bình</li>
+                            <li data-value="thainguyen" class="iot-list-city-item">Thái Nguyên</li>
+                            <li data-value="thanhhoa" class="iot-list-city-item">Thanh Hóa</li>
+                            <li data-value="thuathienhue" class="iot-list-city-item">Thừa Thiên - Huế</li>
+                            <li data-value="tiengiang" class="iot-list-city-item">Tiền Giang</li>
+                            <li data-value="travinh" class="iot-list-city-item">Trà Vinh</li>
+                            <li data-value="tuyenquang" class="iot-list-city-item">Tuyên Quang</li>
+                            <li data-value="vinhlong" class="iot-list-city-item">Vĩnh Long</li>
+                            <li data-value="vinhphuc" class="iot-list-city-item">Vĩnh Phúc</li>
+                            <li data-value="yenbai" class="iot-list-city-item">Yên Bái</li>
+                        </ul>
+                    </div>
+                    <div class="iot-register-form-select">
+                        <a id="iot-district" class="iot-condition-register iot-btn-select">Quận huyện</a>
+                        <ul id="iot-list-district" class="iot-list-register-detail">
+
+                        </ul>
+                    </div>
+                    <div class="iot-register-form-user iot-register-form-input">
+                        <input data-role="none" type="text" name="iot-address" id="iot-address" placeholder="Địa chỉ" />
+                    </div>
+
+                    <div class="iot-register-form-register">
+                        <button data-role="none" id="iot-register-next" class="iot-btn-register">Tiếp theo</button>
+                    </div>
+                </div><!-- end .iot-register-form -->
+            </div>
+            <div id="form-register-two" class="form-register-control">
+                <div class="iot-register-logo">
+                    <span class="logo" id="choose-image"></span>
+                    <canvas id="myAvatarHide"></canvas>
+                </div>
+                <div class="iot-register-form">
+                    <div class="iot-register-errors" id="iot-register-data-errors"></div>
+                    <div class="iot-register-form-password iot-register-form-input">
+                        <input data-role="none" type="password" name="iot-password" id="iot-rg-password" placeholder="Mật khẩu" />
+                    </div>
+                    <div class="iot-register-form-password iot-register-form-input">
+                        <input data-role="none" type="password" name="iot-password2" id="iot-rg-password2" placeholder="Nhập lại mật khẩu" />
+                    </div>
+                    <div class="iot-register-form-register">
+                        <button data-role="none" id="iot-register-control" class="iot-btn-register">Đăng ký</button>
+                    </div>
+                    <div class="iot-register-changelogin">
+                        <a href="#" id="iot-register-logincontrol">Đăng nhập</a>
+                    </div>
+                </div><!-- end .iot-register-form -->
+            </div>
+        </div>
+    </div><!-- end .iot-page-register -->
+    <div class="iot-register-footer">
+        <p>Welcome come here! </p>
+        <a id="iot-register-help">Hỗ trợ</a>
+    </div>
+</div>
