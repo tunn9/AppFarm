@@ -12,6 +12,7 @@ var pageUrl = {
     HOME_PAGE: 'screen/home/home.html',
     LOGIN_PAGE: 'screen/user/login.html',
     REGISTER_PAGE: 'screen/user/register.html',
+    FORGET_PASS: 'screen/user/forgot.html',
     PROFILER: 'screen/user/profiler.html',
 
     MANUAL: 'screen/manual/manual.html',

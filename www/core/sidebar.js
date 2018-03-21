@@ -108,29 +108,27 @@ var sidebarPanel = {
         httpService.logout('','').done(function (response) {
             debug.log(response);
             if(response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE){
-                storageManager.deleteLocalStorage(constants.LOGIN.DATA_LOGIN);
-                sidebarPanel.close();
-                elm.removeClass('loading-sidebar');
-                sidebarPanel.wapperLock.removeClass('sidebar-open-lock');
-                if(mqttApp.conntectServer){
-                    mqttApp.disConnect();
-                }
-                var pagelogin = setTimeout(function () {
-                    pageHelper.changePage(fileHelper.getUrl(pageUrl.LOGIN_PAGE),  {transition: eventHelper.PAGE_TRANSITION.SLIDE,  reverse: true});
-                    clearTimeout(pagelogin);
-                },300);
+                sidebarPanel.handlerLogoutResponse(elm);
             }else{
-                sidebarPanel.close();
-                elm.removeClass('loading-sidebar');
-                sidebarPanel.wapperLock.removeClass('sidebar-open-lock');
+                sidebarPanel.handlerLogoutResponse(elm);
             }
         }).fail(function (jqXHR) {
-            debug.log("fail" + jqXHR);
-            sidebarPanel.close();
-            elm.removeClass('loading-sidebar');
-            sidebarPanel.wapperLock.removeClass('sidebar-open-lock');
+            sidebarPanel.handlerLogoutResponse(elm);
         });
 
+    },
+    handlerLogoutResponse: function(elm) {
+        storageManager.deleteLocalStorage(constants.LOGIN.DATA_LOGIN);
+        sidebarPanel.close();
+        elm.removeClass('loading-sidebar');
+        sidebarPanel.wapperLock.removeClass('sidebar-open-lock');
+        if(mqttApp.conntectServer){
+            mqttApp.disConnect();
+        }
+        var pagelogin = setTimeout(function () {
+            pageHelper.changePage(fileHelper.getUrl(pageUrl.LOGIN_PAGE),  {transition: eventHelper.PAGE_TRANSITION.SLIDE,  reverse: true});
+            clearTimeout(pagelogin);
+        },300);
     },
     handlerSetupAuto: function (event) {
         event.preventDefault();

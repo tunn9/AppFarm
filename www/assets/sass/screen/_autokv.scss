@@ -146,6 +146,13 @@
     }
     .iot-condition-top{
       position: relative;
+      @include display-flex;
+      @include align-item;
+      .iot-condition-top-left{
+        flex: 1;
+        -webkit-flex: 1;
+      }
+
       h5{
         color: #808080;
         margin: 0;
@@ -164,24 +171,28 @@
       h5{
         color: #808080;
         margin: 0;
-        padding: 0 0 12px 0;
+        padding: 0;
+      }
+      .unit{
+        font-size: 12px;
+        padding-left: 5px;
       }
       .iot-condition-value{
         float: left;
-        width: 50%;
+        width: 47%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        padding-right: 15px;
+        @include display-flex;
+        @include align-item;
+        @include justify-content(space-between);
         &:last-child{
-          padding-right: 0;
-          padding-left: 12px;
           float: right;
         }
       }
       .iot-condition-value{
         input{
-          width: 100%;
+          width: 60%;
           border: 2px solid #9b9b9b;
           height: 45px;
           line-height: 45px;
@@ -199,22 +210,33 @@
     }
   }
 }
-
+.btn-auto-remove{
+  width: 35px;
+  height: 35px;
+  background-color: transparent;
+  background-image: url(../images/remove.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 35px;
+  margin-left: 40px;
+  @include box-shadow(1px 1px 5px 0 rgba(0,0,0,0.3));
+  @include border-radius(50%);
+}
 .iot-condition-action{
   text-align: right;
   padding-top: 25px;
   a{
     display: inline-block;
-    width: 40px;
+
     text-align: center;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 15px;
-    background: #8c8c8c;
     @include box-shadow(1px 1px 5px 0 rgba(0,0,0,0.3));
-    font-size: 30px;
+    font-size: 14px;
     line-height: 34px;
     color: $color-white !important;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-radius: 5px;
+    &.iot-btn-time-addnew,
     &.iot-autokv-condition-addnew{
       background: $brand-primary;
     }
@@ -281,12 +303,12 @@
 
 // set up by time
 #iot-autokv-bytime{
-  padding: 15px;
   display: none;
   &.bytime-show{
     display: block;
   }
 }
+
 .iot-autokv-bytime-header{
   list-style: none;
   padding: 0;
@@ -387,6 +409,190 @@
   border-top: 1px solid $brand-primary;
   color: $brand-primary !important;
 }
-#iot-bytime-list-device{
-  padding-top: 10px;
+
+.iot-condition-top{
+  position: relative;
+}
+.setting-time{
+  h5{
+    color: #808080;
+    margin: 0;
+    padding: 0 0 12px 0;
+  }
+  .time-week {
+    display: flex;
+    -webkit-display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    .time-week-detail {
+      display: block;
+      width: 40px;
+      text-align: center;
+      height: 40px;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      background: transparent;
+      border: 2px solid #9b9b9b;
+      font-weight: bold;
+      font-size: 13px;
+      line-height: 34px;
+      color: $gray-base;
+      @include transition(all 0.3s ease 0s);
+      &.time-week-active {
+        background-color: $brand-primary;
+        color: $color-white;
+        border-color: $brand-primary;
+      }
+    }
+  }
+  .time-repeat{
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    min-width: 100px;
+    padding-left: 35px;
+    line-height: 25px;
+    margin-top: 25px;
+    &:before {
+      content: '';
+      width: 25px;
+      text-align: center;
+      height: 25px;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      background: transparent;
+      border: 2px solid #9b9b9b;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+      @include transition(all 0.3s ease 0s);
+    }
+    &:after{
+      @include transition(all 0.3s ease 0s);
+      content: '';
+      width: 25px;
+      height: 25px;
+      background-color: transparent;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url("../images/checked.svg");
+      background-size: 18px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+    &.time-repeat-active{
+      &:before {
+        background-color: $brand-primary;
+        border-color: $brand-primary;
+      }
+      &:after{
+        opacity: 1;
+      }
+    }
+  }
+}
+#iot-autokv-bytime{
+  background: #f2f2f2;
+  #iot-bytime-list-device{
+    padding-top: 0;
+  }
+}
+.auto-setting-by-time-value {
+  padding: 25px 15px;
+  border-top: 5px solid #fff;
+  h5 {
+    margin-top: 0;
+  }
+  &:first-child {
+    .iot-btn-time-remove{
+      //display: none;
+    }
+  }
+  .iot-condition-list-time{
+    border-top: 0;
+    padding: 25px 0;
+    @include justify-content(space-around);
+  }
+  .setting-timestart,
+  .setting-timesend{
+    width: 60%;
+  }
+  .iot-condition-time-value{
+    padding: 0 !important;
+    display: flex;
+    -webkit-display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    width: 47%;
+  }
+}
+.iot-condition-list:nth-child(7) {
+  .iot-condition-action a {
+    display: none;
+  }
+}
+.iot-condition-time-thresold{
+  padding: 25px 15px;
+  border-top: 5px solid #fff;
+  .iot-time-thresold-value{
+    display: flex;
+    -webkit-display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+  }
+  h4{
+    color: #222;
+    margin: 0;
+    padding: 0 0 18px 0;
+  }
+  .iot-condition-time-value{
+    display: flex;
+    -webkit-display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    width: 47%;
+  }
+  h5 {
+    color: #808080;
+    margin: 0;
+    padding: 0 0 12px 0;
+  }
+  .time-start {
+    width: 73%;
+    border: 2px solid #9b9b9b;
+    height: 45px;
+    line-height: 45px;
+    font-weight: bold;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+    background: transparent;
+  }
+}
+.iot-st-auto-time-top{
+  @include display-flex;
+  @include align-item;
+  @include justify-content(space-between);
+  .iot-st-auto-time-left{
+    flex: 1;
+    -webkit-flex: 1;
+  }
+  .iot-st-auto-time-right{
+    width: 150px;
+    @include display-flex;
+    @include align-item;
+    @include justify-content(flex-end);
+  }
+  .iot-btn-time-remove{
+    margin-left: 15px;
+  }
 }

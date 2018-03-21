@@ -177,11 +177,14 @@ var createSettingsController = {
         });
 
         createSettingsController.handlerAddOrRemove();
+
+        createSettingsController.handlerAddOrRemoveTime();
     },
 
     bindEventHandlers: function () {
-        createSettingsView.backID.on(eventHelper.TAP,createSettingsController.handlerBackHome);
+        createSettingsView.backID.on(eventHelper.TOUCH_START,createSettingsController.handlerBackHome);
         createSettingsView.actionCancel.on(eventHelper.TAP,createSettingsController.handlerBackHome);
+        createSettingsView.pageID.on(eventHelper.VMOUSEUP,createSettingsController.handleBlurInput);
 
         createSettingsView.pageID.on(eventHelper.TAP,function () {
             $('.iot-condition').removeClass('active');
@@ -192,6 +195,7 @@ var createSettingsController = {
             if(!createSettingsView.conditionList.hasClass('active-condition')){
                 createSettingsView.conditionList.addClass('active-condition');
             }
+
         });
 
         createSettingsView.sensorByTimeID.on('tap',function () {
@@ -203,6 +207,10 @@ var createSettingsController = {
 
         // call method create auto setting
         createSettingsView.actionCreate.on(eventHelper.TAP, createSettingsController.handlerActionAutoSeting);
+
+        // bind event for setting by time
+        $('#iot-autokv-bytime').on(eventHelper.TAP, '.time-week-detail', createSettingsView.activeTimeWeek);
+        $('#iot-autokv-bytime').on(eventHelper.TAP, '.time-repeat', createSettingsView.activeTimeRepeat);
 
     },
 
@@ -225,13 +233,14 @@ var createSettingsController = {
         url_param['name'] = elm.attr('data-areaID');
         httpService.getDeviceList(url_param, data).done(function (response) {
             if(response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE){
+
                 // call method bind device
                 createSettingsView.bindDeviceList(response.data).done(function () {
-
+                    createSettingsController.bindEventOnOff();
                     // call method bind device by time
                     createSettingsView.bindDeviceListByTime(response.data).done(function () {
                         createSettingsView.conditionParent.removeClass(createSettingsView.STYLE.CLASS.NO_ACTIVE);
-                        createSettingsController.bindEventOnOff();
+                         // createSettingsController.bindEventOnOff();
                         createSettingsController.handlerAutoByTime();
                         loadingPage.hidePageLoading();
                     });
@@ -249,21 +258,21 @@ var createSettingsController = {
      *
      */
     bindEventOnOff: function () {
-        createSettingsView.onoffSwitch.on('swipeleft', function (e) {
+
+        createSettingsView.pageContent.on('swipeleft', '.onoffswitch', function (e) {
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (checkbox.is(':checked')) {
                 $(this).find('.onoffswitch-checkbox').prop("checked", false);
             }
         });
-        createSettingsView.onoffSwitch.on('swiperight', function (e) {
+        createSettingsView.pageContent.on('swiperight', '.onoffswitch', function (e) {
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (!checkbox.is(':checked')) {
                 checkbox.prop("checked", true);
             }
         });
-        createSettingsView.onoffSwitchTap.on('tap', function (e) {
+        createSettingsView.pageContent.on('tap', '.onoffswitch-action', function (e) {
             e.preventDefault();
-            debug.log(this.TAG);
             var checkbox = $(this).prev();
             if (checkbox.is(':checked')) {
                 checkbox.prop("checked", false);
@@ -280,19 +289,25 @@ var createSettingsController = {
     */
     handlerBackHome: function (ev) {
         ev.preventDefault();
-        pageHelper.changePage(fileHelper.getUrl(pageUrl.HOME_PAGE), {
+        pageHelper.changePage(fileHelper.getUrl(pageUrl.LIST_SETTINGS), {
             transition: eventHelper.PAGE_TRANSITION.SLIDE,
             reverse: true
         });
+    },
+
+    handleBlurInput: function (event) {
+
+        if($(event.target).attr('id') !== 'input-focus'){
+
+            $('input').blur();
+        }
     },
 
     handlerAddOrRemove: function () {
         $('.iot-autokv-list').on('tap','.iot-autokv-condition-addnew',function (event) {
             event.preventDefault();
             var elm = $(this);
-                console.log('add new');
-            // var parent = elm.closest('.iot-condition-list').find('.iot-condition-sensor').attr('data-senson');
-
+            if( $('.iot-condition-list').length === 6 ) return ;
 
             var DomElement = $('.iot-condition-list:eq(0)').clone();
             // DomElement.find('.iot-condition-content li[data-value='+parent+']').remove();
@@ -331,7 +346,7 @@ var createSettingsController = {
     */
     handlerAutoByTime: function () {
 
-        $('.time-start').on(eventHelper.TAP,function (event) {
+        $('#ioi-content-autokv').on(eventHelper.TAP,'.time-start',function (event) {
             event.preventDefault();
             var elm = $(this);
             $('#iot-datemobi').val(elm.text());
@@ -383,16 +398,15 @@ var createSettingsController = {
         var sensorNode = {
             "mode":2,
             "setType":1,
+            "sensorID": sensorID,
+            "controlID": controlID,
             "name": "",
-            "areaId": 1,
-            "sensorId": sensorID,
-            "controlId": controlID,
+            "areaID": 1,
             "cmdType": 1,
             "multiTask": 1,
             "data": {
-                date: '20171206',
-                timestart: '20:30',
-                timeend: '22:30',
+                'timeStart': '20:30',
+                'timeEnd': '22:30',
                 airTemplow: 0,
                 airTemphigh: 0,
                 airHumlow: 0,
@@ -466,9 +480,9 @@ var createSettingsController = {
                     break;
             }
         });
-
-        createSettingsController.sendDataForGateway(sensorNode);
-        createSettingsController.handleCheckTime();
+console.log(sensorNode);
+        // createSettingsController.sendDataForGateway(sensorNode);
+        // createSettingsController.handleCheckTime();
     },
     /*
      * Method post on Device
@@ -497,7 +511,38 @@ var createSettingsController = {
             console.log('action fail');
             clearTimeout(timeOut);
         },3000);
-    }
+    },
+
+    handlerAddOrRemoveTime: function () {
+        $('#iot-autokv-bytime').on('tap','.iot-btn-time-addnew',function (event) {
+
+            event.preventDefault();
+            var elm = $(this);
+            var DomElement = $('.auto-setting-by-time-value:eq(0)').clone();
+            DomElement.find('input').val('');
+            DomElement.find('.time-week-detail').removeClass('time-week-active');
+            DomElement.find('.time-repeat').removeClass('time-repeat-active');
+            DomElement.find('.time-start').text('6:07');
+            DomElement.find('.time-start').text('18:07');
+            DomElement.find('.iot-condition-sensor').text('Chọn output');
+            elm.closest('.auto-setting-by-time-value').after(DomElement);
+
+        });
+
+        $('#iot-autokv-bytime').on('tap','.iot-btn-time-remove',function (event) {
+            event.preventDefault();
+            var elm = $(this);
+            var param = {
+                title: '',
+                msg: 'Bạn có muốn xóa điều kiện này không?'
+            };
+            $.Confirm(param,function (res) {
+                if(res){
+                    elm.closest('.auto-setting-by-time-value').remove();
+                }
+            });
+        });
+    },
 
 
 }; //End Class

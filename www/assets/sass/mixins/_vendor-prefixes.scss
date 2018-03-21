@@ -4,7 +4,19 @@
 // Prevent browsers from flickering when using CSS 3D transforms.
 // Default value is `visible`, but can be changed to `hidden`
 
-
+//flex
+@mixin display-flex() {
+  display: flex;
+  -webkit-display: flex;
+}
+@mixin justify-content($value: center) {
+  justify-content: $value;
+  -webkit-justify-content: $value;
+}
+@mixin align-item(){
+  align-items: center;
+  -webkit-align-items: center;
+}
 // Box sizing
 @mixin box-sizing($boxmodel) {
   -webkit-box-sizing: $boxmodel;

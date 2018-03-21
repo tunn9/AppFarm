@@ -39,25 +39,24 @@
       padding: 0;
       margin: 0;
       list-style: none;
+      display: flex;
+      -webkit-display: flex;
+      justify-content: space-around;
+      -webkit-justify-content: space-around;
       li{
-        display: flex;
-        -webkit-display: flex;
-        justify-content: space-between;
-        -webkit-justify-content: space-between;
-        align-items: center;
-        -webkit-align-items: center;
         padding: 5px 0;
         span{
           display: block;
         }
         .icon-support-detail{
-          width: 40px;
-          height: 35px;
+          width: 45px;
+          height: 45px;
           display: block;
           background-color: transparent;
           background-position: center;
           background-repeat: no-repeat;
-          background-size: 30px;
+          background-size: 45px;
+          margin-bottom: 15px;
           &.iot-icon-phone{
             background-image: url("../images/ic_phone.svg");
           }

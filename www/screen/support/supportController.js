@@ -62,6 +62,8 @@ var supportController = {
             pageBack = pageUrl.LOGIN_PAGE;
         }else if( supportPage === 'register' ) {
             pageBack = pageUrl.REGISTER_PAGE;
+        }else if( supportPage === 'forgot' ) {
+            pageBack = pageUrl.FORGET_PASS;
         }
         pageHelper.changePage(fileHelper.getUrl(pageBack), {
             transition: eventHelper.PAGE_TRANSITION.SLIDE,

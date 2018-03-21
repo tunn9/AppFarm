@@ -1,4 +1,4 @@
-#iot-login{
+#iot-forgot{
   background-color: transparent;
   background-image: url("../images/spl.svg");
   background-position: center;
@@ -6,7 +6,7 @@
   background-size: cover;
 }
 
-.iot-login-logo{
+.iot-forgot-logo{
 
   padding: 25vw 0 15vw;
   .logo{
@@ -21,11 +21,11 @@
     margin: auto;
   }
 }
-.iot-login-form{
+.iot-forgot-form{
   padding: 0 15px;
   position: relative;
 }
-.iot-login-form-input{
+.iot-forgot-form-input{
   background-color: rgba(255,255,255,0.2);
   padding: 0 50px;
   @include box-shadow(0 15px 10px -11px rgba(0,0,0,0.3));
@@ -44,18 +44,18 @@
     top: 0;
     content: '';
   }
-  &.iot-login-form-user{
+  &.iot-forgot-form-user{
     &:before{
       background-image: url("../images/ic_user.svg");
     }
   }
-  &.iot-login-form-password{
+  &.iot-forgot-form-password{
     &:before{
       background-image: url("../images/ic_pass.svg");
     }
   }
 }
-.iot-login-form-input{
+.iot-forgot-form-input{
   input{
     height: 45px;
     width: 100%;
@@ -69,16 +69,16 @@
     }
   }
 }
-.login-active{
+.forgot-active{
   pointer-events: none;
-  #iot-login-control{
+  #iot-forgot-control{
     background-color: darken($orange,7%);
     &:after{
       opacity: 1;
     }
   }
 }
-#iot-login-control{
+#iot-forgot-control{
   height: 45px;
   width: 100%;
   border: 0;
@@ -112,7 +112,7 @@
     outline: 0;
   }
 }
-.iot-login-form-register{
+.iot-forgot-form-register{
   text-align: right;
   padding-top: 15px;
   padding-right: 15px;
@@ -122,10 +122,9 @@
     padding: 5px 0 5px 10px;
     display: block;
     margin: 5px 0;
-    opacity: 0.9;
   }
 }
-.iot-login-footer{
+.iot-forgot-footer{
   line-height: 24px;
   width: 100%;
   padding: 0 15px;
@@ -163,7 +162,7 @@
     }
   }
 }
-.iot-login-errors{
+.iot-forgot-errors{
   position: absolute;
   bottom: 100%;
   padding-bottom: 10px;
@@ -176,6 +175,16 @@
   text-align: center;
   &.eff{
     opacity: 1;
+  }
+}
+.iot-forgot-form-footer {
+  text-align: right;
+  a {
+    display: block;
+    font-size: $font-size-base + 1;
+    color: $color-white;
+    position: relative;
+    padding: 20px 10px;
   }
 }
 @keyframes bounceCenter {
@@ -193,10 +202,10 @@
   }
 }
 @media ( max-width: 370px ) {
-  .iot-login-logo{
+  .iot-forgot-logo{
     padding: 22vw 0 12vw;
   }
-  .iot-login-form-input:before{
+  .iot-forgot-form-input:before{
     left: 15px;
   }
 }

@@ -12,6 +12,11 @@ var messages = {
         textEmpty: '',
         fail: 'Đăng nhập không thành công'
     },
+    forgot: {
+        textErrors: 'không được để trống email/ phone',
+        done: 'reset mật khẩu thành công!',
+        fail: 'reset mật khẩu không thành công!'
+    },
     network: 'Internet is unavailable. Please check your network.',
     UPDATE: 'Cập nhật'
 };

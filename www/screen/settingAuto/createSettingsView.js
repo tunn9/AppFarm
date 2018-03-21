@@ -44,7 +44,7 @@ var createSettingsView = {
         createSettingsView.headerID = $('#iot-autokv-header');
         createSettingsView.pageContent = $('#ioi-content-autokv');
         createSettingsView.footerID = $('#iot-autokv-footer');
-        createSettingsView.backID = $('#ioi-back-autokv');
+        createSettingsView.backID = $('#iot-back-autokv');
         createSettingsView.actionCancel = $('#iot-autokv-cancel');
 
         createSettingsView.listAreaID = $('#iot-condition-area-name');
@@ -120,7 +120,7 @@ var createSettingsView = {
         var dfd = $.Deferred();
         var i = 0;
         var html = '';
-        var data = datalist.output;
+        var data = datalist;
         if (Array.isArray(data) && data.length > 0){
             for (i; i < data.length; i++) {
                 var mychecked = 'checked';
@@ -140,6 +140,8 @@ var createSettingsView = {
                     '</div>' +
                     '</li>';
             }
+
+
             createSettingsView.sensorInforDevice.html(html);
             createSettingsView.sensorInforDevice.attr('data-controlid',datalist.id);
 
@@ -156,33 +158,12 @@ var createSettingsView = {
         var dfd = $.Deferred();
         var i = 0;
         var html = '';
-        var data = datalist.output;
+        var data = datalist;
         if (Array.isArray(data) && data.length > 0){
             for (i; i < data.length; i++) {
-                html += '<ul class="iot-autokv-bytime-data">' +
-                    '<li>' +
-                        data[i].name +
-                    '</li>' +
-                    '<li>' +
-                        '<div class="ioi-device-status">' +
-                        '<div class="onoffswitch" data-id="'+data[i].id+'">'+
-                        '<input data-role="none" data-id="'+data[i].id+'" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox onoffswitch-setup">' +
-                        '<div class="onoffswitch-action" data-id="'+data[i].id+'"></div>' +
-                        '<span class="onoffswitch-switch"></span>' +
-                        '</div>'+
-                        '</div>' +
-                    '</li>' +
-                    '<li>'+
-                        '<div class="time-start">6:07</div>'+
-                    '</li>'+
-                    '<li>'+
-                        '<input data-role="none" type="number" value="" class="total-time" placeholder="30" />'+
-                    '</li>'+
-                    '</ul>';
+                html += '<li>Output '+i+'</li>';
             }
-            $('#iot-bytime-list-device').html(html);
-            createSettingsView.onoffSwitch = $('.onoffswitch');
-            createSettingsView.onoffSwitchTap = $('.onoffswitch-action');
+            $('.iot-autokv-sensor-value-time').html(html);
             dfd.resolve('Done');
         }else{
             dfd.resolve('Done');
@@ -201,6 +182,34 @@ var createSettingsView = {
         var heightFooter = createSettingsView.footerID.innerHeight();
         var contentHeight = heightWindow - ( heightFooter + heightHeader );
         createSettingsView.pageContent.height(contentHeight);
+    },
+
+    /*
+    * Method active time week
+    *
+    */
+    activeTimeWeek: function (event) {
+        event.preventDefault();
+        var elm  =  $(this);
+        if ( elm.hasClass('time-week-active') ) {
+            elm.removeClass('time-week-active');
+        }else {
+            elm.addClass('time-week-active');
+        }
+    },
+
+    /*
+    * Method active time repeat
+    *
+    */
+    activeTimeRepeat: function (event) {
+        event.preventDefault();
+        var elm  =  $(this);
+        if ( elm.hasClass('time-repeat-active') ) {
+            elm.removeClass('time-repeat-active');
+        }else {
+            elm.addClass('time-repeat-active');
+        }
     }
 
 

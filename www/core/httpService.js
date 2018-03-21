@@ -5,7 +5,7 @@
 
 var httpService = {
 
-    dataLocal: false,
+    dataLocal: true,
     dataServer: 'http://117.4.244.12:8888/dts/',
 
     /**
@@ -26,6 +26,9 @@ var httpService = {
     },
     updateUser: function (url_para, data) {
         return httpService.connectServer("data/users", "POST", url_para, data);
+    },
+    resetPassword: function (url_para, data) {
+        return httpService.connectServer("user/resetPassword", "POST", url_para, data);
     },
     profiler: function (url_para, data) {
         return httpService.connectServer("data/users", "GET", url_para, data);

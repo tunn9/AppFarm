@@ -59,6 +59,7 @@ var loginController = {
 
         loginView.buttonRegister.on(eventHelper.TAP, loginController.handlerActionRegister);
         loginView.btnSupport.on(eventHelper.TAP, loginController.handlerChangePageSupport);
+        $('#iot-forgot-password').on(eventHelper.TAP, loginController.handlerForgotPasword);
 
     },
 
@@ -142,5 +143,13 @@ var loginController = {
         ev.preventDefault();
         storageManager.put(constants.USER.SUPPORT_PAGE, 'login');
         pageHelper.changePage(fileHelper.getUrl(pageUrl.SUPPORT), {transition: eventHelper.PAGE_TRANSITION.SLIDE});
+    },
+    /*
+     * Method handler when tap button forgot pass word
+     *
+     */
+    handlerForgotPasword: function (ev) {
+        ev.preventDefault();
+        pageHelper.changePage(fileHelper.getUrl(pageUrl.FORGET_PASS), {transition: eventHelper.PAGE_TRANSITION.SLIDE});
     }
 };
