@@ -65,6 +65,7 @@ var settingListController = {
 
         settingListController.getListSettingsFromServer();
         settingListController.bindEventForPage();
+        settingListController.bindEventOnOff();
     },
 
     bindEventForPage: function () {
@@ -81,8 +82,9 @@ var settingListController = {
         var url_param = '';
         var data = '';
         httpService.getListSettingsAuto(url_param, data).done(function (response) {
-            debug.log(response);
-            if (response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE && response.total > 0) {
+
+            if (response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE) {
+
                 // call method bind data html
                 settingListView.bindDataListSettings(response.data).done(function () {
                     loadingPage.hide();
@@ -101,6 +103,36 @@ var settingListController = {
             }
             loadingPage.hide();
             settingListView.setHeightList();
+        });
+    },
+
+    /*
+     * method handler on/off status device
+     *
+     */
+    bindEventOnOff: function () {
+
+        settingListView.settingsContent.on('swipeleft', '.onoffswitch', function (e) {
+            var checkbox = $(this).find('.onoffswitch-checkbox');
+            if (checkbox.is(':checked')) {
+                $(this).find('.onoffswitch-checkbox').prop("checked", false);
+            }
+        });
+        settingListView.settingsContent.on('swiperight', '.onoffswitch', function (e) {
+            var checkbox = $(this).find('.onoffswitch-checkbox');
+            if (!checkbox.is(':checked')) {
+                checkbox.prop("checked", true);
+            }
+        });
+        settingListView.settingsContent.on('tap', '.onoffswitch-action', function (e) {
+            e.preventDefault();
+            var checkbox = $(this).prev();
+            if (checkbox.is(':checked')) {
+                checkbox.prop("checked", false);
+
+            } else {
+                checkbox.prop("checked", true);
+            }
         });
     },
 

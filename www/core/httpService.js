@@ -5,7 +5,7 @@
 
 var httpService = {
 
-    dataLocal: true,
+    dataLocal: false,
     dataServer: 'http://117.4.244.12:8888/dts/',
 
     /**
@@ -39,6 +39,9 @@ var httpService = {
     getDeviceList: function (url_para, data) {
         return httpService.connectServer("data/devices", "GET", url_para, data);
     },
+    getDeviceListAuto: function (url_para, data, id) {
+        return httpService.connectServer("data/devices?type=3&notUse=true&areaId="+id+"", "GET", url_para, data);
+    },
     deleteArea: function (url_para, data) {
         return httpService.connectServer("data/areas", "DELETE", url_para, data);
     },
@@ -56,6 +59,9 @@ var httpService = {
     },
     getListSettingsAuto: function (url_para, data) {
         return httpService.connectServer("data/settingsAuto", "GET", url_para, data);
+    },
+    getIndexSettingsAuto: function (url_para, data, id) {
+        return httpService.connectServer("data/settingsAuto/readIndex/" + id, "GET", url_para, data);
     },
     // deleteSettingsAuto: function (url_para, data) {
     //     return httpService.connectServer("data/settingsAuto", "DELETE", url_para, data);
@@ -95,7 +101,7 @@ var httpService = {
         var param = '';
         var token = '';  
                  
-        if (url_para !== '') {         
+        if (url_para !== '') {
             param = Object.keys(url_para).map(function (key) {
                 return encodeURIComponent(key) + '=' + encodeURIComponent(url_para[key]);
             }).join('&');
@@ -112,6 +118,7 @@ var httpService = {
                 setUrl = httpService.dataServer + api;
             }
         }
+        console.log(setUrl);
 
         // get token when logged
         var datalogin = storageManager.getLocalStorage(constants.LOGIN.DATA_LOGIN);

@@ -596,3 +596,9 @@
     margin-left: 15px;
   }
 }
+#iot-condition-list-device-wapper{
+  display: none;
+  &.active-show-device{
+    display: block;
+  }
+}

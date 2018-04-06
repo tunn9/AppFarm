@@ -1,44 +1,23 @@
 {
   "code": 200,
-  "total": 2,
   "data": [
     {
-      "id": 1113,
-      "nameSetting": "Nhiệt độ",
-      "nameArea": "Khuc vực 1",
+      "id": "23123-sagdajsd-cas231233",
+      "area":{
+        "id":"89423-dwew-23424",
+        "name" : "KV1"
+      },
+      "name":"setting 1",
       "enable": 1
     },
     {
-      "id": 1113,
-      "nameSetting": "Độ ẩm",
-      "nameArea": "Khuc vực 2",
-      "enable": 0
-    },
-    {
-      "id": 1113,
-      "nameSetting": "Nhiệt độ",
-      "nameArea": "Khuc vực 3",
-      "enable": 1
-    },
-    {
-      "id": 1113,
-      "nameSetting": "Độ ẩm",
-      "nameArea": "Khuc vực 4",
-      "enable": 0
-    },
-    {
-      "id": 1113,
-      "nameSetting": "Nhiệt độ",
-      "nameArea": "Khuc vực 5",
-      "enable": 1
-    },
-    {
-      "id": 1113,
-      "nameSetting": "Độ ẩm",
-      "nameArea": "Khuc vực 6",
+      "id": "23123-sagdajsd-c21343522",
+      "area":{
+        "id":"213432423423-23123-123d",
+        "name":"KV1"
+      },
+      "name":"setting2",
       "enable": 0
     }
   ]
 }
-
-

@@ -52,15 +52,15 @@ var settingListView = {
         var i = 0;
         var html = '';
         if (Array.isArray(data)) {
-
+            console.log(data);
             for (i; i < data.length; i++) {
                 var mychecked = 'checked';
                 if(data[i].enable === 0){
                     mychecked = '';
                 }
-                html += '<li data-id="'+data[i].id+'" data-area="'+data[i].nameArea+'" data-setting="'+data[i].nameSetting+'">'+
-                            '<div class="setting-name setting-name-control">'+data[i].nameSetting+'</div>'+
-                            '<div class="setting-area setting-name-control">'+data[i].nameArea+'</div>'+
+                html += '<li data-id="'+data[i].id+'" data-area="'+data[i].area.name+'" data-setting="'+data[i].name+'" data-areaID="'+data[i].area.ID+'">'+
+                            '<div class="setting-name setting-name-control">'+data[i].name+'</div>'+
+                            '<div class="setting-area setting-name-control">'+data[i].area.name+'</div>'+
                             '<div class="setting-status text-right">'+
                                 '<span class="iot-check iot-check-list" data-id="'+data[i].id+'"></span>'+
                                 '<div class="ioi-device-status">'+

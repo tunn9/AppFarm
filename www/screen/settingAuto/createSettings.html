@@ -72,14 +72,6 @@
                     <a class="iot-autokv-condition-addnew">Thêm điều kiến</a>
                 </div>
             </div><!-- .iot-condition-list -->
-            <div class="iot-condition-list-device">
-                <div class="iot-device-header">
-                    <h4>Thiết bị</h4>
-                    <h4>Tắt/Bật</h4>
-                </div>
-                <ul class="iot-autokvdevice-content">
-                </ul>
-            </div><!-- .iot-condition-list-device -->
         </div><!-- .iot-autokv-list -->
 
         <div id="iot-autokv-bytime">
@@ -87,28 +79,28 @@
 
 
                 <div class="auto-setting-by-time-value iot-condition-list-device">
-                    <div class="iot-condition-top iot-st-auto-time-top">
-                        <div class="iot-st-auto-time-left">
-                            <a class="iot-condition iot-condition-sensor" data-senson="">Chọn output</a>
-                            <ul class="iot-condition-content iot-autokv-sensor-value iot-autokv-sensor-value-time">
-                                <li data-value="1">Output 1</li>
-                                <li data-value="2">Output 2</li>
-                                <li data-value="3">Output 3</li>
-                                <li data-value="4">Output 4</li>
-                                <li data-value="5">Output 5</li>
-                            </ul>
-                        </div>
-                        <div class="iot-st-auto-time-right">
-                            <div class="ioi-device-status">
-                                <div class="onoffswitch">
-                                    <input data-role="none" data-id="undefined" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox onoffswitch-setup" checked="">
-                                    <div class="onoffswitch-action" data-id="undefined"></div>
-                                    <span class="onoffswitch-switch"></span>
-                                </div>
-                            </div>
-                            <a class="iot-btn-time-remove btn-auto-remove"></a>
-                        </div>
-                    </div>
+                    <!--<div class="iot-condition-top iot-st-auto-time-top">-->
+                        <!--<div class="iot-st-auto-time-left">-->
+                            <!--<a class="iot-condition iot-condition-sensor" data-senson="">Chọn output</a>-->
+                            <!--<ul class="iot-condition-content iot-autokv-sensor-value iot-autokv-sensor-value-time">-->
+                                <!--<li data-value="1">Output 1</li>-->
+                                <!--<li data-value="2">Output 2</li>-->
+                                <!--<li data-value="3">Output 3</li>-->
+                                <!--<li data-value="4">Output 4</li>-->
+                                <!--<li data-value="5">Output 5</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                        <!--<div class="iot-st-auto-time-right">-->
+                            <!--<div class="ioi-device-status">-->
+                                <!--<div class="onoffswitch">-->
+                                    <!--<input data-role="none" data-id="undefined" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox onoffswitch-setup" checked="">-->
+                                    <!--<div class="onoffswitch-action" data-id="undefined"></div>-->
+                                    <!--<span class="onoffswitch-switch"></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<a class="iot-btn-time-remove btn-auto-remove"></a>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
                     <div class="iot-condition-list-time">
                         <div class="iot-condition-time-value">
@@ -137,15 +129,18 @@
                             Lặp lại
                         </span>
                     </div>
-
-                    <div class="iot-condition-action">
-                        <a class="iot-btn-time-addnew">Thêm thiết bị</a>
-                    </div>
-
-
                 </div>
             </div>
         </div><!-- #iot-autokv-bytime -->
+
+        <div class="iot-condition-list-device" id="iot-condition-list-device-wapper">
+            <div class="iot-device-header">
+                <h4>Thiết bị</h4>
+                <h4>Tắt/Bật</h4>
+            </div>
+            <ul class="iot-autokvdevice-content">
+            </ul>
+        </div><!-- .iot-condition-list-device -->
 
     </div>
 

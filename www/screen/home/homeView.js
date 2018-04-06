@@ -103,10 +103,15 @@ var homeView = {
                     gatewayID: gateId,
                     nameArea: data[i].name,
                     areaID: data[i].id,
-                    nodeID: "check"
+                    nodeID: '',
+                    controlId: ''
                 };
+                console.log(data);
                 if(data[i].sensor){
-                    data_local.nodeID = data[i].sensor.id;
+                    data_local.nodeID = data[i].sensor.code;
+                }
+                if(data[i].control){
+                    data_local.controlID = data[i].control.code;
                 }
                 data_areas.push(data_local);
                 html += '<div class="item-area">' +

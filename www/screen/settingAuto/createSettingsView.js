@@ -101,7 +101,7 @@ var createSettingsView = {
 
         if(data){
             for(i; i < data.length; i++ ){
-                html += '<li data-getway="'+data[i].gatewayID+'" data-nodeID="'+data[i].nodeID+'" data-areaID="'+data[i].areaID+'">'+data[i].nameArea+'</li>';
+                html += '<li data-getway="'+data[i].gatewayID+'" data-node="'+data[i].nodeID+'" data-control="'+data[i].controlID+'" data-areaID="'+data[i].areaID+'">'+data[i].nameArea+'</li>';
             }
             createSettingsView.listAreaID.html(html);
             dfd.resolve('Done');

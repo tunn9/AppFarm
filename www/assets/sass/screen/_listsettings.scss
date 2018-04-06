@@ -28,7 +28,9 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   li{
-    padding: 20px 0;
+    padding: 10px 0;
+    @include display-flex;
+    @include align-item;
     &:after{
       clear: both;
       content: '';
@@ -40,21 +42,24 @@
       overflow: hidden;
       text-overflow: clip;
       &:nth-child(1){
-        width: 35%;
+        width: 30%;
       }
     }
     div.text-right{
-      width: 35%;
+      width: 40%;
+      .iot-check{
+        margin: 10px 0 10px 20px;
+      }
     }
     .ioi-device-status{
       float: right;
-      .onoffswitch{
-        padding: 0;
-        .onoffswitch-switch{
-          left: 0;
-          top: 0;
-        }
-      }
+      //.onoffswitch{
+      //  padding: 0;
+      //  .onoffswitch-switch{
+      //    left: 0;
+      //    top: 0;
+      //  }
+      //}
     }
   }
 }

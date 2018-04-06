@@ -16,7 +16,7 @@ var createSettingsController = {
 
     // PROPERTIES
     //
-
+    readIndex: null,
     // METHODS
     //
 
@@ -178,7 +178,7 @@ var createSettingsController = {
 
         createSettingsController.handlerAddOrRemove();
 
-        createSettingsController.handlerAddOrRemoveTime();
+       // createSettingsController.handlerAddOrRemoveTime();
     },
 
     bindEventHandlers: function () {
@@ -195,13 +195,20 @@ var createSettingsController = {
             if(!createSettingsView.conditionList.hasClass('active-condition')){
                 createSettingsView.conditionList.addClass('active-condition');
             }
+            if(!$('#iot-condition-list-device-wapper').hasClass('active-show-device')){
+                $('#iot-condition-list-device-wapper').addClass('active-show-device');
+            }
 
         });
 
         createSettingsView.sensorByTimeID.on('tap',function () {
+
             createSettingsView.conditionList.removeClass('active-condition');
             if(!createSettingsView.autoSetingTime.hasClass('bytime-show')){
                 createSettingsView.autoSetingTime.addClass('bytime-show');
+            }
+            if(!$('#iot-condition-list-device-wapper').hasClass('active-show-device')){
+                $('#iot-condition-list-device-wapper').addClass('active-show-device');
             }
         });
 
@@ -224,14 +231,20 @@ var createSettingsController = {
         var elm = $(this);
         var iotAreaDom = elm.parent().prev();
         iotAreaDom.text(elm.text());
-        iotAreaDom.attr('data-nodeID',elm.attr('data-nodeID'));
-        iotAreaDom.attr('data-getway',elm.attr('data-getway'));
+        iotAreaDom.attr('data-node',elm.attr('data-node'));
+        iotAreaDom.attr('data-gateway',elm.attr('data-getway'));
+        iotAreaDom.attr('data-control',elm.attr('data-control'));
         $('.iot-condition').removeClass('active');
         loadingPage.showPageLoading(createSettingsView.pageID);
-        var url_param = {};
+        var url_param = '';
         var data = '';
-        url_param['name'] = elm.attr('data-areaID');
-        httpService.getDeviceList(url_param, data).done(function (response) {
+        httpService.getIndexSettingsAuto(url_param, data, elm.attr('data-areaID')).done(function (res) {
+            this.readIndex = res.data;
+            console.log(res);
+        }).fail(function () {
+            console.log('fail');
+        });
+        httpService.getDeviceListAuto(url_param, data, elm.attr('data-areaID')).done(function (response) {
             if(response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE){
 
                 // call method bind device
@@ -393,8 +406,8 @@ var createSettingsController = {
     handlerActionAutoSeting: function (event) {
         event.preventDefault();
 
-        var sensorID = createSettingsView.areaNameID.attr('data-nodeID');
-        var controlID = createSettingsView.sensorInforDevice.attr('data-controlid');
+        var sensorID = createSettingsView.areaNameID.attr('data-node');
+        var controlID = createSettingsView.areaNameID.attr('data-control');
         var sensorNode = {
             "mode":2,
             "setType":1,
@@ -404,6 +417,7 @@ var createSettingsController = {
             "areaID": 1,
             "cmdType": 1,
             "multiTask": 1,
+            "aIndex": createSettingsController.readIndex,
             "data": {
                 'timeStart': '20:30',
                 'timeEnd': '22:30',
@@ -480,9 +494,9 @@ var createSettingsController = {
                     break;
             }
         });
-console.log(sensorNode);
-        // createSettingsController.sendDataForGateway(sensorNode);
-        // createSettingsController.handleCheckTime();
+
+        createSettingsController.sendDataForGateway(sensorNode);
+        createSettingsController.handleCheckTime();
     },
     /*
      * Method post on Device
@@ -490,10 +504,10 @@ console.log(sensorNode);
      */
     sendDataForGateway: function (data) {
         loadingPage.showPageLoading(createSettingsView.pageID);
-        debug.log(data);
-        var getwayID = createSettingsView.areaNameID.attr('data-getway') || '';
+        var getwayID = createSettingsView.areaNameID.attr('data-gateway') || '';
         var message = new Paho.MQTT.Message(JSON.stringify(data));
         message.destinationName = 'smartFarm/'+getwayID+'/CONTROL';
+        debug.log(message);
         message.qos = 0;
         mqttApp.client.send(message);
     },
@@ -542,7 +556,7 @@ console.log(sensorNode);
                 }
             });
         });
-    },
+    }
 
 
 }; //End Class
