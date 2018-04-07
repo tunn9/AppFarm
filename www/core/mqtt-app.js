@@ -24,7 +24,7 @@ var mqttApp = {
         //     userName = dataHost.username || userName;
         //     passWord = dataHost.password || passWord;
         // }
-        mqttApp.client = new Paho.MQTT.Client("117.4.244.12", 31883, '/mqtt', 'clientId-' + parseInt(Math.random() * 1000, 10));
+        mqttApp.client = new Paho.MQTT.Client("27.72.145.192", 31883, '/mqtt', 'clientId-' + parseInt(Math.random() * 1000, 10));
         mqttApp.client.connect({
             timeout: 10,
             userName:'iot',
@@ -62,11 +62,11 @@ var mqttApp = {
                 var validate = message.payloadString.replace(/\0/g, '');
                 var data = JSON.parse(validate);
                 // update Read time
-                if(data.type == 'ManualMode'){
+                if(data.type == 2){
                     mqttApp.handlerConfirmManual(data);
-                }else if(data.type === 'sensor'){
+                }else if(data.type == 1){
                     mqttApp.handlerRealTimeSensor(data);
-                }else if(data.type === 'aFB'){
+                }else if(data.type == 3){
                     mqttApp.handlerConfirmAuto(data);
                 }
             }catch (err){

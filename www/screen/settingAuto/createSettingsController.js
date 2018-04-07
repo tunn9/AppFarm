@@ -70,6 +70,19 @@ var createSettingsController = {
             createSettingsController.handlerSelectConditionKV();
             createSettingsController.handlerSelectSensor();
             createSettingsController.bindEventHandlers();
+
+    },
+
+    coverDateUTC: function (time) {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var currentDate = mm +'/'+ dd +'/'+ yyyy;
+        var timeSetting = time;
+        var myDate = new Date( currentDate +" "+timeSetting); // Your timezone!
+        var myEpoch = myDate.getTime()/1000.0;
+        return myEpoch;
     },
 
     /*
@@ -130,6 +143,7 @@ var createSettingsController = {
             var elm = $(this);
             $('.iot-condition').removeClass('active');
             elm.parent().prev().text(elm.text());
+            elm.parent().prev().attr('data-type',elm.attr('data-type'));
         });
     },
 
@@ -160,20 +174,20 @@ var createSettingsController = {
             var sensorValue = elm.attr('data-value');
             elm.parent().prev().text(elm.text()).attr('data-senson',sensorValue);
 
-            var unit = elm.closest('.iot-condition-list').find('.unit');
-            switch (sensorValue){
-                case 'airTemp':
-                case 'airHum':
-                    unit.text('°C');
-                    break;
-                case 'soilTemp':
-                case 'soilHum':
-                    unit.text('%RH');
-                    break;
-                case 'elecNeg':
-                    unit.text('mS /cm');
-                    break;
-            }
+            // var unit = elm.closest('.iot-condition-list').find('.unit');
+            // switch (sensorValue){
+            //     case 'airTemp':
+            //     case 'airHum':
+            //         unit.text('°C');
+            //         break;
+            //     case 'soilTemp':
+            //     case 'soilHum':
+            //         unit.text('%RH');
+            //         break;
+            //     case 'elecNeg':
+            //         unit.text('mS /cm');
+            //         break;
+            // }
         });
 
         createSettingsController.handlerAddOrRemove();
@@ -217,7 +231,7 @@ var createSettingsController = {
 
         // bind event for setting by time
         $('#iot-autokv-bytime').on(eventHelper.TAP, '.time-week-detail', createSettingsView.activeTimeWeek);
-        $('#iot-autokv-bytime').on(eventHelper.TAP, '.time-repeat', createSettingsView.activeTimeRepeat);
+      //  $('#iot-autokv-bytime').on(eventHelper.TAP, '.time-repeat', createSettingsView.activeTimeRepeat);
 
     },
 
@@ -234,13 +248,14 @@ var createSettingsController = {
         iotAreaDom.attr('data-node',elm.attr('data-node'));
         iotAreaDom.attr('data-gateway',elm.attr('data-getway'));
         iotAreaDom.attr('data-control',elm.attr('data-control'));
+        iotAreaDom.attr('data-areaid',elm.attr('data-areaid'));
         $('.iot-condition').removeClass('active');
         loadingPage.showPageLoading(createSettingsView.pageID);
         var url_param = '';
         var data = '';
         httpService.getIndexSettingsAuto(url_param, data, elm.attr('data-areaID')).done(function (res) {
-            this.readIndex = res.data;
-            console.log(res);
+            createSettingsController.readIndex = res.data;
+            console.log(res.data);
         }).fail(function () {
             console.log('fail');
         });
@@ -405,22 +420,40 @@ var createSettingsController = {
     */
     handlerActionAutoSeting: function (event) {
         event.preventDefault();
+        var typeSetting = $('#iot-conditionkv').attr('data-type');
+        if( typeSetting === 'thresold' ) {
+            createSettingsController.handlerSettingAutoByThresold();
+        } else {
+            createSettingsController.handlerSettingAutoByTime();
+        }
+    },
+
+    /*
+    * method setting auto by thresold
+    *
+    */
+    handlerSettingAutoByThresold: function () {
 
         var sensorID = createSettingsView.areaNameID.attr('data-node');
         var controlID = createSettingsView.areaNameID.attr('data-control');
+        var timeStart = $('.settingthresold-timestart').text();
+        var timeEnd = $('.settingthresold-timeend').text();
+
+        var timeStartUTC = createSettingsController.coverDateUTC(timeStart);
+        var timeEndUTC = createSettingsController.coverDateUTC(timeEnd);
         var sensorNode = {
             "mode":2,
             "setType":1,
             "sensorID": sensorID,
             "controlID": controlID,
             "name": "",
-            "areaID": 1,
+            "areaID": $('#iot-nameArea').attr('data-areaid'),
             "cmdType": 1,
             "multiTask": 1,
             "aIndex": createSettingsController.readIndex,
             "data": {
-                'timeStart': '20:30',
-                'timeEnd': '22:30',
+                'timeStart': timeStartUTC,
+                'timeEnd': timeEndUTC,
                 airTemplow: 0,
                 airTemphigh: 0,
                 airHumlow: 0,
@@ -430,7 +463,9 @@ var createSettingsController = {
                 soilHumlow: 0,
                 soilHumhigh: 0,
                 elecNeglow: 0,
-                elecNeghigh: 0
+                elecNeghigh: 0,
+                lightVolLow: 0,
+                lightVolHigh: 0
             },
             "output":{}
         };
@@ -460,6 +495,10 @@ var createSettingsController = {
                 case 'elecNeg':
                     sensorNode.data.elecNeglow = lowThreshold;
                     sensorNode.data.elecNeghigh = highThreshold;
+                    break;
+                case 'listIntensity':
+                    sensorNode.data.lightVolLow = lowThreshold;
+                    sensorNode.data.lightVolHigh = highThreshold;
                     break;
                 default:
                     break;
@@ -494,10 +533,82 @@ var createSettingsController = {
                     break;
             }
         });
-
+        console.log(sensorNode);
         createSettingsController.sendDataForGateway(sensorNode);
         createSettingsController.handleCheckTime();
     },
+
+    /*
+    * Method setting auto by time
+    *
+    */
+    handlerSettingAutoByTime: function () {
+        var sensorID = createSettingsView.areaNameID.attr('data-node');
+        var controlID = createSettingsView.areaNameID.attr('data-control');
+        var timeStart = $('.settingByTine-timestart').text();
+        var timeEnd = $('.settingByTine-timend').text();
+
+        var timeStartUTC = createSettingsController.coverDateUTC(timeStart);
+        var timeEndUTC = createSettingsController.coverDateUTC(timeEnd);
+        var sensorNodeTime = {
+            "mode":2,
+            "setType":2,
+            "sensorID": sensorID,
+            "controlID": controlID,
+            "name": $('#iot-autokv-name').val(),
+            "areaID": $('#iot-nameArea').attr('data-areaid'),
+            "cmdType": 1,
+            "multiTask": 1,
+            "aIndex": createSettingsController.readIndex,
+            "data": {
+                "timeStart": timeStartUTC,
+                "timeEnd": timeEndUTC,
+                "loopWeek": 123456
+            },
+            "output":{}
+        };
+
+        $('.onoffswitch-setup').each(function () {
+            var elm = $(this);
+            var enable = 0;
+            if(elm.is(':checked')){
+                enable = 1;
+            }
+            var outputId = elm.attr('data-id');
+            switch (outputId) {
+                case '1':
+                    sensorNodeTime.output.output1 = enable;
+                    break;
+                case '2':
+                    sensorNodeTime.output.output2 = enable;
+                    break;
+                case '3':
+                    sensorNodeTime.output.output3 = enable;
+                    break;
+                case '4':
+                    sensorNodeTime.output.output4 = enable;
+                    break;
+                case '5':
+                    sensorNodeTime.output.output5 = enable;
+                    break;
+                default:
+                    break;
+            }
+        });
+        var getWeek = '';
+        $('.time-week-active').each(function () {
+            var weekElm = $(this);
+            getWeek += weekElm.attr('data-week');
+
+        });
+        var weekData = Number(getWeek);
+        sensorNodeTime.data.loopWeek = weekData;
+        console.log(sensorNodeTime);
+        createSettingsController.sendDataForGateway(sensorNodeTime);
+        createSettingsController.handleCheckTime();
+    },
+
+
     /*
      * Method post on Device
      *
@@ -524,7 +635,7 @@ var createSettingsController = {
             $.Alert(param);
             console.log('action fail');
             clearTimeout(timeOut);
-        },3000);
+        },10000);
     },
 
     handlerAddOrRemoveTime: function () {

@@ -85,7 +85,8 @@ var editSettingsController = {
     getListDataByAreaID: function () {
         var areaID = storageManager.get(constants.AUTO_EDIT_KEY);
         var url_param = '';
-        httpService.editSettingsAuto(url_param,areaID.id).done(function (res) {
+        httpService.editSettingsAuto(url_param,'', areaID.id).done(function (res) {
+            console.log(res);
             editSettingsView.bingDataLisCondition(res).done(function () {
                 // call method bind device by time
                 editSettingsView.bindDeviceList(res.settingThreshold).done(function () {
@@ -94,7 +95,9 @@ var editSettingsController = {
                     editSettingsView.setHeightContent();
                     loadingPage.hide();
                 });
-            })
+            }).fail(function () {
+                loadingPage.hide();
+            });
         });
 
     },

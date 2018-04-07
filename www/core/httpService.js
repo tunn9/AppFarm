@@ -6,7 +6,7 @@
 var httpService = {
 
     dataLocal: false,
-    dataServer: 'http://117.4.244.12:8888/dts/',
+    dataServer: 'http://27.72.145.192:8888/dts/',
 
     /**
      * Get list latest tickets list on home screen.
@@ -66,8 +66,8 @@ var httpService = {
     // deleteSettingsAuto: function (url_para, data) {
     //     return httpService.connectServer("data/settingsAuto", "DELETE", url_para, data);
     // },
-    editSettingsAuto: function (url_para, data) {
-        return httpService.connectServer("data/editSetingsAuto", "GET", url_para, data);
+    editSettingsAuto: function (url_para, data, id) {
+        return httpService.connectServer("data/settingsAuto?areaId="+id+"", "GET", url_para, data);
     },
     deleteSettingsAuto: function (url_para, data) {
         return httpService.connectServer("data/deleteSetingsAuto", "DELETE", url_para, data);

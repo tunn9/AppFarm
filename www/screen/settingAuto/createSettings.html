@@ -19,10 +19,10 @@
                 </li>
                 <li class="iot-condition-parent no-active">
                     <h4>Điều kiện</h4>
-                    <a id="iot-conditionkv" class="iot-condition iot-condition-select">Lựa chọn điều kiện</a>
+                    <a id="iot-conditionkv" data-type="" class="iot-condition iot-condition-select">Lựa chọn điều kiện</a>
                     <ul class="iot-condition-content" id="iot-condition-select-name">
-                        <li id="sensor-infor">Thông số cảm biến</li>
-                        <li id="autoby-time">Thời gian</li>
+                        <li id="sensor-infor" data-type="thresold">Thông số cảm biến</li>
+                        <li id="autoby-time" data-type="time">Thời gian</li>
                     </ul>
                 </li>
             </ul>
@@ -34,11 +34,11 @@
                 <div class="iot-time-thresold-value">
                     <div class="iot-condition-time-value">
                         <h5>Từ</h5>
-                        <div class="setting-timestart time-start">6:07</div>
+                        <div class="setting-timestart settingthresold-timestart time-start">6:07</div>
                     </div>
                     <div class="iot-condition-time-value">
                         <h5>Đến</h5>
-                        <div class="setting-timesend time-start">18:07</div>
+                        <div class="setting-timesend settingthresold-timeend time-start">18:07</div>
                     </div>
                 </div>
             </div>
@@ -105,11 +105,11 @@
                     <div class="iot-condition-list-time">
                         <div class="iot-condition-time-value">
                             <h5>Bắt đầu</h5>
-                            <div class="setting-timestart time-start">6:07</div>
+                            <div class="setting-timestart settingByTine-timestart time-start">6:07</div>
                         </div>
                         <div class="iot-condition-time-value">
                             <h5>Kết thúc</h5>
-                            <div class="setting-timesend time-start">18:07</div>
+                            <div class="setting-timesend settingByTine-timend time-start">18:07</div>
                         </div>
 
                     </div>
@@ -117,17 +117,17 @@
                     <div class="setting-time">
                         <h5>Thời gian</h5>
                         <span class="time-week">
-                            <a class="time-week-detail">T2</a>
-                            <a class="time-week-detail">T3</a>
-                            <a class="time-week-detail">T4</a>
-                            <a class="time-week-detail">T5</a>
-                            <a class="time-week-detail">T6</a>
-                            <a class="time-week-detail">T7</a>
-                            <a class="time-week-detail">CN</a>
+                            <a class="time-week-detail" data-week="1">T2</a>
+                            <a class="time-week-detail" data-week="2">T3</a>
+                            <a class="time-week-detail" data-week="3">T4</a>
+                            <a class="time-week-detail" data-week="4">T5</a>
+                            <a class="time-week-detail" data-week="5">T6</a>
+                            <a class="time-week-detail" data-week="6">T7</a>
+                            <a class="time-week-detail" data-week="7">CN</a>
                         </span>
-                        <span class="time-repeat">
-                            Lặp lại
-                        </span>
+                        <!--<span class="time-repeat">-->
+                            <!--Lặp lại-->
+                        <!--</span>-->
                     </div>
                 </div>
             </div>
