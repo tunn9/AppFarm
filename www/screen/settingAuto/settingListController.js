@@ -82,7 +82,7 @@ var settingListController = {
         var url_param = '';
         var data = '';
         httpService.getListSettingsAuto(url_param, data).done(function (response) {
-
+            console.log(response);
             if (response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE) {
 
                 // call method bind data html
@@ -223,27 +223,61 @@ var settingListController = {
         var paramSuccess = {
             msg: 'Bạn đã xóa thành công?'
         };
+        var bodydata = {
+            "mode":2,
+            "setType":1,
+            "flagWrite":1,
+            "type":2,
+            "index0":0,
+            "index1":0,
+            "index2":0,
+            "index3":0,
+            "index4":0,
+            "index5":0,
+            "index6":0,
+            "index7":0,
+            "index8":0,
+            "index9":0,
+            "index10":0,
+            "index11":0
+        };
+        $('.iot-check-active').each(function () {
+            var indexData = "index"+ $(this).attr('data-index');
+            bodydata[indexData] = 1;
+        });
         $.Confirm(paramRemove,function (res) {
             if(res){
-                var url_param = {};
-                var data_post = {};
-                httpService.deleteSettingsAuto(url_param,data_post).done(function (response) {
-                    if(response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE){
-                        settingListView.handlerRemoveSettings();
-                        settingListView.buttonCheckAll.removeClass('iot-checkall-active');
-                        $.Alert( paramSuccess ) ;
-                    }else{
-                        $.AlertSingle('Bạn xóa không thành công');
-                    }
-                }).fail(function () {
-                    $.AlertSingle('Bạn xóa không thành công');
-                });
+                console.log(bodydata);
+                // var url_param = {};
+                // var data_post = {};
+                // httpService.deleteSettingsAuto(url_param,data_post).done(function (response) {
+                //     if(response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE){
+                //         settingListView.handlerRemoveSettings();
+                //         settingListView.buttonCheckAll.removeClass('iot-checkall-active');
+                //         $.Alert( paramSuccess ) ;
+                //     }else{
+                //         $.AlertSingle('Bạn xóa không thành công');
+                //     }
+                // }).fail(function () {
+                //     $.AlertSingle('Bạn xóa không thành công');
+                // });
 
             }
         });
-        $('.iot-check-active').each(function () {
 
-        });
+    },
+
+    /*
+     * Method send data for gateway delete
+     *
+     */
+    sendDataForGatewayDelete: function (data) {
+        var getwayID = createSettingsView.areaNameID.attr('data-gateway') || '';
+        var message = new Paho.MQTT.Message(JSON.stringify(data));
+        message.destinationName = 'smartFarm/'+getwayID+'/CONTROL';
+        debug.log(message);
+        message.qos = 0;
+        mqttApp.client.send(message);
     },
 
     /*

@@ -16,6 +16,7 @@ var editDeviceController = {
 
     // PROPERTIES
     //
+    idDB: '',
 
     // METHODS
     //
@@ -74,11 +75,10 @@ var editDeviceController = {
         httpService.detailDevice(url_param, data, deviceID).done(function (response) {
 
             if (response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE ) {
-
+                editDeviceController.idDB = response.data.id;
                 editDeviceView.bindDetailDevice(response.data);
                 loadingPage.hide();
                 editDeviceView.setHeightListDevice();
-
             } else {
                 loadingPage.hide();
                 editDeviceView.setHeightListDevice();
@@ -125,9 +125,10 @@ var editDeviceController = {
         var dataType = editDeviceView.deviceID.attr('data-type');
         var deviceIP = $('#device-detail-ip').val();
         var data = {
-            "id": deviceIP,
+            "id": editDeviceController.idDB,
             "name": name,
-            "type": dataType
+            "type": dataType,
+            "code": deviceIP
         };
         loadingPage.showPageLoading(editDeviceView.pageID);
         httpService.updateDevice('',data).done(function (response) {

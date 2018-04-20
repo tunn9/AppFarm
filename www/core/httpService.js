@@ -107,6 +107,7 @@ var httpService = {
             }).join('&');
             param = "?" + param;
         }
+        console.log(param);
 
         var setUrl;
         if (httpService.dataLocal) {

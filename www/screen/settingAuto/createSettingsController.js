@@ -16,6 +16,7 @@ var createSettingsController = {
 
     // PROPERTIES
     //
+    checkActionAuto: false,
     readIndex: null,
     // METHODS
     //
@@ -34,6 +35,7 @@ var createSettingsController = {
      */
     destroy: function () {
         debug.log(this.TAG + '#destroy()');
+        this.checkActionAuto = false;
     },
 
     /**
@@ -421,6 +423,7 @@ var createSettingsController = {
     handlerActionAutoSeting: function (event) {
         event.preventDefault();
         var typeSetting = $('#iot-conditionkv').attr('data-type');
+        $('#page-autokv').addClass('process-auto');
         if( typeSetting === 'thresold' ) {
             createSettingsController.handlerSettingAutoByThresold();
         } else {
@@ -632,8 +635,11 @@ var createSettingsController = {
             msg: 'Hành động của bạn không thành công'
         };
         var timeOut = setTimeout(function () {
-            $.Alert(param);
-            console.log('action fail');
+            if($('#page-autokv').hasClass('process-auto')){
+                $.Alert(param);
+                $('#page-autokv').removeClass('process-auto');
+                console.log('action fail auto');
+            }
             clearTimeout(timeOut);
         },10000);
     },

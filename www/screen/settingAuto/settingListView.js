@@ -58,11 +58,15 @@ var settingListView = {
                 if(data[i].enable === 0){
                     mychecked = '';
                 }
+                var indexData = Number(data[i].index) - 1;
+                if(!data[i].area) {
+                    break;
+                }
                 html += '<li data-id="'+data[i].id+'" data-area="'+data[i].area.name+'" data-setting="'+data[i].name+'" data-areaID="'+data[i].area.ID+'">'+
                             '<div class="setting-name setting-name-control">'+data[i].name+'</div>'+
                             '<div class="setting-area setting-name-control">'+data[i].area.name+'</div>'+
                             '<div class="setting-status text-right">'+
-                                '<span class="iot-check iot-check-list" data-id="'+data[i].id+'"></span>'+
+                                '<span class="iot-check iot-check-list" data-index="'+indexData+'"></span>'+
                                 '<div class="ioi-device-status">'+
                                     '<div class="onoffswitch">'+
                                         '<input data-role="none" type="checkbox" name="onoffswitch" data-id="3" data-name="output 3" class="onoffswitch-checkbox" '+mychecked+'>'+

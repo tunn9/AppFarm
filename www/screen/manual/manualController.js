@@ -81,9 +81,10 @@ var manualController = {
      */
     getListDeviceServer: function () {
 
-        var url_param = {};
-        url_param['areaId'] = manualController.data.id;
-        url_param['type'] = 3;
+        var url_param = {
+            areaId: manualController.data.id,
+            type: 3
+        };
         httpService.getDeviceList(url_param, '').done(function (response) {
             console.log(response);
             if (response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE) {
@@ -137,7 +138,7 @@ var manualController = {
             reverse: true
         });
     },
-    setDataMenaul: function () {
+    setDataMenaul: function (elm) {
         var menuaID = '' + manualController.data.controlID;
         var relayNode = {
             "mode":1,
@@ -145,62 +146,24 @@ var manualController = {
             "multiTask":1,
             "mControlID": menuaID,
             "manual":{
-                "mOutput1":1,
-                "mOutput2":1,
-                "mOutput3":1,
-                "mOutput4":1,
-                "mTimeout1":10,        // Don vi la giay
-                "mTimeout2":20,     // Don vi la giay
-                "mTimeout3":30,     // Don vi la giay
-                "mTimeout4":15         // Don vi la giay
+                "mOutput": Number(elm.attr('data-id')),
+                "mValue": 1,
+                "mTimeout": 5
             }
         };
-        if($('.iot-list-device-manual1').find('.onoffswitch-checkbox').is(':checked')){
-            relayNode.manual.mOutput1 = 1;
+        if(elm.closest('.iot-list-device-manual').find('.onoffswitch-checkbox').is(':checked')){
+            relayNode.manual.mValue = 1;
         }else{
-            relayNode.manual.mOutput1 = 0;
-        }
-        if($('.iot-list-device-manual2').find('.onoffswitch-checkbox').is(':checked')){
-            relayNode.manual.mOutput2 = 1;
-        }else{
-            relayNode.manual.mOutput2 = 0;
-        }
-        if($('.iot-list-device-manual3').find('.onoffswitch-checkbox').is(':checked')){
-            relayNode.manual.mOutput3 = 1;
-        }else{
-            relayNode.manual.mOutput3 = 0;
-        }
-        if($('.iot-list-device-manual4').find('.onoffswitch-checkbox').is(':checked')){
-            relayNode.manual.mOutput4 = 1;
-        }else{
-            relayNode.manual.mOutput4 = 0;
+            relayNode.manual.mValue = 0;
         }
 
 
-        if($('.iot-manual-time1').val()){
-            relayNode.manual.mTimeout1 = parseFloat($('.iot-manual-time1').val()) * 60;
+        var timeElm = elm.closest('.iot-list-device-manual').find('.iot-manual-time1').val();
+        if(timeElm){
+            relayNode.manual.mTimeout = parseFloat(timeElm) * 60;
         }else{
-            relayNode.manual.mTimeout1 = 300;
+            relayNode.manual.mTimeout = 300;
         }
-
-        if($('.iot-manual-time2').val()){
-            relayNode.manual.mTimeout2 = parseFloat($('.iot-manual-time2').val()) * 60;
-        }else{
-            relayNode.manual.mTimeout2 = 300;
-        }
-
-        if($('.iot-manual-time3').val()){
-            relayNode.manual.mTimeout3 = parseFloat($('.iot-manual-time3').val()) * 60;
-        }else{
-            relayNode.manual.mTimeout3 = 300;
-        }
-
-        if($('.iot-manual-time4').val()){
-            relayNode.manual.mTimeout4 = parseFloat($('.iot-manual-time4').val()) * 60;
-        }else{
-            relayNode.manual.mTimeout4 = 300;
-        }
-
         return relayNode;
     },
 
@@ -222,7 +185,7 @@ var manualController = {
                 elm.find('.onoffswitch-checkbox').prop("checked", false);
 
                 // get data
-                var relayNode = manualController.setDataMenaul();
+                var relayNode = manualController.setDataMenaul(elm);
                 manualController.postDeviceServer(relayNode);
             }
             var currentAction = $(this).closest('.ioi-device-status').find('.onoffswitch').attr('data-id');
@@ -239,7 +202,7 @@ var manualController = {
                 checkbox.prop("checked", true);
 
                 // get data
-                var relayNode = manualController.setDataMenaul();
+                var relayNode = manualController.setDataMenaul(elm);
                 manualController.postDeviceServer(relayNode);
             }
             var currentAction = $(this).closest('.ioi-device-status').find('.onoffswitch').attr('data-id');
@@ -256,7 +219,7 @@ var manualController = {
             }
             var currentAction = $(this).closest('.ioi-device-status').find('.onoffswitch').attr('data-id');
             // get data
-            var relayNode = manualController.setDataMenaul();
+            var relayNode = manualController.setDataMenaul($(this));
             storageManager.put('currentManual', 'Output' + currentAction);
             manualController.postDeviceServer(relayNode);
 

@@ -124,6 +124,9 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    input {
+      @include placeholder($text-color);
+    }
     > li{
       position: relative;
       padding-top: 15px;

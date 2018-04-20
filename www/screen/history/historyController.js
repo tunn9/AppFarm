@@ -75,21 +75,26 @@ var historyController = {
       $('#iot-history-search').on(eventHelper.TAP, historyController.handlerSeachHistory);
       $('#iot-back-history').on(eventHelper.TAP, historyController.handlerHistoryBack);
     },
-
+    coverDateUTC: function (date, time) {
+        console.log(date +'   '+time);
+        var myDate = new Date( date +" "+time); // Your timezone!
+        var myEpoch = myDate.getTime();
+        return myEpoch;
+    },
     handlerSeachHistory: function () {
         var areaId = $('#iot-history-area-value').attr('data-id');
         var startTime = $('#iot-timeStart').text();
-        var startDate = $('#iot-dateStart').text().split('/');
+        var startDate = $('#iot-dateStart').text();
         var endTime = $('#iot-timeEnd').text();
-        var endDate = $('#iot-dateEnd').text().split('/');
+        var endDate = $('#iot-dateEnd').text();
 
         var newStartDate = startDate[2] +'/'+ startDate[1]+'/'+ startDate[0];
         var newEndDate = endDate[2] +'/'+ endDate[1]+'/'+ endDate[0];
-        var startUTC = new Date(newStartDate +' '+ startTime);
-        var endUTC = new Date(endTime +' '+ newEndDate);
+        var startUTC = historyController.coverDateUTC(startDate, startTime);
+        var endUTC = historyController.coverDateUTC(endDate, endTime);
         var urlParam = {
-            startTime: Number(startUTC),
-            endTime: Number(endUTC),
+            startTime: startUTC,
+            endTime: endUTC,
             typeSearch: 0
         };
         console.log(urlParam);

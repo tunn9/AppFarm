@@ -24,6 +24,7 @@ var mqttApp = {
         //     userName = dataHost.username || userName;
         //     passWord = dataHost.password || passWord;
         // }
+        var getUser = storageManager.getLocalStorage(constants.LOGIN.DATA_LOGIN);
         mqttApp.client = new Paho.MQTT.Client("27.72.145.192", 31883, '/mqtt', 'clientId-' + parseInt(Math.random() * 1000, 10));
         mqttApp.client.connect({
             timeout: 10,
@@ -58,6 +59,7 @@ var mqttApp = {
         //Gets websocket/mqtt connection onMessageArrived
         mqttApp.client.onMessageArrived = function (message) {
             try {
+                console.log(message);
                 // remove Character null in string
                 var validate = message.payloadString.replace(/\0/g, '');
                 var data = JSON.parse(validate);
@@ -112,10 +114,11 @@ var mqttApp = {
     *
     */
     handlerConfirmManual: function (data) {
-        console.log(data);
+
         var currentOutput = storageManager.get('currentManual');
+        console.log(currentOutput);
         $('.ioi-device-status').removeClass('userActive');
-        if(currentOutput === data.name) {
+        if(currentOutput === 'Output'+data.name) {
             var param = {
                 title: '',
                 msg: 'Tắt thiết bị thành công'
@@ -137,14 +140,22 @@ var mqttApp = {
     */
     handlerConfirmAuto: function (data) {
         debug.log('response Auto');
-        var param = {
-            title: '',
-            msg: 'Cài đặt không thành công'
-        };
-        if(data.status == 1){
-            param.msg = 'Cài đặt thành công';
-         }
-        $.Alert(param);
+        if($('#page-autokv').length > 0 ){
+            var param = {
+                title: '',
+                msg: 'Cài đặt không thành công'
+            };
+            if(data.status == 1){
+                param.msg = 'Cài đặt thành công';
+             }
+            $.Alert(param, function () {
+                pageHelper.changePage(fileHelper.getUrl(pageUrl.LIST_SETTINGS), {
+                    transition: eventHelper.PAGE_TRANSITION.SLIDE,
+                    reverse: true
+                });
+            });
+            $('#page-autokv').removeClass('process-auto');
+        }
     },
 
     /*
