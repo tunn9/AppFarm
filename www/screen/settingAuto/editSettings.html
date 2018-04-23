@@ -1,6 +1,6 @@
 <div data-role="page" id="page-editAuto" class="page-wapper">
     <div class="ioi-header" id="iot-editAuto-header">
-        <a id="ioi-back-editAuto" class="icon-header-control icon-back"></a>
+        <a id="iot-back-editAuto" class="icon-header-control icon-back"></a>
         <h1>Cài đặt chế độ tưới Tự Động</h1>
     </div>
 
@@ -9,55 +9,138 @@
             <ul class="iot-editAuto-control-list">
                 <li>
                     <h4>Tên cài đặt</h4>
-                    <input data-role="none" type="text" value="" placeholder="Tên khu vực" id="iot-editAuto-name" />
+                    <input data-role="none" type="text" value="" placeholder="Tên cài đặt" id="iot-editAuto-name" class="input-focus" />
                 </li>
                 <li>
                     <h4>Khu Vực</h4>
-                    <a id="iot-editauto-nameArea" data-nodeID="" class="iot-condition">Lựa chọn khu vực</a>
+                    <a id="iot-editauto-nameArea" data-nodeID="" class="iot-condition iot-select-area">Lựa chọn khu vực</a>
+                    <ul class="iot-condition-content" id="iot-condition-editAuto-area-name">
+                    </ul>
                 </li>
                 <li class="iot-condition-parent">
                     <h4>Điều kiện</h4>
-                    <a id="iot-condition-editauto" class="iot-condition editAuto-condition-select">Lựa chọn điều kiện</a>
+                    <a id="iot-editAuto-conditionkv" data-type="" class="iot-condition iot-condition-select">Lựa chọn điều kiện</a>
                     <ul class="iot-condition-content" id="iot-condition-select-name">
-                        <li id="sensor-infor">Thông số cảm biến</li>
-                        <li id="autoby-time">Thời gian</li>
+                        <li id="sensor-infor" data-type="thresold">Thông số cảm biến</li>
+                        <li id="autoby-time" data-type="time">Thời gian</li>
                     </ul>
                 </li>
             </ul>
         </div>
 
-        <div id="iot-editAuto-list" class="iot-editAuto-list">
-            <div id="iot-editAuto-condition">
-            </div>
-            <div class="iot-condition-list-device">
-                <div class="iot-device-header">
-                    <h4>Thiết bị</h4>
-                    <h4>Tắt/Bật</h4>
+        <div class="iot-editAuto-list">
+            <div class="iot-condition-time-thresold">
+                <h4>Khoảng thời gian tưới</h4>
+                <div class="iot-time-thresold-value">
+                    <div class="iot-condition-time-value">
+                        <h5>Từ</h5>
+                        <div class="setting-timestart settingthresold-timestart time-start">6:07</div>
+                    </div>
+                    <div class="iot-condition-time-value">
+                        <h5>Đến</h5>
+                        <div class="setting-timesend settingthresold-timeend time-start">18:07</div>
+                    </div>
                 </div>
-                <ul id="iot-editAutodevice-content" class="iot-editAutodevice-content">
-                </ul>
             </div>
+            <div class="iot-condition-list">
+                <div class="iot-condition-top">
+                    <div class="iot-condition-top-left">
+                        <a class="iot-condition iot-condition-sensor" data-senson="">Lựa chọn điều kiện</a>
+                        <ul class="iot-condition-content iot-editAuto-sensor-value">
+                            <li data-value="airTemp">Nhiệt độ không khí</li>
+                            <li data-value="airHum">Nhiệt độ đất</li>
+                            <li data-value="soilTemp">Độ ẩm không khí</li>
+                            <li data-value="soilHum">Độ ẩm đất</li>
+                            <li data-value="elecNeg">Độ ẩm Độ dẫn điện EC</li>
+                            <li data-value="listIntensity">Cường độ sáng</li>
+                        </ul>
+                    </div><!-- end .iot-condition-top-left -->
+                    <a class="iot-editAuto-condition-remove btn-auto-remove"></a>
+                </div>
+                <div class="iot-condition-bottom">
+                    <div class="iot-condition-value">
+                        <h5>Từ <span class="unit"></span></h5>
+                        <input data-role="none" type="number" value="" class="lowThreshold input-focus" placeholder="" />
+                    </div>
+                    <div class="iot-condition-value">
+                        <h5>Đến <span class="unit"></span></h5>
+                        <input data-role="none" type="number" value="" class="highThreshold input-focus" placeholder="" />
+                    </div>
+                </div>
+                <div class="iot-condition-action">
+
+                    <a class="iot-editAuto-condition-addnew">Thêm điều kiến</a>
+                </div>
+            </div><!-- .iot-condition-list -->
         </div><!-- .iot-editAuto-list -->
 
         <div id="iot-editAuto-bytime">
-            <ul class="iot-editAuto-bytime-header">
-                <li>
-                    Thiết bị
-                </li>
-                <li>
-                    Bật/Tắt
-                </li>
-                <li>
-                    TG bắt đầu
-                </li>
-                <li>
-                    Bao lâu (m)
-                </li>
-            </ul>
             <div id="iot-bytime-list-device">
 
+
+                <div class="auto-setting-by-time-value iot-condition-list-device">
+                    <!--<div class="iot-condition-top iot-st-auto-time-top">-->
+                    <!--<div class="iot-st-auto-time-left">-->
+                    <!--<a class="iot-condition iot-condition-sensor" data-senson="">Chọn output</a>-->
+                    <!--<ul class="iot-condition-content iot-editAuto-sensor-value iot-editAuto-sensor-value-time">-->
+                    <!--<li data-value="1">Output 1</li>-->
+                    <!--<li data-value="2">Output 2</li>-->
+                    <!--<li data-value="3">Output 3</li>-->
+                    <!--<li data-value="4">Output 4</li>-->
+                    <!--<li data-value="5">Output 5</li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
+                    <!--<div class="iot-st-auto-time-right">-->
+                    <!--<div class="ioi-device-status">-->
+                    <!--<div class="onoffswitch">-->
+                    <!--<input data-role="none" data-id="undefined" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox onoffswitch-setup" checked="">-->
+                    <!--<div class="onoffswitch-action" data-id="undefined"></div>-->
+                    <!--<span class="onoffswitch-switch"></span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<a class="iot-btn-time-remove btn-auto-remove"></a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <div class="iot-condition-list-time">
+                        <div class="iot-condition-time-value">
+                            <h5>Bắt đầu</h5>
+                            <div class="setting-timestart settingByTine-timestart time-start">6:07</div>
+                        </div>
+                        <div class="iot-condition-time-value">
+                            <h5>Kết thúc</h5>
+                            <div class="setting-timesend settingByTine-timend time-start">18:07</div>
+                        </div>
+
+                    </div>
+
+                    <div class="setting-time">
+                        <h5>Thời gian</h5>
+                        <span class="time-week">
+                            <a class="time-week-detail" data-week="1">T2</a>
+                            <a class="time-week-detail" data-week="2">T3</a>
+                            <a class="time-week-detail" data-week="3">T4</a>
+                            <a class="time-week-detail" data-week="4">T5</a>
+                            <a class="time-week-detail" data-week="5">T6</a>
+                            <a class="time-week-detail" data-week="6">T7</a>
+                            <a class="time-week-detail" data-week="7">CN</a>
+                        </span>
+                        <!--<span class="time-repeat">-->
+                        <!--Lặp lại-->
+                        <!--</span>-->
+                    </div>
+                </div>
             </div>
         </div><!-- #iot-editAuto-bytime -->
+
+        <div class="iot-condition-list-device" id="iot-condition-list-device-wapper">
+            <div class="iot-device-header">
+                <h4>Thiết bị</h4>
+                <h4>Tắt/Bật</h4>
+            </div>
+            <ul class="iot-editAutodevice-content">
+            </ul>
+        </div><!-- .iot-condition-list-device -->
 
     </div>
 
@@ -71,7 +154,7 @@
 
     <div class="iot-editAuto-footer" id="iot-editAuto-footer">
         <a id="iot-editAuto-cancel">Hủy</a>
-        <a id="iot-editAuto-action">Cập nhật</a>
+        <a id="iot-editAuto-action">Lưu lại</a>
     </div>
     <div class="loading-page" id="loading-page-home"></div>
 </div>

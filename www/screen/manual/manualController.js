@@ -158,7 +158,8 @@ var manualController = {
         }
 
 
-        var timeElm = elm.closest('.iot-list-device-manual').find('.iot-manual-time1').val();
+        var timeElm = elm.closest('.iot-list-device-manual').find('.iot-manual-time').val();
+        console.log(timeElm);
         if(timeElm){
             relayNode.manual.mTimeout = parseFloat(timeElm) * 60;
         }else{

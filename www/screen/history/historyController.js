@@ -76,8 +76,10 @@ var historyController = {
       $('#iot-back-history').on(eventHelper.TAP, historyController.handlerHistoryBack);
     },
     coverDateUTC: function (date, time) {
-        console.log(date +'   '+time);
-        var myDate = new Date( date +" "+time); // Your timezone!
+        var coverDate = date.split('/');
+        var newDate = coverDate[2]+', '+coverDate[1]+', '+coverDate[0]+', 0'+', 0'+', 0'+', 0';
+        console.log(newDate);
+        var myDate = new Date(newDate); // Your timezone!
         var myEpoch = myDate.getTime();
         return myEpoch;
     },

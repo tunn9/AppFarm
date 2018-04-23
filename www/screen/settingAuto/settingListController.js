@@ -216,6 +216,9 @@ var settingListController = {
     * */
     handlerDeleteSetting: function (event) {
         event.preventDefault();
+        if($('.iot-check-active').length === 0) {
+            return;
+        }
         var paramRemove = {
             msg: 'Bạn có muốn xóa không?',
             loadingstatus: true
@@ -248,6 +251,7 @@ var settingListController = {
         $.Confirm(paramRemove,function (res) {
             if(res){
                 console.log(bodydata);
+                settingListController.sendDataForGatewayDelete(bodydata);
                 // var url_param = {};
                 // var data_post = {};
                 // httpService.deleteSettingsAuto(url_param,data_post).done(function (response) {
@@ -272,10 +276,10 @@ var settingListController = {
      *
      */
     sendDataForGatewayDelete: function (data) {
-        var getwayID = createSettingsView.areaNameID.attr('data-gateway') || '';
+        var getwayID = settingListView.gateWayID || '';
         var message = new Paho.MQTT.Message(JSON.stringify(data));
         message.destinationName = 'smartFarm/'+getwayID+'/CONTROL';
-        debug.log(message);
+        debug.log(getwayID);
         message.qos = 0;
         mqttApp.client.send(message);
     },

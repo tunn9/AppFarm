@@ -148,6 +148,12 @@ var homeView = {
                         '<div class="status-area elecNeg pull-left">' + data[i].sensorValue.elecNeg.toFixed(1) + '</div>' +
                         '<div class="unit-area pull-left">mS /cm</div>' +
                         '</li>'+
+                        '<li class="item-conductivityEC">'+
+                        '<div class="icon-area conductivityEC"></div>' +
+                        '<div class="name-area pull-left">Cường độ ánh sáng</div>' +
+                        '<div class="status-area light pull-left">' + data[i].sensorValue.light.toFixed(1) + '</div>' +
+                        '<div class="unit-area pull-left">lux</div>' +
+                        '</li>'+
 
                         '<div class="footer-area">' +
                             '<a href="#" class="control-area" data-gatewayID="'+gateId+'" data-id="'+data[i].id+'" data-name="'+data[i].name+'"><span> Tưới bằng tay </span></a>' +

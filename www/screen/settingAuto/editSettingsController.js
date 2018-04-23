@@ -64,7 +64,19 @@ var editSettingsController = {
 
         this.getListDataByAreaID();
         this.hanbdeBingEvent();
+        this.getListAreaLocal();
+        this.handlerSelectArea();
+    },
 
+
+    /*
+     * Method get list Area from local
+     *
+     */
+    getListAreaLocal: function () {
+        var data = storageManager.get(constants.DATA_AREA);
+
+        editSettingsView.bingDataListArea(data);
     },
 
     /*
@@ -87,17 +99,16 @@ var editSettingsController = {
         var url_param = '';
         httpService.editSettingsAuto(url_param,'', areaID.id).done(function (res) {
             console.log(res);
+            editSettingsView.bindingCoditionSetting(res.data);
+            editSettingsView.handleShowSettingByTime(res.data);
             editSettingsView.bingDataLisCondition(res).done(function () {
-                // call method bind device by time
-                editSettingsView.bindDeviceList(res.settingThreshold).done(function () {
-                    editSettingsView.editAutoList.addClass(editSettingsView.STYLE.CLASS.ACTIVE);
-                    editSettingsController.bindEventOnOff();
-                    editSettingsView.setHeightContent();
-                    loadingPage.hide();
-                });
+
             }).fail(function () {
                 loadingPage.hide();
             });
+
+            // call method bind device by time
+            editSettingsView.bindDeviceList(res.data.output);
         });
 
     },
@@ -133,6 +144,28 @@ var editSettingsController = {
 
     },
 
+
+    /*
+     * Method Select Area
+     *
+     */
+    handlerSelectArea: function () {
+
+        $('#ioi-content-editAuto').on(eventHelper.TAP,'.iot-select-area',function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if($(this).hasClass('active')){
+                $('.iot-condition').removeClass('active');
+            }else{
+                $('.iot-condition').removeClass('active');
+                $(this).addClass('active');
+            }
+
+        });
+
+    },
+
+
     /*
     * Handle show list select
     *
@@ -142,7 +175,7 @@ var editSettingsController = {
             $('.iot-condition').removeClass('active');
         });
         $('#ioi-content-editAuto').on(eventHelper.TAP,'.editAuto-condition-select',function (e) {
-
+        alert(1);
             e.preventDefault();
             e.stopPropagation();
             if($(this).hasClass('active')){

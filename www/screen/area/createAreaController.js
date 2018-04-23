@@ -65,6 +65,7 @@ var createAreaController = {
 
     doPageShow: function () {
         createAreaController.getListSettingsFromServer();
+        createAreaController.getListGatewayFromServer();
         createAreaController.bindEventHandlers();
         createAreaController.bindEventOnOff();
 
@@ -97,6 +98,22 @@ var createAreaController = {
         }).fail(function (jqXHR) {
             loadingPage.hide();
             createAreaView.setHeightListDevice();
+        });
+    },
+    /*
+     * Method get Gateway data server
+     *
+     *
+     */
+    getListGatewayFromServer: function () {
+        var url_param = {
+            type: 0
+        };
+        var data = '';
+        httpService.getListScreenDevice(url_param, data).done(function (response) {
+            console.log('-----------');
+            console.log(response);
+            createAreaView.bindDataListGateway(response.data)
         });
     },
 

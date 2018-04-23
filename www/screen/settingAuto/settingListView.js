@@ -8,6 +8,7 @@ var settingListView = {
     // CONSTANTS
     //
     TAG: 'settingListView',
+    gateWayID: null,
 
     pageID: null,
     buttonBack: null,
@@ -59,12 +60,18 @@ var settingListView = {
                     mychecked = '';
                 }
                 var indexData = Number(data[i].index) - 1;
-                if(!data[i].area) {
-                    break;
+                var areaName = '';
+                var areaID = '';
+                if(data[i].area) {
+                    areaName = data[i].area.name;
+                    areaID = data[i].area.id;
+                    if(!settingListView.gateWayID && data[i].area.gateway.code) {
+                        settingListView.gateWayID = data[i].area.gateway.code
+                    }
                 }
-                html += '<li data-id="'+data[i].id+'" data-area="'+data[i].area.name+'" data-setting="'+data[i].name+'" data-areaID="'+data[i].area.ID+'">'+
+                html += '<li data-id="'+data[i].id+'" data-area="'+areaName+'" data-setting="'+data[i].name+'" data-areaID="'+areaID+'">'+
                             '<div class="setting-name setting-name-control">'+data[i].name+'</div>'+
-                            '<div class="setting-area setting-name-control">'+data[i].area.name+'</div>'+
+                            '<div class="setting-area setting-name-control">'+areaName+'</div>'+
                             '<div class="setting-status text-right">'+
                                 '<span class="iot-check iot-check-list" data-index="'+indexData+'"></span>'+
                                 '<div class="ioi-device-status">'+

@@ -51,13 +51,13 @@ var editDeviceView = {
         var name;
         switch (data.type) {
             case 0:
-                name = 'Getway';
+                name = 'Bộ xử lý trung tâm';
                 break;
             case 1:
-                name = 'Control';
+                name = 'Bộ điều khiển';
                 break;
             case 2:
-                name = 'sensor';
+                name = 'Bộ cảm biến';
                 break;
             case 3:
                 name = 'output';

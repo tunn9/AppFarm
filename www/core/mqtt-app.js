@@ -25,7 +25,8 @@ var mqttApp = {
         //     passWord = dataHost.password || passWord;
         // }
         var getUser = storageManager.getLocalStorage(constants.LOGIN.DATA_LOGIN);
-        mqttApp.client = new Paho.MQTT.Client("27.72.145.192", 31883, '/mqtt', 'clientId-' + parseInt(Math.random() * 1000, 10));
+        console.log(getUser.username);
+        mqttApp.client = new Paho.MQTT.Client("27.72.145.192", 31883, '/mqtt', getUser.username + '_' + new Date().getTime());
         mqttApp.client.connect({
             timeout: 10,
             userName:'iot',
@@ -170,6 +171,7 @@ var mqttApp = {
         elm.find('.soilTemp').text(sensor.soilTemp.toFixed(1));
         elm.find('.soilHum').text(sensor.soilHum.toFixed(1));
         elm.find('.elecNeg').text(sensor.elecNeg.toFixed(1));
+        elm.find('.light').text(sensor.lightVol.toFixed(1));
     }
 
 };

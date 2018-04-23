@@ -70,7 +70,7 @@ var manualView = {
                     '<div class="ioi-device-name">' +
                         data[i].name +
                     '</div>' +
-                    '<div class="iot-device-time"><input type="number" value="5" class="iot-manual-time iot-manual-time'+data[i].relay+'" ></div>'+
+                    '<div class="iot-device-time"><input type="number" value="'+data[i].timeout / 60+'" class="iot-manual-time iot-manual-time'+data[i].relay+'" ></div>'+
                     '<div class="ioi-device-status">' +
                     '<div class="onoffswitch action-onoff" data-id="'+data[i].relay+'">'+
                     '<input data-role="none" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox Output'+index+'" '+mychecked+'>' +

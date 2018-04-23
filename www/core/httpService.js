@@ -67,7 +67,7 @@ var httpService = {
     //     return httpService.connectServer("data/settingsAuto", "DELETE", url_para, data);
     // },
     editSettingsAuto: function (url_para, data, id) {
-        return httpService.connectServer("data/settingsAuto?areaId="+id+"", "GET", url_para, data);
+        return httpService.connectServer("data/settingsAuto/"+id+"", "GET", url_para, data);
     },
     deleteSettingsAuto: function (url_para, data) {
         return httpService.connectServer("data/deleteSetingsAuto", "DELETE", url_para, data);

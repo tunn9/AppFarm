@@ -131,6 +131,22 @@ var createAreaView = {
 
         return dfd.promise();
     },
+
+    bindDataListGateway: function (data) {
+
+        var i = 0;
+        var gatewayHtml = '';
+        if (Array.isArray(data)) {
+            for (i; i < data.length; i++) {
+                gatewayHtml += '<li data-id="'+data[i].id+'">'+data[i].name+'</li>';
+            }
+            if(gatewayHtml) {
+                $('#iot-list-gateway-name').html(gatewayHtml);
+            }
+
+
+        }
+    },
     setHeightListDevice: function () {
         var heightContent = $(window).innerHeight();
         var headerHeaderPage = createAreaView.headerID.innerHeight();
