@@ -61,8 +61,12 @@ var httpService = {
         return httpService.connectServer("data/settingsAuto", "GET", url_para, data);
     },
     getIndexSettingsAuto: function (url_para, data, id) {
-        return httpService.connectServer("data/settingsAuto/readIndex/" + id, "GET", url_para, data);
+        return httpService.connectServer("data/settingsAuto/" + id + "/readIndex", "GET", url_para, data);
     },
+    unLockIndexSettingsAuto: function (url_para, data, areaID, indexID) {
+        return httpService.connectServer("data/settingsAuto/" + areaID + "/" +indexID+ "/releaseIndex", "POST", url_para, data);
+    },
+
     // deleteSettingsAuto: function (url_para, data) {
     //     return httpService.connectServer("data/settingsAuto", "DELETE", url_para, data);
     // },

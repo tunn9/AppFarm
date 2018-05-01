@@ -101,8 +101,8 @@ var editSettingsController = {
             console.log(res);
             editSettingsView.bindingCoditionSetting(res.data);
             editSettingsView.handleShowSettingByTime(res.data);
-            editSettingsView.bingDataLisCondition(res).done(function () {
-
+            editSettingsView.bingDataLisCondition(res.data.output).done(function () {
+                loadingPage.hide();
             }).fail(function () {
                 loadingPage.hide();
             });

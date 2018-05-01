@@ -88,9 +88,10 @@ var homeView = {
         if (Array.isArray(datalist) && datalist.length > 0) {
             var data =  datalist.reverse();
             for (i; i < data.length; i++) {
-                var gateId = '', sensorId = '';
+                var gateId = '', sensorId = '', gateId2 ='';
                 if(data[i].gateway){
                     gateId = data[i].gateway.code;
+                    gateId2 = data[i].gateway.id;
                 }
                 if(data[i].sensor){
                     sensorId = data[i].sensor.code;
@@ -101,6 +102,7 @@ var homeView = {
                 }
                 var data_local =  {
                     gatewayID: gateId,
+                    gateID: gateId2,
                     nameArea: data[i].name,
                     areaID: data[i].id,
                     nodeID: '',

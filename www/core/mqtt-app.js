@@ -69,6 +69,10 @@ var mqttApp = {
                     mqttApp.handlerConfirmManual(data);
                 }else if(data.type == 1){
                     mqttApp.handlerRealTimeSensor(data);
+                }else if(data.type == 3 && data.command == 2){
+                    mqttApp.handlerConfirmEnadble(data);
+                }else if(data.type == 3 && data.command == 1){
+                    mqttApp.handlerRemoveSetting(data);
                 }else if(data.type == 3){
                     mqttApp.handlerConfirmAuto(data);
                 }
@@ -160,11 +164,54 @@ var mqttApp = {
     },
 
     /*
+    * Method: Handle response setting enable device
+    *
+    */
+    handlerConfirmEnadble: function (data) {
+        debug.log('enable auto');
+        if($('#iot-listsettings').length > 0 ){
+            var param = {
+                title: '',
+                msg: 'Bật chế độ tự động không thành công'
+            };
+            if(data.status == 1){
+                param.msg = 'Bật chế độ tự động thành công';
+             }
+            $('#iot-listsettings').find('li').removeClass('processing-enableAuto');
+            $.Alert(param);
+
+        }
+    },
+
+    /*
+    * Method: Handle response setting remove device
+    *
+    */
+    handlerRemoveSetting: function (data) {
+        debug.log('remove auto');
+        if($('#iot-listsettings').length > 0 ){
+            var param = {
+                title: '',
+                msg: 'Xóa cài đặt tự động không thành công'
+            };
+            if(data.status == 1){
+                param.msg = 'Xóa cài đặt độ tự động thành công';
+                $('#iot-check-all').removeClass('iot-checkall-active');
+                $('#ioi-list-settings-content .iot-check-active').each(function () {
+                    $(this).closest('.settingauto-list').remove();
+                });
+             }
+            $.Alert(param);
+
+        }
+    },
+
+    /*
      * Method: Handle response send sensor data
      * @Desc: handle update real time
      */
     handlerRealTimeSensor: function (sensor) {
-        console.log(sensor);
+
         var elm = $('.'+sensor.sensorID);
         elm.find('.airTemp').text(sensor.airTemp.toFixed(1));
         elm.find('.airHum').text(sensor.airHum.toFixed(1));

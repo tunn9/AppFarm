@@ -108,7 +108,6 @@ var editSettingsView = {
             }
             $('.settingthresold-timeend').text(getHoursEnd +':'+ getMinutesEnd);
 
-
             var loopWeek = data.data.loopWeek + '';
             var coverLoopWeek = loopWeek.split('');
             for( var i = 0; i < coverLoopWeek.length; i++ ) {
@@ -124,52 +123,37 @@ var editSettingsView = {
      * Method bind data Area
      *
      */
-    bingDataLisCondition: function (dataAll) {
+    bingDataLisCondition: function (datalist) {
         var dfd = $.Deferred();
         var i = 0;
         var html = '';
+        var data = datalist;
+        var converData = Object.keys(datalist).map( function (i) {
+            return datalist[i];
+        } );
+        console.log(converData);
+        if (Array.isArray(converData) && converData.length > 0){
+            for (i; i < converData.length; i++) {
+                var mychecked = 'checked';
+                if(converData[i] === 0){
+                    mychecked = '';
+                }
+                html += '<li>' +
+                    '<div class="ioi-device-name">Output'+i+'</div>' +
+                    '<div class="ioi-device-status">' +
+                    '<div class="onoffswitch" data-id="'+i+'">'+
+                    '<input data-role="none" data-id="'+i+'" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox onoffswitch-setup" '+mychecked+'>' +
+                    '<div class="onoffswitch-action" data-id="'+i+'"></div>' +
+                    '<span class="onoffswitch-switch"></span>' +
+                    '</div>'+
+                    '</div>' +
+                    '</li>';
+            }
 
-        debug.log(dataAll);
 
-        if(dataAll){
+            $('.iot-editAutodevice-content').html(html).addClass('active-show-device');
+            $('#iot-condition-list-device-wapper').addClass('active-show-device');
 
-            editSettingsView.conditionBy.text('Thông số cảm biến');
-
-            // var data = dataAll.settingThreshold.condition;
-            // for(i; i < data.length; i++ ){
-            //     html += '<div class="iot-condition-list">'+
-            //
-            //                 '<div class="iot-condition-top">'+
-            //                     '<a class="iot-condition editAuto-condition-select" data-senson="'+data[i].type+'">'+data[i].name+'</a>'+
-            //                     '<ul class="iot-condition-content iot-editAuto-sensor-value">'+
-            //                         '<li data-value="airTemp">Nhiệt độ không khí</li>'+
-            //                         '<li data-value="airHum">Nhiệt độ đất</li>'+
-            //                         '<li data-value="soilTemp">Độ ẩm không khí</li>'+
-            //                         '<li data-value="soilHum">Độ ẩm đất</li>'+
-            //                         '<li data-value="elecNeg">Độ ẩm Độ dẫn điện EC</li>'+
-            //                     '</ul>'+
-            //
-            //                 '</div>'+
-            //
-            //                 '<div class="iot-condition-bottom">'+
-            //                     '<div class="iot-condition-value">'+
-            //                         '<h5>Ngưỡng dưới <span class="unit"></span></h5>'+
-            //                         '<input data-role="none" type="number" value="'+data[i].lowThreshold+'" class="lowThreshold" placeholder="" />'+
-            //                     '</div>'+
-            //                     '<div class="iot-condition-value">'+
-            //                         '<h5>Ngưỡng trên <span class="unit"></span></h5>'+
-            //                         '<input data-role="none" type="number" value="'+data[i].hightThreshold+'" class="highThreshold" placeholder="" />'+
-            //                     '</div>'+
-            //                 '</div>'+
-            //
-            //                 '<div class="iot-condition-action">'+
-            //                     '<a class="iot-editAuto-condition-remove">-</a><a class="iot-editAuto-condition-addnew">+</a>'+
-            //                 '</div>'+
-            //
-            //
-            //             '</div>';
-            // }
-            // editSettingsView.editAutoCondition.html(html);
             dfd.resolve('Done');
         }else{
             dfd.resolve('Done');

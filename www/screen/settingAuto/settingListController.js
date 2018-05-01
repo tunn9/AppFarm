@@ -13,6 +13,9 @@ var settingListController = {
      * Parent ID of page holder
      */
     PAGE_ID: 'iot-listsettings',
+    timeOut: null,
+
+    GATEWAY: null,
 
     // PROPERTIES
     //
@@ -34,7 +37,7 @@ var settingListController = {
      */
     destroy: function () {
         debug.log(this.TAG + '#destroy()');
-
+        this.GATEWAY = null;
     },
 
     /**
@@ -62,10 +65,25 @@ var settingListController = {
     },
 
     doPageShow: function () {
-
+        settingListController.getGateWayID();
         settingListController.getListSettingsFromServer();
         settingListController.bindEventForPage();
         settingListController.bindEventOnOff();
+
+
+    },
+
+    getGateWayID: function () {
+        var data = storageManager.get(constants.DATA_AREA);
+        console.log('----');
+        console.log(data);
+        if( Array.isArray(data) ) {
+            for( var i = 0; i < data.length; i++ ) {
+                if(data[i].gatewayID){
+                settingListController.GATEWAY = data[i].gatewayID;
+                }
+            }
+        }
     },
 
     bindEventForPage: function () {
@@ -113,28 +131,68 @@ var settingListController = {
     bindEventOnOff: function () {
 
         settingListView.settingsContent.on('swipeleft', '.onoffswitch', function (e) {
+
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (checkbox.is(':checked')) {
                 $(this).find('.onoffswitch-checkbox').prop("checked", false);
+
             }
+            settingListController.handleEnableSettingAuto($(this), 0);
         });
         settingListView.settingsContent.on('swiperight', '.onoffswitch', function (e) {
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (!checkbox.is(':checked')) {
                 checkbox.prop("checked", true);
             }
+            settingListController.handleEnableSettingAuto($(this), 1);
         });
         settingListView.settingsContent.on('tap', '.onoffswitch-action', function (e) {
             e.preventDefault();
             var checkbox = $(this).prev();
+            var status = 1;
             if (checkbox.is(':checked')) {
                 checkbox.prop("checked", false);
-
+                status = 0;
             } else {
                 checkbox.prop("checked", true);
+                status = 1;
             }
+            settingListController.handleEnableSettingAuto($(this), status);
         });
     },
+
+    /*
+    * Method handle enable setting auto
+    *
+    */
+    handleEnableSettingAuto: function (elm, flag) {
+        var dataOnOff = {
+            "mode":2,
+            "setType":1,
+            "flagWrite":1,
+            "type":2
+        };
+        elm.closest('.settingauto-list').addClass('processing-enableAuto');
+        var indexSetting = elm.closest('.settingauto-list').attr('data-index');
+        dataOnOff["index"+indexSetting] = flag;
+        settingListController.sendDataForGateway(dataOnOff);
+        settingListController.handleCheckTime();
+    },
+
+    /*
+     * Method post on Device
+     *
+     */
+    sendDataForGateway: function (data) {
+        loadingPage.showPageLoading(settingListView.pageID);
+        var getwayID = settingListController.GATEWAY;
+        var message = new Paho.MQTT.Message(JSON.stringify(data));
+        message.destinationName = 'smartFarm/'+getwayID+'/CONTROL';
+        debug.log(message);
+        message.qos = 0;
+        mqttApp.client.send(message);
+    },
+
 
     /*
     * Method bind event for icon check
@@ -230,7 +288,7 @@ var settingListController = {
             "mode":2,
             "setType":1,
             "flagWrite":1,
-            "type":2,
+            "type":1,
             "index0":0,
             "index1":0,
             "index2":0,
@@ -250,22 +308,7 @@ var settingListController = {
         });
         $.Confirm(paramRemove,function (res) {
             if(res){
-                console.log(bodydata);
                 settingListController.sendDataForGatewayDelete(bodydata);
-                // var url_param = {};
-                // var data_post = {};
-                // httpService.deleteSettingsAuto(url_param,data_post).done(function (response) {
-                //     if(response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE){
-                //         settingListView.handlerRemoveSettings();
-                //         settingListView.buttonCheckAll.removeClass('iot-checkall-active');
-                //         $.Alert( paramSuccess ) ;
-                //     }else{
-                //         $.AlertSingle('Bạn xóa không thành công');
-                //     }
-                // }).fail(function () {
-                //     $.AlertSingle('Bạn xóa không thành công');
-                // });
-
             }
         });
 
@@ -276,10 +319,10 @@ var settingListController = {
      *
      */
     sendDataForGatewayDelete: function (data) {
-        var getwayID = settingListView.gateWayID || '';
+        var getwayID = settingListController.GATEWAY;
         var message = new Paho.MQTT.Message(JSON.stringify(data));
         message.destinationName = 'smartFarm/'+getwayID+'/CONTROL';
-        debug.log(getwayID);
+        debug.log(message);
         message.qos = 0;
         mqttApp.client.send(message);
     },
@@ -302,8 +345,32 @@ var settingListController = {
         pageHelper.changePage(fileHelper.getUrl(pageUrl.EDIT_SETTINGS), {
             transition: eventHelper.PAGE_TRANSITION.SLIDE
         });
-    }
+    },
 
+    /*
+     * handle check time with action manual
+     *
+     */
+    handleCheckTime: function () {
+        var param = {
+            title: '',
+            msg: 'Bật chế độ tự động không thành công'
+        };
+        var elm = $('.processing-enableAuto');
+        var flag = true;
+        if(elm.find('.onoffswitch-checkbox').is(':checked')){
+            flag = false;
+        }
+        settingListController.timeOut = setTimeout(function () {
+            if(elm.hasClass('processing-enableAuto')){
+                elm.parent().find('.onoffswitch-checkbox').prop("checked", flag);
+                elm.removeClass('processing-enableAuto');
+                $.Alert(param);
+                console.log('action fail');
+            }
+            clearTimeout(settingListController.timeOut);
+        },10000);
+    }
 
 
 

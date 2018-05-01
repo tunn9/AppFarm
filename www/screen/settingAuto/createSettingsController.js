@@ -251,13 +251,16 @@ var createSettingsController = {
         iotAreaDom.attr('data-gateway',elm.attr('data-getway'));
         iotAreaDom.attr('data-control',elm.attr('data-control'));
         iotAreaDom.attr('data-areaid',elm.attr('data-areaid'));
+        iotAreaDom.attr('data-getwayid',elm.attr('data-getwayid'));
         $('.iot-condition').removeClass('active');
         loadingPage.showPageLoading(createSettingsView.pageID);
         var url_param = '';
         var data = '';
-        httpService.getIndexSettingsAuto(url_param, data, elm.attr('data-areaID')).done(function (res) {
-            createSettingsController.readIndex = res.data;
+        httpService.getIndexSettingsAuto(url_param, data, elm.attr('data-getwayid')).done(function (res) {
+            console.log('get index');
             console.log(res.data);
+            createSettingsController.readIndex = res.data;
+
         }).fail(function () {
             console.log('fail');
         });
@@ -319,6 +322,10 @@ var createSettingsController = {
     */
     handlerBackHome: function (ev) {
         ev.preventDefault();
+        var url_param = '';
+        var data = '';
+        var areaID = $('#iot-nameArea').attr('data-getwayid');
+        httpService.unLockIndexSettingsAuto(url_param, data,areaID, createSettingsController.readIndex);
         pageHelper.changePage(fileHelper.getUrl(pageUrl.LIST_SETTINGS), {
             transition: eventHelper.PAGE_TRANSITION.SLIDE,
             reverse: true
