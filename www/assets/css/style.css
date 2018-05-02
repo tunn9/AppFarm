@@ -3847,6 +3847,10 @@ index h1 {
   position: relative;
 }
 
+#ioi-content-editAuto .iot-condition#iot-editauto-nameArea:before {
+  display: none;
+}
+
 #ioi-content-editAuto .iot-condition:before {
   position: absolute;
   right: 20px;
@@ -4497,6 +4501,21 @@ index h1 {
 }
 
 #iot-condition-list-device-wapper.active-show-device {
+  display: block;
+}
+
+.overlay-mobiscroll {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: transparent;
+  display: none;
+}
+
+.eff-mobi ~ .overlay-mobiscroll {
   display: block;
 }
 

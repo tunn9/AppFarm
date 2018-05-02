@@ -85,6 +85,11 @@
     text-align: center;
     font-size: $font-size-base - 2;
     position: relative;
+    &#iot-editauto-nameArea {
+      &:before{
+        display: none;
+      }
+    }
     &:before{
       position: absolute;
       right: 20px;
@@ -598,4 +603,17 @@
   &.active-show-device{
     display: block;
   }
+}
+.overlay-mobiscroll{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: rgba(0,0,0,0);
+  display: none;
+}
+.eff-mobi ~ .overlay-mobiscroll {
+  display: block;
 }
