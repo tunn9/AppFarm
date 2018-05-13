@@ -82,7 +82,7 @@ var editSettingsView = {
     */
     bindingCoditionSetting: function (data) {
         // bind type
-        if(data.type === 0 ) {
+        if(data.type === 2 ) {
             $('#iot-editAuto-conditionkv').text('Thời gian').attr('data-type','time');
         } else {
             $('#iot-editAuto-conditionkv').text('Thông số cảm biến').attr('data-type','thresold');
@@ -90,7 +90,7 @@ var editSettingsView = {
     },
 
     handleShowSettingByTime: function (data) {
-        if( data.type === 0 ) {
+        if( data.type === 2 ) {
             $('#iot-editAuto-bytime').addClass('bytime-show');
             var dateSetting = new Date(data.data.timeStart*1000.0);
             var getHours = dateSetting.getHours();
@@ -115,8 +115,51 @@ var editSettingsView = {
                 console.log(loop);
                 $('.time-week-detail:eq('+loop+')').addClass('time-week-active');
             }
+        }else {
+            $('.iot-editAuto-list').addClass('active-condition');
+            editSettingsView.handleEditSettingAuto(data);
         }
 
+    },
+
+    handleEditSettingAuto: function (data) {
+        var dataSetting = data.data;
+
+        var airTemp = editSettingsView.renderSettingListCondition(dataSetting.airHumhigh, dataSetting.airHumlow, 'Nhiệt độ không khí');
+        $('#iot-edit-condition-listsetting').html(airTemp);
+    },
+
+    renderSettingListCondition: function (conditionhight, conditionLow, type) {
+        var html = '<div class="iot-condition-list">'+
+            '<div class="iot-condition-top">'+
+            '<div class="iot-condition-top-left">' +
+            '<a class="iot-condition iot-condition-sensor" data-senson="airTemp">Nhiệt độ không khí</a>'+
+            '<ul class="iot-condition-content iot-editauto-sensor-value">'+
+            '<li data-value="airTemp">Nhiệt độ không khí</li>'+
+            '<li data-value="airHum">Nhiệt độ đất</li>'+
+            '<li data-value="soilTemp">Độ ẩm không khí</li>'+
+            '<li data-value="soilHum">Độ ẩm đất</li>'+
+            '<li data-value="elecNeg">Độ ẩm Độ dẫn điện EC</li>'+
+            '<li data-value="listIntensity">Cường độ sáng</li>'+
+            '</ul>'+
+            '</div>'+
+            '<a class="iot-editauto-condition-remove btn-auto-remove"></a>'+
+            '</div>'+
+            '<div class="iot-condition-bottom">'+
+            '<div class="iot-condition-value">'+
+            '<h5>Từ <span class="unit"></span></h5>'+
+            '<input data-role="none" type="number" value="" class="lowThreshold input-focus" placeholder="" />'+
+            '</div>'+
+            '<div class="iot-condition-value">'+
+            '<h5>Đến <span class="unit"></span></h5>'+
+            '<input data-role="none" type="number" value="" class="highThreshold input-focus" placeholder="" />'+
+            '</div>'+
+            '</div>'+
+            '<div class="iot-condition-action">'+
+            '<a class="iot-autokv-condition-addnew iot-editAuto-condition-addnew">Thêm điều kiến</a>'+
+            '</div>'+
+            '</div>';
+        return html;
     },
 
     /*
@@ -138,12 +181,13 @@ var editSettingsView = {
                 if(converData[i] === 0){
                     mychecked = '';
                 }
+                var outputIndex = i +1 ;
                 html += '<li>' +
-                    '<div class="ioi-device-name">Output'+i+'</div>' +
+                    '<div class="ioi-device-name">Output '+outputIndex+'</div>' +
                     '<div class="ioi-device-status">' +
-                    '<div class="onoffswitch" data-id="'+i+'">'+
-                    '<input data-role="none" data-id="'+i+'" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox onoffswitch-setup" '+mychecked+'>' +
-                    '<div class="onoffswitch-action" data-id="'+i+'"></div>' +
+                    '<div class="onoffswitch" data-id="'+outputIndex+'">'+
+                    '<input data-role="none" data-id="'+outputIndex+'" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox onoffswitch-setup" '+mychecked+'>' +
+                    '<div class="onoffswitch-action" data-id="'+outputIndex+'"></div>' +
                     '<span class="onoffswitch-switch"></span>' +
                     '</div>'+
                     '</div>' +
@@ -261,6 +305,15 @@ var editSettingsView = {
         }
     },
 
+    activeTimeWeekEdit: function (event) {
+        event.preventDefault();
+        var elm  =  $(this);
+        if ( elm.hasClass('time-week-active') ) {
+            elm.removeClass('time-week-active');
+        }else {
+            elm.addClass('time-week-active');
+        }
+    },
     /*
      * Method set height for wapper
      * @return Object

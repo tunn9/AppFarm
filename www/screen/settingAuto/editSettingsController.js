@@ -16,6 +16,7 @@ var editSettingsController = {
 
     // PROPERTIES
     //
+    DATAS: null,
 
     // METHODS
     //
@@ -34,6 +35,7 @@ var editSettingsController = {
      */
     destroy: function () {
         debug.log(this.TAG + '#destroy()');
+        this.DATAS = null;
     },
 
     /**
@@ -90,7 +92,10 @@ var editSettingsController = {
 
         $('.overlay-mobiscroll').on(eventHelper.TOUCH_START, function (e) {
             e.preventDefault();
-        })
+        });
+
+        $('#iot-editAuto-bytime').on(eventHelper.TAP, '.time-week-detail', editSettingsView.activeTimeWeekEdit);
+        $('#iot-editAuto-action').on(eventHelper.TAP, editSettingsController.handlerActionAutoEditSeting);
     },
 
     /*
@@ -102,8 +107,10 @@ var editSettingsController = {
         var url_param = '';
         httpService.editSettingsAuto(url_param,'', areaID.id).done(function (res) {
             console.log(res);
+            editSettingsController.DATAS = res.data;
             editSettingsView.bindingCoditionSetting(res.data);
             editSettingsView.handleShowSettingByTime(res.data);
+            editSettingsController.bindEventOnOff();
             editSettingsView.bingDataLisCondition(res.data.output).done(function () {
                 loadingPage.hide();
                 editSettingsView.setHeightContent();
@@ -125,19 +132,19 @@ var editSettingsController = {
      *
      */
     bindEventOnOff: function () {
-        editSettingsView.onoffSwitch.on('swipeleft', function (e) {
+        $('#ioi-content-editAuto').on('swipeleft', '.onoffswitch', function (e) {
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (checkbox.is(':checked')) {
                 $(this).find('.onoffswitch-checkbox').prop("checked", false);
             }
         });
-        editSettingsView.onoffSwitch.on('swiperight', function (e) {
+        $('#ioi-content-editAuto').on('swiperight', '.onoffswitch', function (e) {
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (!checkbox.is(':checked')) {
                 checkbox.prop("checked", true);
             }
         });
-        editSettingsView.onoffSwitchTap.on('tap', function (e) {
+        $('#ioi-content-editAuto').on('tap', '.onoffswitch-action', function (e) {
             e.preventDefault();
             var checkbox = $(this).prev();
             if (checkbox.is(':checked')) {
@@ -196,6 +203,18 @@ var editSettingsController = {
                 $('#iot-editAuto-bytime').addClass('bytime-show');
             }
         });
+
+
+        // select value sensor
+        $('#ioi-content-editAuto').on(eventHelper.TAP,'.iot-editauto-sensor-value li',function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var elm = $(this);
+            $('.iot-condition').removeClass('active');
+            var sensorValue = elm.attr('data-value');
+            elm.parent().prev().text(elm.text()).attr('data-senson',sensorValue);
+
+        });
     },
 
     handlerAddOrRemove: function () {
@@ -213,7 +232,7 @@ var editSettingsController = {
 
         });
 
-        $('.iot-editAuto-list').on('tap','.iot-editAuto-condition-remove',function (event) {
+        $('.iot-editAuto-list').on('tap','.iot-editauto-condition-remove',function (event) {
             event.preventDefault();
             var elm = $(this);
             if($('.iot-condition-list').length > 1){
@@ -319,6 +338,7 @@ var editSettingsController = {
         });
     },
 
+
     /*
     * Handler event back to page
     *
@@ -329,7 +349,140 @@ var editSettingsController = {
             transition: eventHelper.PAGE_TRANSITION.SLIDE,
             reverse: true
         });
-    }
+    },
 
+
+    coverDateUTC: function (time) {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var currentDate = mm +'/'+ dd +'/'+ yyyy;
+        var timeSetting = time;
+        var myDate = new Date( currentDate +" "+timeSetting); // Your timezone!
+        var myEpoch = myDate.getTime()/1000.0;
+        return myEpoch;
+    },
+
+
+    /*
+     * Method: handle create auto setting
+     *
+     */
+    handlerActionAutoEditSeting: function (event) {
+        event.preventDefault();
+        var typeSetting = $('#iot-editAuto-conditionkv').attr('data-type');
+        $('#page-editAuto').addClass('process-auto-edit');
+        if( typeSetting === 'thresold' ) {
+          //  editSettingsController.handlerSettingAutoByThresold();
+        } else {
+            editSettingsController.handlerSettingAutoEditByTime();
+        }
+    },
+
+    /*
+     * Method setting auto by time
+     *
+     */
+    handlerSettingAutoEditByTime: function () {
+        var sensorID = editSettingsController.DATAS.area.sensor.code;
+        var controlID = editSettingsController.DATAS.area.control.code;
+        var areaID = editSettingsController.DATAS.area.id;
+        var aIndex = editSettingsController.DATAS.index;
+        var timeStart = $('.settingByTine-timestart').text();
+        var timeEnd = $('.settingByTine-timend').text();
+
+        var timeStartUTC = editSettingsController.coverDateUTC(timeStart);
+        var timeEndUTC = editSettingsController.coverDateUTC(timeEnd);
+        var sensorNodeTime = {
+            "mode":2,
+            "setType":2,
+            "sensorID": sensorID,
+            "controlID": controlID,
+            "name": $('#iot-editAuto-name').val(),
+            "areaID": areaID,
+            "cmdType": 1,
+            "multiTask": 1,
+            "aIndex": aIndex,
+            "data": {
+                "timeStart": timeStartUTC,
+                "timeEnd": timeEndUTC,
+                "loopWeek": 123456
+            },
+            "output":{}
+        };
+
+        $('.onoffswitch-setup').each(function () {
+            var elm = $(this);
+            var enable = 0;
+            if(elm.is(':checked')){
+                enable = 1;
+            }
+            var outputId = elm.attr('data-id');
+            switch (outputId) {
+                case '1':
+                    sensorNodeTime.output.output1 = enable;
+                    break;
+                case '2':
+                    sensorNodeTime.output.output2 = enable;
+                    break;
+                case '3':
+                    sensorNodeTime.output.output3 = enable;
+                    break;
+                case '4':
+                    sensorNodeTime.output.output4 = enable;
+                    break;
+                case '5':
+                    sensorNodeTime.output.output5 = enable;
+                    break;
+                default:
+                    break;
+            }
+        });
+        var getWeek = '';
+        $('.time-week-active').each(function () {
+            var weekElm = $(this);
+            getWeek += weekElm.attr('data-week');
+
+        });
+        var weekData = Number(getWeek);
+        sensorNodeTime.data.loopWeek = weekData;
+
+       editSettingsController.sendDataForGateway(sensorNodeTime);
+        editSettingsController.handleCheckTime();
+    },
+
+    /*
+     * Method post on Device
+     *
+     */
+    sendDataForGateway: function (data) {
+        loadingPage.showPageLoading(editSettingsView.pageID);
+        var getwayID = editSettingsController.DATAS.area.gateway.code;
+        var message = new Paho.MQTT.Message(JSON.stringify(data));
+        message.destinationName = 'smartFarm/'+getwayID+'/CONTROL';
+        debug.log(message);
+        message.qos = 0;
+        mqttApp.client.send(message);
+    },
+
+    /*
+     * handle check time with action manual
+     *
+     */
+    handleCheckTime: function () {
+        var param = {
+            title: '',
+            msg: 'Hành động của bạn không thành công'
+        };
+        var timeOut = setTimeout(function () {
+            if($('#page-editAuto').hasClass('process-auto-edit')){
+                $.Alert(param);
+                $('#page-autokv').removeClass('process-auto-edit');
+                console.log('action fail auto');
+            }
+            clearTimeout(timeOut);
+        },10000);
+    }
 
 }; //End Class

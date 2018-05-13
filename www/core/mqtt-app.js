@@ -60,7 +60,6 @@ var mqttApp = {
         //Gets websocket/mqtt connection onMessageArrived
         mqttApp.client.onMessageArrived = function (message) {
             try {
-                console.log(message);
                 // remove Character null in string
                 var validate = message.payloadString.replace(/\0/g, '');
                 var data = JSON.parse(validate);
@@ -69,9 +68,9 @@ var mqttApp = {
                     mqttApp.handlerConfirmManual(data);
                 }else if(data.type == 1){
                     mqttApp.handlerRealTimeSensor(data);
-                }else if(data.type == 3 && data.command == 2){
+                }else if(data.type == 3 && ( data.command == 2 || data.command == 6 )){
                     mqttApp.handlerConfirmEnadble(data);
-                }else if(data.type == 3 && data.command == 1){
+                }else if(data.type == 3 && ( data.command == 1 || data.command == 4 )){
                     mqttApp.handlerRemoveSetting(data);
                 }else if(data.type == 3){
                     mqttApp.handlerConfirmAuto(data);
@@ -119,9 +118,10 @@ var mqttApp = {
     *
     */
     handlerConfirmManual: function (data) {
-
+        console.log('manual');
+        console.log(data);
         var currentOutput = storageManager.get('currentManual');
-        console.log(currentOutput);
+
         $('.ioi-device-status').removeClass('userActive');
         if(currentOutput === 'Output'+data.name) {
             var param = {
@@ -144,6 +144,7 @@ var mqttApp = {
     *
     */
     handlerConfirmAuto: function (data) {
+        debug.log(data);
         debug.log('response Auto');
         if($('#page-autokv').length > 0 ){
             var param = {
@@ -189,6 +190,7 @@ var mqttApp = {
     */
     handlerRemoveSetting: function (data) {
         debug.log('remove auto');
+        debug.log(data);
         if($('#iot-listsettings').length > 0 ){
             var param = {
                 title: '',
@@ -196,10 +198,7 @@ var mqttApp = {
             };
             if(data.status == 1){
                 param.msg = 'Xóa cài đặt độ tự động thành công';
-                $('#iot-check-all').removeClass('iot-checkall-active');
-                $('#ioi-list-settings-content .iot-check-active').each(function () {
-                    $(this).closest('.settingauto-list').remove();
-                });
+                $('.wating-remove-auto').closest('.settingauto-list').remove();
              }
             $.Alert(param);
 

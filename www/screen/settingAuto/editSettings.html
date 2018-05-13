@@ -32,7 +32,7 @@
                 <div class="iot-time-thresold-value">
                     <div class="iot-condition-time-value">
                         <h5>Từ</h5>
-                        <div class="setting-timestart settingthresold-timestart time-start">6:07</div>
+                        <div class="setting-timestart settingthresold-timestart time-start edit-time-start">6:07</div>
                     </div>
                     <div class="iot-condition-time-value">
                         <h5>Đến</h5>
@@ -40,36 +40,39 @@
                     </div>
                 </div>
             </div>
-            <div class="iot-condition-list">
-                <div class="iot-condition-top">
-                    <div class="iot-condition-top-left">
-                        <a class="iot-condition iot-condition-sensor" data-senson="">Lựa chọn điều kiện</a>
-                        <ul class="iot-condition-content iot-editAuto-sensor-value">
-                            <li data-value="airTemp">Nhiệt độ không khí</li>
-                            <li data-value="airHum">Nhiệt độ đất</li>
-                            <li data-value="soilTemp">Độ ẩm không khí</li>
-                            <li data-value="soilHum">Độ ẩm đất</li>
-                            <li data-value="elecNeg">Độ ẩm Độ dẫn điện EC</li>
-                            <li data-value="listIntensity">Cường độ sáng</li>
-                        </ul>
-                    </div><!-- end .iot-condition-top-left -->
-                    <a class="iot-editAuto-condition-remove btn-auto-remove"></a>
-                </div>
-                <div class="iot-condition-bottom">
-                    <div class="iot-condition-value">
-                        <h5>Từ <span class="unit"></span></h5>
-                        <input data-role="none" type="number" value="" class="lowThreshold input-focus" placeholder="" />
-                    </div>
-                    <div class="iot-condition-value">
-                        <h5>Đến <span class="unit"></span></h5>
-                        <input data-role="none" type="number" value="" class="highThreshold input-focus" placeholder="" />
-                    </div>
-                </div>
-                <div class="iot-condition-action">
+            <div id="iot-edit-condition-listsetting">
 
-                    <a class="iot-editAuto-condition-addnew">Thêm điều kiến</a>
-                </div>
-            </div><!-- .iot-condition-list -->
+            </div>
+            <!--<div class="iot-condition-list">-->
+                <!--<div class="iot-condition-top">-->
+                    <!--<div class="iot-condition-top-left">-->
+                        <!--<a class="iot-condition iot-condition-sensor" data-senson="">Lựa chọn điều kiện</a>-->
+                        <!--<ul class="iot-condition-content iot-editAuto-sensor-value">-->
+                            <!--<li data-value="airTemp">Nhiệt độ không khí</li>-->
+                            <!--<li data-value="airHum">Nhiệt độ đất</li>-->
+                            <!--<li data-value="soilTemp">Độ ẩm không khí</li>-->
+                            <!--<li data-value="soilHum">Độ ẩm đất</li>-->
+                            <!--<li data-value="elecNeg">Độ ẩm Độ dẫn điện EC</li>-->
+                            <!--<li data-value="listIntensity">Cường độ sáng</li>-->
+                        <!--</ul>-->
+                    <!--</div>&lt;!&ndash; end .iot-condition-top-left &ndash;&gt;-->
+                    <!--<a class="iot-editAuto-condition-remove btn-auto-remove"></a>-->
+                <!--</div>-->
+                <!--<div class="iot-condition-bottom">-->
+                    <!--<div class="iot-condition-value">-->
+                        <!--<h5>Từ <span class="unit"></span></h5>-->
+                        <!--<input data-role="none" type="number" value="" class="lowThreshold input-focus" placeholder="" />-->
+                    <!--</div>-->
+                    <!--<div class="iot-condition-value">-->
+                        <!--<h5>Đến <span class="unit"></span></h5>-->
+                        <!--<input data-role="none" type="number" value="" class="highThreshold input-focus" placeholder="" />-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="iot-condition-action">-->
+
+                    <!--<a class="iot-editAuto-condition-addnew">Thêm điều kiến</a>-->
+                <!--</div>-->
+            <!--</div>-->
         </div><!-- .iot-editAuto-list -->
 
         <div id="iot-editAuto-bytime">

@@ -14,6 +14,7 @@ var settingListController = {
      */
     PAGE_ID: 'iot-listsettings',
     timeOut: null,
+    timeOutRemove: null,
 
     GATEWAY: null,
 
@@ -166,16 +167,40 @@ var settingListController = {
     *
     */
     handleEnableSettingAuto: function (elm, flag) {
-        var dataOnOff = {
-            "mode":2,
-            "setType":1,
-            "flagWrite":1,
-            "type":2
-        };
         elm.closest('.settingauto-list').addClass('processing-enableAuto');
         var indexSetting = elm.closest('.settingauto-list').attr('data-index');
-        dataOnOff["index"+indexSetting] = flag;
-        settingListController.sendDataForGateway(dataOnOff);
+        var setType = elm.closest('.settingauto-list').attr('data-type');
+        var typeBySetType = 1;
+        if( setType == 2 ) {
+            typeBySetType = 6;
+        }
+        var bodydata = {
+            "mode":2,
+            "setType":setType,
+            "flagWrite":1,
+            "type":typeBySetType,
+            "index0":0,
+            "index1":0,
+            "index2":0,
+            "index3":0,
+            "index4":0,
+            "index5":0,
+            "index6":0,
+            "index7":0,
+            "index8":0,
+            "index9":0,
+            "index10":0,
+            "index11":0
+        };
+
+
+
+
+        var indexData = "index"+ indexSetting;
+        bodydata[indexData] = flag;
+
+
+        settingListController.sendDataForGateway(bodydata);
         settingListController.handleCheckTime();
     },
 
@@ -199,10 +224,10 @@ var settingListController = {
     *
     */
     bindEventCheckbox: function () {
-        settingListView.buttonCheckList.on(eventHelper.TAP,settingListController.handlerCheckboxList);
-        settingListView.buttonCheckAll.on(eventHelper.TAP,settingListController.handlerCheckboxAll);
+        // settingListView.buttonCheckList.on(eventHelper.TAP,settingListController.handlerCheckboxList);
+        // settingListView.buttonCheckAll.on(eventHelper.TAP,settingListController.handlerCheckboxAll);
 
-        settingListView.buttonRemove.on(eventHelper.TAP,settingListController.handlerDeleteSetting);
+        $('#ioi-list-settings-content').on(eventHelper.TAP,'.iot-remove-settingauto', settingListController.handlerDeleteSetting);
 
         settingListView.settingsContent.on(eventHelper.TAP,'.setting-name-control', settingListController.handlerEditSetting);
     },
@@ -274,9 +299,9 @@ var settingListController = {
     * */
     handlerDeleteSetting: function (event) {
         event.preventDefault();
-        if($('.iot-check-active').length === 0) {
-            return;
-        }
+        $(this).addClass('wating-remove-auto');
+        var aIndex = $(this).attr('data-index');
+        var setType = $(this).attr('data-type');
         var paramRemove = {
             msg: 'Bạn có muốn xóa không?',
             loadingstatus: true
@@ -284,11 +309,15 @@ var settingListController = {
         var paramSuccess = {
             msg: 'Bạn đã xóa thành công?'
         };
+        var typeBySetType = 1;
+        if( setType == 2 ) {
+            typeBySetType = 4;
+        }
         var bodydata = {
             "mode":2,
-            "setType":1,
+            "setType":setType,
             "flagWrite":1,
-            "type":1,
+            "type":typeBySetType,
             "index0":0,
             "index1":0,
             "index2":0,
@@ -302,13 +331,12 @@ var settingListController = {
             "index10":0,
             "index11":0
         };
-        $('.iot-check-active').each(function () {
-            var indexData = "index"+ $(this).attr('data-index');
-            bodydata[indexData] = 1;
-        });
+        var indexData = "index"+ aIndex;
+        bodydata[indexData] = 1;
         $.Confirm(paramRemove,function (res) {
             if(res){
                 settingListController.sendDataForGatewayDelete(bodydata);
+                settingListController.handleCheckTimeRemove();
             }
         });
 
@@ -369,6 +397,26 @@ var settingListController = {
                 console.log('action fail');
             }
             clearTimeout(settingListController.timeOut);
+        },10000);
+    },
+
+    /*
+     * handle check time with action manual
+     *
+     */
+    handleCheckTimeRemove: function () {
+        var param = {
+            title: '',
+            msg: 'Xóa chế độ tự động không thành công'
+        };
+        var elm = $('.processing-enableAuto');
+        settingListController.timeOutRemove = setTimeout(function () {
+            if($('.wating-remove-auto').length > 0){
+                $('.iot-remove-settingauto').removeClass('wating-remove-auto');
+                $.Alert(param);
+                console.log('action fail');
+            }
+            clearTimeout(settingListController.timeOutRemove);
         },10000);
     }
 

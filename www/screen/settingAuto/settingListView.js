@@ -62,18 +62,21 @@ var settingListView = {
                 var indexData = data[i].index;
                 var areaName = '';
                 var areaID = '';
+                var typeSetting = data[i].type;
                 if(data[i].area) {
                     areaName = data[i].area.name;
                     areaID = data[i].area.id;
                     if(!settingListView.gateWayID && data[i].area.gateway.code) {
                         settingListView.gateWayID = data[i].area.gateway.code
                     }
+
                 }
-                html += '<li class="settingauto-list" data-index="'+indexData+'" data-id="'+data[i].id+'" data-area="'+areaName+'" data-setting="'+data[i].name+'" data-areaID="'+areaID+'">'+
+                html += '<li class="settingauto-list" data-type="'+typeSetting+'" data-index="'+indexData+'" data-id="'+data[i].id+'" data-area="'+areaName+'" data-setting="'+data[i].name+'" data-areaID="'+areaID+'">'+
                             '<div class="setting-name setting-name-control">'+data[i].name+'</div>'+
                             '<div class="setting-area setting-name-control">'+areaName+'</div>'+
                             '<div class="setting-status text-right">'+
-                                '<span class="iot-check iot-check-list" data-index="'+indexData+'"></span>'+
+                                // '<span class="iot-check iot-check-list" data-index="'+indexData+'"></span>'+
+                                '<span class="iot-remove-settingauto" data-index="'+indexData+'" data-type="'+typeSetting+'"></span>'+
                                 '<div class="ioi-device-status" >'+
                                     '<div class="onoffswitch">'+
                                         '<input data-role="none" type="checkbox" name="onoffswitch" data-name="output 3" class="onoffswitch-checkbox" '+mychecked+'>'+

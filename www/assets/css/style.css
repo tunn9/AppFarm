@@ -3649,6 +3649,10 @@ index h1 {
   margin: 10px 0 10px 20px;
 }
 
+#ioi-list-settings-content li div.text-right .iot-remove-settingauto {
+  padding: 20px 0 20px 20px;
+}
+
 #ioi-list-settings-content li .ioi-device-status {
   float: right;
 }
@@ -3658,6 +3662,11 @@ index h1 {
 }
 
 .text-right .iot-check {
+  float: right;
+  margin-left: 20px;
+}
+
+.text-right .iot-remove-settingauto {
   float: right;
   margin-left: 20px;
 }
@@ -3685,10 +3694,22 @@ index h1 {
   background-repeat: no-repeat;
 }
 
+.iot-remove-settingauto {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-image: url("../images/rm-setting.svg");
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 #listsetting-footer {
   display: flex;
-  justify-content: center;
-  -webkit-justify-content: center;
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
   padding: 30px 0;
 }
 
