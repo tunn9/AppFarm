@@ -60,6 +60,7 @@ var mqttApp = {
         //Gets websocket/mqtt connection onMessageArrived
         mqttApp.client.onMessageArrived = function (message) {
             try {
+                console.log(message);
                 // remove Character null in string
                 var validate = message.payloadString.replace(/\0/g, '');
                 var data = JSON.parse(validate);
@@ -68,8 +69,10 @@ var mqttApp = {
                     mqttApp.handlerConfirmManual(data);
                 }else if(data.type == 1){
                     mqttApp.handlerRealTimeSensor(data);
-                }else if(data.type == 3 && ( data.command == 2 || data.command == 6 )){
+                }else if(data.type == 3 && ( data.command == 2 || data.command == 5 )){
                     mqttApp.handlerConfirmEnadble(data);
+                }else if(data.type == 3 && ( data.command == 3 || data.command == 6 )){
+                    mqttApp.handlerConfirmdDisable (data);
                 }else if(data.type == 3 && ( data.command == 1 || data.command == 4 )){
                     mqttApp.handlerRemoveSetting(data);
                 }else if(data.type == 3){
@@ -177,6 +180,27 @@ var mqttApp = {
             };
             if(data.status == 1){
                 param.msg = 'Bật chế độ tự động thành công';
+             }
+            $('#iot-listsettings').find('li').removeClass('processing-enableAuto');
+            $.Alert(param);
+
+        }
+    },
+
+
+    /*
+    * Method: Handle response setting disable device
+    *
+    */
+    handlerConfirmdDisable: function (data) {
+        debug.log('disable auto');
+        if($('#iot-listsettings').length > 0 ){
+            var param = {
+                title: '',
+                msg: 'tắt chế độ tự động không thành công'
+            };
+            if(data.status == 1){
+                param.msg = 'Tắt chế độ tự động thành công';
              }
             $('#iot-listsettings').find('li').removeClass('processing-enableAuto');
             $.Alert(param);

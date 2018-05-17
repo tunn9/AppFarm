@@ -136,29 +136,31 @@ var settingListController = {
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (checkbox.is(':checked')) {
                 $(this).find('.onoffswitch-checkbox').prop("checked", false);
-
+                $(this).find('.onoffswitch-checkbox').addClass('active-on-off');
             }
-            settingListController.handleEnableSettingAuto($(this), 0);
+            settingListController.handleEnableSettingAuto($(this), 1, 'on');
         });
         settingListView.settingsContent.on('swiperight', '.onoffswitch', function (e) {
             var checkbox = $(this).find('.onoffswitch-checkbox');
             if (!checkbox.is(':checked')) {
                 checkbox.prop("checked", true);
+                checkbox.addClass('active-on-off')
             }
-            settingListController.handleEnableSettingAuto($(this), 1);
+            settingListController.handleEnableSettingAuto($(this), 1, 'off');
         });
         settingListView.settingsContent.on('tap', '.onoffswitch-action', function (e) {
             e.preventDefault();
             var checkbox = $(this).prev();
-            var status = 1;
+            var status = 'on';
             if (checkbox.is(':checked')) {
                 checkbox.prop("checked", false);
-                status = 0;
+                status = 'off';
             } else {
                 checkbox.prop("checked", true);
-                status = 1;
+                status = 'on';
             }
-            settingListController.handleEnableSettingAuto($(this), status);
+            checkbox.addClass('active-on-off');
+            settingListController.handleEnableSettingAuto($(this), 1, status);
         });
     },
 
@@ -166,14 +168,25 @@ var settingListController = {
     * Method handle enable setting auto
     *
     */
-    handleEnableSettingAuto: function (elm, flag) {
+    handleEnableSettingAuto: function (elm, flag, type) {
         elm.closest('.settingauto-list').addClass('processing-enableAuto');
         var indexSetting = elm.closest('.settingauto-list').attr('data-index');
         var setType = elm.closest('.settingauto-list').attr('data-type');
-        var typeBySetType = 1;
-        if( setType == 2 ) {
+        var typeBySetType = 2;
+
+        if( setType == 1 && type === 'off' ){
+            typeBySetType = 3;
+        }
+
+        if( setType == 2 && type === 'on') {
+            typeBySetType = 5;
+        }
+
+        if( setType == 2 && type === 'off') {
             typeBySetType = 6;
         }
+
+
         var bodydata = {
             "mode":2,
             "setType":setType,
@@ -382,22 +395,23 @@ var settingListController = {
     handleCheckTime: function () {
         var param = {
             title: '',
-            msg: 'Bật chế độ tự động không thành công'
+            msg: 'Hành động không thành công'
         };
         var elm = $('.processing-enableAuto');
         var flag = true;
-        if(elm.find('.onoffswitch-checkbox').is(':checked')){
+        if(elm.find('.active-on-off').is(':checked')){
             flag = false;
         }
         settingListController.timeOut = setTimeout(function () {
             if(elm.hasClass('processing-enableAuto')){
-                elm.parent().find('.onoffswitch-checkbox').prop("checked", flag);
+                elm.parent().find('.active-on-off').prop("checked", flag);
                 elm.removeClass('processing-enableAuto');
+                $('input').removeClass('active-on-off');
                 $.Alert(param);
                 console.log('action fail');
             }
             clearTimeout(settingListController.timeOut);
-        },10000);
+        },20000);
     },
 
     /*
@@ -417,7 +431,7 @@ var settingListController = {
                 console.log('action fail');
             }
             clearTimeout(settingListController.timeOutRemove);
-        },10000);
+        },20000);
     }
 
 
