@@ -148,14 +148,20 @@ var mqttApp = {
     */
     handlerConfirmAuto: function (data) {
         debug.log(data);
-        debug.log('response Auto');
-        if($('#page-autokv').length > 0 ){
+
+        if($('#page-autokv').length > 0  || $('#page-editAuto').length > 0 ){
+            debug.log('response Auto');
             var param = {
                 title: '',
                 msg: 'Cài đặt không thành công'
             };
             if(data.status == 1){
                 param.msg = 'Cài đặt thành công';
+             }
+             if( $('#page-editAuto').length > 0 ) {
+                 if(data.status == 1){
+                     param.msg = 'Cập nhật thành công';
+                 }
              }
             $.Alert(param, function () {
                 pageHelper.changePage(fileHelper.getUrl(pageUrl.LIST_SETTINGS), {

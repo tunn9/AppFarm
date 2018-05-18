@@ -374,12 +374,122 @@ var editSettingsController = {
         var typeSetting = $('#iot-editAuto-conditionkv').attr('data-type');
         $('#page-editAuto').addClass('process-auto-edit');
         if( typeSetting === 'thresold' ) {
-          //  editSettingsController.handlerSettingAutoByThresold();
+            editSettingsController.handlerSettingAutoByThresold();
         } else {
             editSettingsController.handlerSettingAutoEditByTime();
         }
     },
+    /*
+    *
+    *
+    */
+    handlerSettingAutoByThresold: function () {
 
+        var sensorID = editSettingsController.DATAS.area.sensor.code;
+        var controlID = editSettingsController.DATAS.area.control.code;
+        var areaID = editSettingsController.DATAS.area.id;
+        var aIndex = editSettingsController.DATAS.index;
+        var timeStart = $('.settingByTine-timestart').text();
+        var timeEnd = $('.settingByTine-timend').text();
+
+        var timeStartUTC = editSettingsController.coverDateUTC(timeStart);
+        var timeEndUTC = editSettingsController.coverDateUTC(timeEnd);
+        var sensorNode = {
+            "mode":2,
+            "setType":1,
+            "sensorID": sensorID,
+            "controlID": controlID,
+            "name": $('#iot-editAuto-name').val(),
+            "areaID": areaID,
+            "cmdType": 1,
+            "multiTask": 1,
+            "aIndex": aIndex,
+            "data": {
+                'timeStart': timeStartUTC,
+                'timeEnd': timeEndUTC,
+                airTemplow: 0,
+                airTemphigh: 0,
+                airHumlow: 0,
+                airHumhigh: 0,
+                soilTemplow: 0,
+                soilTemphigh: 0,
+                soilHumlow: 0,
+                soilHumhigh: 0,
+                elecNeglow: 0,
+                elecNeghigh: 0,
+                lightVolLow: 0,
+                lightVolHigh: 0
+            },
+            "output":{}
+        };
+
+        $('.iot-condition-list').each(function () {
+            var elm = $(this);
+            var name = elm.find('.iot-condition-sensor').attr('data-senson');
+            var lowThreshold = parseFloat(elm.find('.lowThreshold').val());
+            var highThreshold = parseFloat(elm.find('.highThreshold').val());
+            switch (name){
+                case 'airTemp':
+                    sensorNode.data.airTemplow = lowThreshold;
+                    sensorNode.data.airTemphigh = highThreshold;
+                    break;
+                case 'airHum':
+                    sensorNode.data.airHumlow = lowThreshold;
+                    sensorNode.data.airHumhigh = highThreshold;
+                    break;
+                case 'soilTemp':
+                    sensorNode.data.soilTemplow = lowThreshold;
+                    sensorNode.data.soilTemphigh = highThreshold;
+                    break;
+                case 'soilHum':
+                    sensorNode.data.soilHumlow = lowThreshold;
+                    sensorNode.data.soilHumhigh = highThreshold;
+                    break;
+                case 'elecNeg':
+                    sensorNode.data.elecNeglow = lowThreshold;
+                    sensorNode.data.elecNeghigh = highThreshold;
+                    break;
+                case 'listIntensity':
+                    sensorNode.data.lightVolLow = lowThreshold;
+                    sensorNode.data.lightVolHigh = highThreshold;
+                    break;
+                default:
+                    break;
+            }
+
+        });
+
+        $('.onoffswitch-setup').each(function () {
+            var elm = $(this);
+            var enable = 0;
+            if(elm.is(':checked')){
+                enable = 1;
+            }
+            var outputId = elm.attr('data-id');
+            switch (outputId) {
+                case '1':
+                    sensorNode.output.output1 = enable;
+                    break;
+                case '2':
+                    sensorNode.output.output2 = enable;
+                    break;
+                case '3':
+                    sensorNode.output.output3 = enable;
+                    break;
+                case '4':
+                    sensorNode.output.output4 = enable;
+                    break;
+                case '5':
+                    sensorNode.output.output5 = enable;
+                    break;
+                default:
+                    break;
+            }
+        });
+        console.log(sensorNode);
+        editSettingsController.sendDataForGateway(sensorNode);
+        editSettingsController.handleCheckTime();
+    },
     /*
      * Method setting auto by time
      *

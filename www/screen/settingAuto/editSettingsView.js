@@ -101,12 +101,14 @@ var editSettingsView = {
             $('.settingByTine-timestart').text(getHours +':'+ getMinutes);
 
             var dateSettingEnd = new Date(data.data.timeEnd*1000.0);
+
             var getHoursEnd = dateSettingEnd.getHours();
             var getMinutesEnd = dateSettingEnd.getMinutes();
             if( getMinutesEnd < 10 ) {
                 getMinutesEnd = '0' + getMinutesEnd;
             }
-            $('.settingthresold-timeend').text(getHoursEnd +':'+ getMinutesEnd);
+
+            $('.settingByTine-timend').text(getHoursEnd +':'+ getMinutesEnd);
 
             var loopWeek = data.data.loopWeek + '';
             var coverLoopWeek = loopWeek.split('');
@@ -125,15 +127,24 @@ var editSettingsView = {
     handleEditSettingAuto: function (data) {
         var dataSetting = data.data;
 
-        var airTemp = editSettingsView.renderSettingListCondition(dataSetting.airHumhigh, dataSetting.airHumlow, 'Nhiệt độ không khí');
-        $('#iot-edit-condition-listsetting').html(airTemp);
+        var airHum = editSettingsView.renderSettingListCondition(dataSetting.airHumhigh, dataSetting.airHumlow, 'airHum', 'Nhiệt độ đất');
+        var airTemp = editSettingsView.renderSettingListCondition(dataSetting.airTemphigh, dataSetting.airTemplow, 'airTemp', 'Nhiệt độ không khí');
+        var elecNeg = editSettingsView.renderSettingListCondition(dataSetting.elecNeghigh, dataSetting.elecNeglow, 'elecNeg', 'Độ ẩm Độ dẫn điện EC');
+        var listIntensity = editSettingsView.renderSettingListCondition(dataSetting.lightVolHigh, dataSetting.lightVolLow, 'listIntensity', 'Cường độ sáng');
+        var soilHum = editSettingsView.renderSettingListCondition(dataSetting.soilHumhigh, dataSetting.soilTemplow, 'soilHum', 'Độ ẩm đất');
+        var soilTemp = editSettingsView.renderSettingListCondition(dataSetting.soilTemphigh, dataSetting.soilTemplow, 'soilTemp', 'Độ ẩm không khí');
+        var html = airHum + airTemp + elecNeg + listIntensity + soilHum + soilTemp;
+        $('#iot-edit-condition-listsetting').html(html);
     },
 
-    renderSettingListCondition: function (conditionhight, conditionLow, type) {
+    renderSettingListCondition: function (conditionhight, conditionLow, value, name) {
+        if( conditionhight == 0 && conditionLow == 0) {
+            return '';
+        }
         var html = '<div class="iot-condition-list">'+
             '<div class="iot-condition-top">'+
             '<div class="iot-condition-top-left">' +
-            '<a class="iot-condition iot-condition-sensor" data-senson="airTemp">Nhiệt độ không khí</a>'+
+            '<a class="iot-condition iot-condition-sensor" data-senson="'+value+'">'+name+'</a>'+
             '<ul class="iot-condition-content iot-editauto-sensor-value">'+
             '<li data-value="airTemp">Nhiệt độ không khí</li>'+
             '<li data-value="airHum">Nhiệt độ đất</li>'+
@@ -148,15 +159,15 @@ var editSettingsView = {
             '<div class="iot-condition-bottom">'+
             '<div class="iot-condition-value">'+
             '<h5>Từ <span class="unit"></span></h5>'+
-            '<input data-role="none" type="number" value="" class="lowThreshold input-focus" placeholder="" />'+
+            '<input data-role="none" type="number" value="'+conditionhight+'" class="lowThreshold input-focus" placeholder="" />'+
             '</div>'+
             '<div class="iot-condition-value">'+
             '<h5>Đến <span class="unit"></span></h5>'+
-            '<input data-role="none" type="number" value="" class="highThreshold input-focus" placeholder="" />'+
+            '<input data-role="none" type="number" value="'+conditionLow+'" class="highThreshold input-focus" placeholder="" />'+
             '</div>'+
             '</div>'+
             '<div class="iot-condition-action">'+
-            '<a class="iot-autokv-condition-addnew iot-editAuto-condition-addnew">Thêm điều kiến</a>'+
+            '<a class="iot-autokv-condition-addnew iot-editAuto-condition-addnew">Thêm điều kiện</a>'+
             '</div>'+
             '</div>';
         return html;

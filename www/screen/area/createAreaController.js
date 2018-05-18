@@ -82,7 +82,7 @@ var createAreaController = {
             notUse: true
         };
         var data = '';
-        httpService.getListScreenDevice(url_param, data).done(function (response) {
+        httpService.getListScreenDevice('', data).done(function (response) {
             console.log(response);
             if (response.code === constants.HTTP_STATUS_CODES.SUCCESS_CODE && response.total > 0) {
                 // call method bind data html
