@@ -1712,6 +1712,12 @@ index h1 {
   transform: translate(-50%, -50%);
 }
 
+#iot-city.error,
+#iot-district.error,
+.iot-register-form-input.error {
+  border: 1px solid red;
+}
+
 .iot-profiler-inner {
   position: absolute;
   left: 0;

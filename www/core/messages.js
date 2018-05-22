@@ -1,11 +1,16 @@
 var messages = {
     user: {
-        textErrors: 'Input your Email/Phone or password , please try again!',
+        textErrors: 'Nhập Email / Điện thoại hoặc mật khẩu của bạn, vui lòng thử lại!',
         emailErros: 'Địa chỉ e-mail không hợp lệ',
         phoneErros: 'Số điện thoại không hợp lệ',
         passwordErros: 'Vui lòng kiểm tra mật khẩu khớp.',
         passwordErros2: 'Mật Khẩu ít nhất 6 ký tự',
-        fail: 'Đăng ký không thành công'
+        fail: 'Đăng ký không thành công',
+        empty: '',
+        nameEmpty: 'không được để trống họ tên',
+        nameCity: 'không được để trống tỉnh thành ',
+        nameDistrict: 'không được để trống quận huyện ',
+        nameWard: 'không được để trống địa chỉ'
     },
     login: {
         textErrors: 'Input your username or password , please try again!',

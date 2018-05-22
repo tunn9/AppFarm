@@ -74,27 +74,53 @@ var registerController = {
         registerView.btnListDistrict.on(eventHelper.TAP, '.district-item', registerController.handlerOnTapBtnDistrictItem);
     },
     /*
+    * Method check empty
+    *
+    */
+    handlerCheckFieldEmpty: function () {
+        var city = $('#iot-city').text();
+        var district = $('#iot-district').text();
+        var ward = $('#iot-address').val();
+        var name = $('#iot-fullname').val();
+        if( Validation.isBlank(name) ) {
+            registerView.showTextErrors(messages.user.nameEmpty);
+            registerView.showStyleErrors($('#iot-fullname'));
+            return true;
+        } else if ( Validation.isBlank(city) ) {
+            registerView.showTextErrors(messages.user.nameCity);
+            $('#iot-city').addClass('error');
+            return true;
+        } else if ( Validation.isBlank(district) ) {
+            registerView.showTextErrors(messages.user.nameDistrict);
+            $('#iot-district').addClass('error');
+            return true;
+        }else if ( Validation.isBlank(ward) ) {
+            registerView.showTextErrors(messages.user.nameWard);
+            registerView.showStyleErrors($('#iot-address'));
+            return true;
+        }
+
+    },
+
+    /*
      * Method check login value
      * @return booleans
      */
     handlerValidateDataRegister: function (email, phone, password, password2) {
         var online = network.check();
+
         if (!online) {
             registerView.showTextErrors(messages.network);
             return true;
-        }else if (email === '' || password === '' || phone === '' || password2 === '') {
-
-            registerView.showTextErrors(messages.user.textErrors);
-            return true;
-        }else{
+        }else {
 
             var emailCheck = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(email);
             if (!emailCheck) {
                 registerView.showTextErrors(messages.user.emailErros);
                 return true;
             }
-
-            if(phone.length <= 9){
+            var first = phone.substring(0,1);
+            if(!Validation.validatePhone(phone) || first != 0){
                 registerView.showTextErrors(messages.user.phoneErros);
                 return true;
             }
@@ -162,11 +188,10 @@ var registerController = {
                 registerView.showTextErrors('Đăng ký thành công!');
             } else {
                 registerView.pageId.removeClass(registerView.CLASS.REGISTER_ACTIVE);
-                registerView.showTextErrors(messages.user.fail);
+                registerView.showTextErrors(response.message);
 
             }
         }).fail(function (jqXHR) {
-            debug.log(jqXHR);
             registerView.pageId.removeClass(registerView.CLASS.REGISTER_ACTIVE);
             registerView.showTextErrors(messages.user.fail);
         });
@@ -242,6 +267,16 @@ var registerController = {
     handlerNextRegsiter: function (event) {
         event.preventDefault();
         $('input').blur();
+        registerView.showTextErrors(messages.user.empty);
+        registerView.showStyleErrors();
+        $('#iot-city, #iot-district').removeClass('error');
+        var phone = registerView.phoneID.val();
+        var email = registerView.emailID.val();
+
+        var checkEmpty = registerController.handlerCheckFieldEmpty();
+        if (checkEmpty) return;
+        var control = registerController.handlerValidateDataRegister(email, phone, 1234566,1234566);
+        if (control) return;
         registerView.tabsControl.addClass('form-registe-two');
     },
     /*

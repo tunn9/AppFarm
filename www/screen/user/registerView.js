@@ -33,7 +33,7 @@ var registerView = {
         registerView.pageId = $('#iot-register');
         registerView.pageWapper = $('.iot-page-register');
         registerView.tabsControl = $('#form-register-tabs');
-        registerView.registerErrors = $('#iot-register-data-errors');
+        registerView.registerErrors = $('#iot-register-data-errors, .iot-register-errors');
 
         registerView.emailID = $('#iot-email');
         registerView.phoneID = $('#iot-phonenumber');
@@ -85,6 +85,13 @@ var registerView = {
             registerView.registerErrors.html(text).addClass('eff');
         }else{
             registerView.registerErrors.html(text).removeClass('eff');
+        }
+    },
+    showStyleErrors: function (elm) {
+        if(elm){
+            elm.parent().addClass('error');
+        }else{
+            $('.iot-register-form-input').removeClass('error');
         }
     },
 
